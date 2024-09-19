@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Tab } from '@headlessui/react'
-import Chart, { type ChartItem } from 'chart.js/auto'
+import Chart from 'chart.js/auto'
 
 // components
 import { PopoverLayout } from '../../../components/HeadlessUI'
@@ -21,7 +21,7 @@ const ProfilePages = () => {
 	const PopoverToggle = () => <i className="ri-more-2-fill" />
 
 	useEffect(() => {
-		const productTag = document.getElementById('high-performing-product') as ChartItem
+		const productTag = document.getElementById('high-performing-product')
 		const chart = new Chart(productTag, productConfig)
 
 		return () => {

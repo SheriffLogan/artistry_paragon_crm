@@ -23,10 +23,11 @@ const LockScreen2 = React.lazy(() => import('../pages/auth2/LockScreen2'));
 const ConfirmMail2 = React.lazy(() => import('../pages/auth2/ConfirmMail2'));
 
 // dashboard
-const Ecommerce = React.lazy(() => import('../pages/dashboard/ecommerce/'));
-const Analytics = React.lazy(() => import('../pages/dashboard/Analytics/'));
+const LinkedInAnalytics = React.lazy(() => import('../pages/dashboard/LinkedInAnalytics'));
+const EmailAnalytics = React.lazy(() => import('../pages/dashboard/EmailAnalytics/'));
 
 // apps
+const BulkEmail = React.lazy(() => import('../pages/apps/BulkEmail/'));
 const CalendarApp = React.lazy(() => import('../pages/apps/Calendar/'));
 const ChatApp = React.lazy(() => import('../pages/apps/Chat/'));
 const EmailInbox = React.lazy(() => import('../pages/apps/Email/Inbox'));
@@ -140,34 +141,58 @@ const flattenRoutes = (routes) => {
 };
 
 // dashboards
-const dashboardRoutes = {
+const analyticsRoutes = {
 	path: '/dashboard',
 	name: 'Dashboards',
 	icon: 'home',
-	header: 'Navigation',
+	header: 'Dashboard',
 	children: [
 		{
 			path: '/',
 			name: 'Root',
-			element: <Navigate to="/ecommerce" />,
+			element: <Navigate to="/email-analytics" />,
 			route: PrivateRoute,
 		},
 		{
-			path: '/ecommerce',
-			name: 'Ecommerce',
-			element: <Ecommerce />,
-			route: PrivateRoute,
+			path: '/linkedin-analytics',
+			name: 'Linked In',
+			element: <LinkedInAnalytics />,
+			route: PrivateRoute,	
 		},
 		{
-			path: '/analytics',
-			name: 'Analytics',
-			element: <Analytics />,
+			path: '/email-analytics',
+			name: 'Email',
+			element: <EmailAnalytics />,
 			route: PrivateRoute,
 		},
 	],
 };
 
 // Apps
+const bulkEmailRoutes = {
+	path: '/apps/bulk-email',
+	name: 'Bulk Email',
+	route: PrivateRoute,
+	roles: ['Admin'],
+	icon: 'bulk-email',
+	// element: <BulkEmail/>,
+	header: 'Apps',
+	children: [
+		{
+			path: '/apps/email/designer',
+			name: 'Email Designer',
+			element: <BulkEmail />,
+			route: PrivateRoute,
+		},
+		{
+			path: '/apps/email/templates',
+			name: 'Templates',
+			// element: <EmailRead />,
+			route: PrivateRoute,
+		},
+	],
+};
+
 const calendarAppRoutes = {
 	path: '/apps/calendar',
 	name: 'Calendar',
@@ -252,7 +277,7 @@ const fileAppRoutes = {
 	header: 'Apps',
 };
 
-const appRoutes = [calendarAppRoutes, chatAppRoutes, emailAppRoutes, tasksAppRoutes, kanbanAppRoutes, fileAppRoutes];
+const appRoutes = [bulkEmailRoutes ,calendarAppRoutes, chatAppRoutes, emailAppRoutes, tasksAppRoutes, kanbanAppRoutes, fileAppRoutes];
 
 // pages
 const customPagesRoutes = {
@@ -823,7 +848,7 @@ const otherPublicRoutes = [
 ];
 
 // All routes
-const authProtectedRoutes = [dashboardRoutes, ...appRoutes, customPagesRoutes, uiRoutes];
+const authProtectedRoutes = [analyticsRoutes, ...appRoutes, customPagesRoutes, uiRoutes];
 const publicRoutes = [...authRoutes, ...otherPublicRoutes];
 
 const authProtectedFlattenRoutes = flattenRoutes(authProtectedRoutes);

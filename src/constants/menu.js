@@ -1,12 +1,12 @@
 const MENU_ITEMS = [
 	{
-		key: 'navigation',
-		label: 'Navigation',
+		key: 'dashboard',
+		label: 'Dashboard',
 		isTitle: true,
 	},
 	{
-		key: 'dashboard',
-		label: 'Dashboards',
+		key: 'analytics',
+		label: 'Analytics',
 		isTitle: false,
 		icon: 'ri-home-4-line',
 		badge: {
@@ -15,15 +15,15 @@ const MENU_ITEMS = [
 		},
 		children: [
 			{
-				key: 'dashboard-analytics',
-				label: 'Analytics',
-				url: '/analytics',
+				key: 'analytics-Email',
+				label: 'Email',
+				url: '/email-analytics',
 				parentKey: 'dashboard',
 			},
 			{
-				key: 'dashboard-ecommerce',
-				label: 'Ecommerce',
-				url: '/ecommerce',
+				key: 'analytics-Linked In',
+				label: 'Linked In',
+				url: '/linkedin-analytics',
 				parentKey: 'dashboard',
 			},
 		],
@@ -32,6 +32,27 @@ const MENU_ITEMS = [
 		key: 'apps',
 		label: 'Apps',
 		isTitle: true,
+	},
+	{
+		key: 'apps-bulkemail',
+		label: 'Bulk Email',
+		isTitle: false,
+		icon: 'ri-task-line',
+		// url: '/apps/bulk-email',
+		children: [
+			{
+				key: 'email-designer',
+				label: 'Email Designer',
+				url: '/apps/email/designer',
+				parentKey: 'apps-bulkemail',
+			},
+			{
+				key: 'email-templates',
+				label: 'Templates',
+				url: '/apps/email/templates',
+				parentKey: 'apps-bulkemail',
+			},
+		]
 	},
 	{
 		key: 'apps-calendar',

@@ -1,5 +1,5 @@
 //image
-import logoDark from '@/assets/images/logo-dark.png'
+import logoDark from '@/assets/images/logo-dark.svg'
 import barCode from '@/assets/images/barcode.png'
 
 // components

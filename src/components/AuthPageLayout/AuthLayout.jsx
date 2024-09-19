@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 // images
-import logo from '@/assets/images/logo.png';
-import logoDark from '@/assets/images/logo-dark.png';
+import logo from '@/assets/images/logo.svg';
+import logoDark from '@/assets/images/logo-dark.svg';
 
 const AuthLayout = ({ pageImage, authTitle, helpText, bottomLinks, children }) => {
     return (

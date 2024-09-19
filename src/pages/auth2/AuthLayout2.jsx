@@ -4,8 +4,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 
 // images
-import logo from './icons/logo.png'
-import logoDark from './icons/logo-dark.png'
+import logo from './icons/logo.svg'
+import logoDark from './icons/logo-dark.svg'
 
 // style
 import 'swiper/css'

@@ -8,10 +8,10 @@ import SessionsByCountry from './Components/SessionsByCountry'
 import TableCharts from './Components/TableCharts'
 import { PageBreadcrumb } from '../../../components'
 
-const Analytics = () => {
+const EmailAnalytics = () => {
 	return (
 		<>
-			<PageBreadcrumb title="Analytics" subName="Menu" />
+			<PageBreadcrumb title="Email" subName="Analytics" />
 
 			<div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-6 mb-6">
 				<Statistics />
@@ -32,4 +32,4 @@ const Analytics = () => {
 	)
 }
 
-export default Analytics
+export default EmailAnalytics

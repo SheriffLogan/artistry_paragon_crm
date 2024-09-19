@@ -1,7 +1,7 @@
 // components
 import { PageBreadcrumb } from '../../components'
 
-const colors: string[] = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark']
+const colors= ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark']
 
 const color = ['bg-secondary/25']
 const color2 = ['hover:bg-info', 'hover:bg-warning']

@@ -6,8 +6,8 @@ import { PageBreadcrumb } from '../../components'
 import { ModalLayout } from '../../components/HeadlessUI'
 
 //image
-import logo from '@/assets/images/logo.png'
-import logoDark from '@/assets/images/logo-dark.png'
+import logo from '@/assets/images/logo.svg'
+import logoDark from '@/assets/images/logo-dark.svg'
 
 interface ModalBasedAlert {
 	icon: string

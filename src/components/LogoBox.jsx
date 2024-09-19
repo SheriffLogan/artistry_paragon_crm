@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 
 //image
-import logo from '@/assets/images/logo.png'
-import logoSm from '@/assets/images/logo-sm.png'
-import logoDark from '@/assets/images/logo-dark.png'
+import logo from '@/assets/images/logo.svg'
+import logoSm from '@/assets/images/logo-sm.svg'
+import logoDark from '@/assets/images/logo-dark.svg'
 
 const LogoBox = () => {
 	return (

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 //image
-import logo from '@/assets/images/logo.png'
+import logo from '@/assets/images/logo.svg'
 
 // components
 import AuthContainer from '../../components/AuthPageLayout/AuthContainer'

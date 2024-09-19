@@ -1,8 +1,4 @@
-interface RemixIcon {
-	[key: string]: string[]
-}
-
-export const remixIconsList: RemixIcon[] = [
+export const remixIconsList = [
 	{
 		Arrows: ['arrow-left-up', 'arrow-up', 'arrow-right-up', 'arrow-right', 'arrow-right-down', 'arrow-down', 'arrow-left-down', 'arrow-left', 'corner-right-up', 'corner-up-left', 'corner-up-right', 'corner-right-down', 'corner-down-left', 'corner-left-up', 'corner-left-down', 'corner-down-right', 'arrow-up-circle', 'arrow-right-circle', 'arrow-down-circle', 'arrow-left-circle', 'arrow-up-s', 'arrow-right-s', 'arrow-down-s', 'arrow-left-s', 'skip-up', 'skip-right', 'skip-down', 'skip-left', 'arrow-left-right', 'arrow-up-down', 'arrow-drop-up', 'arrow-drop-right', 'arrow-drop-down', 'arrow-drop-left', 'arrow-up-double', 'arrow-right-double', 'arrow-down-double', 'arrow-left-double', 'corner-up-left-double', 'corner-up-right-double', 'expand-left', 'expand-right', 'contract-left', 'contract-right', 'expand-up-down', 'expand-left-right', 'contract-up-down', 'contract-left-right', 'drag-move-2', 'drag-move', 'arrow-go-back', 'arrow-go-forward', 'arrow-turn-forward', 'arrow-turn-back'],
 		Buildings: ['home', 'home-2', 'home-3', 'home-4', 'home-5', 'home-6', 'home-7', 'home-8', 'home-gear', 'home-wifi', 'home-smile', 'home-smile-2', 'home-heart', 'home-office', 'building', 'building-2', 'building-3', 'building-4', 'hotel', 'community', 'school', 'government', 'bank', 'store', 'store-2', 'store-3', 'hospital', 'ancient-gate', 'ancient-pavilion'],

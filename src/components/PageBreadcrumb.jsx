@@ -7,7 +7,7 @@ const PageBreadcrumb = ({ subName, title, addedChild }) => {
 	return (
 		<>
 			<Helmet>
-				<title>{title} | Attex - Responsive Tailwind CSS 3 Admin Dashboard</title>
+				<title>{title} | LeadCured - A Lead Generation Agency</title>
 			</Helmet>
 			{subName && (
 				<div className="flex justify-between items-center mb-6">

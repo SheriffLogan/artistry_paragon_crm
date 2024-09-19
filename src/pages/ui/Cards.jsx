@@ -9,13 +9,6 @@ import Img2 from '@/assets/images/small/small-2.jpg'
 import Img3 from '@/assets/images/small/small-3.jpg'
 import Img4 from '@/assets/images/small/small-4.jpg'
 
-interface CardGroupDetailsTypes {
-	id: number
-	image: string
-	title: string
-	text: string
-	subtext: string
-}
 
 const CardWithImage = () => {
 	return (
@@ -188,7 +181,7 @@ const ColoredCards = () => {
 }
 
 const BorderdCards = () => {
-	const colors: string[] = ['secondary', 'primary', 'success']
+	const colors = ['secondary', 'primary', 'success']
 
 	return (
 		<>
@@ -308,7 +301,7 @@ const CardwithstretchedLink = () => {
 }
 
 const CardWithGroup = () => {
-	const CardGroupDetails: CardGroupDetailsTypes[] = [
+	const CardGroupDetails = [
 		{
 			id: 1,
 			image: Img1,

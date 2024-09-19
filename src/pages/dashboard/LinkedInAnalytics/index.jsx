@@ -9,10 +9,10 @@ import { PageBreadcrumb } from '../../../components'
 // dummy data
 import { products } from './data'
 
-const Ecommerce = () => {
+const LinkedInAnalytics = () => {
 	return (
 		<>
-			<PageBreadcrumb title="Dashboard" subName="Menu" />
+			<PageBreadcrumb title="Linked In" subName="Analytics" />
 			<Statistics />
 
 			<div className="grid lg:grid-cols-3 gap-6 mb-6">
@@ -31,4 +31,4 @@ const Ecommerce = () => {
 	)
 }
 
-export default Ecommerce
+export default LinkedInAnalytics

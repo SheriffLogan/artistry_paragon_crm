@@ -25,7 +25,7 @@ import 'swiper/css/effect-flip'
 
 const pagination = {
 	clickable: true,
-	renderBullet: function (index: number, className: string) {
+	renderBullet: function (index, className) {
 		return '<span class="' + className + '">' + (index + 1) + '</span>'
 	},
 }

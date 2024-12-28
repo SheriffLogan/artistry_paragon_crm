@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeSideBarType } from '../redux/actions';
 import { SideBarType } from '../constants';
@@ -14,6 +14,13 @@ const LeftSideBar = ({ hideLogo }) => {
     const menuNodeRef = useRef(null);
     const menuItems = getMenuItems();
 
+    useEffect(() => {
+        if (sideBarType === 'hover' || sideBarType === 'hover-active') {
+            document.body.classList.add('sidebar-hover');
+        } else {
+            document.body.classList.remove('sidebar-hover');
+        }
+    }, [sideBarType]);
 
     const handleHoverMenu = () => {
         if (sideBarType === 'hover') {
@@ -22,6 +29,15 @@ const LeftSideBar = ({ hideLogo }) => {
             dispatch(changeSideBarType(SideBarType.LEFT_SIDEBAR_TYPE_HOVER));
         }
     };
+
+
+    // const handleHoverMenu = () => {
+    //     if (sideBarType === 'hover') {
+    //         dispatch(changeSideBarType(SideBarType.LEFT_SIDEBAR_TYPE_HOVERACTIVE));
+    //     } else if (sideBarType === 'hover-active') {
+    //         dispatch(changeSideBarType(SideBarType.LEFT_SIDEBAR_TYPE_HOVER));
+    //     }
+    // };
 
     return (
         <div className="app-menu" ref={menuNodeRef}>

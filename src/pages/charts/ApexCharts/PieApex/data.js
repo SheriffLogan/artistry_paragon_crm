@@ -6,7 +6,7 @@ import small4 from '@/assets/images/small/small-4.jpg'
 
 const colors1 = ['#3e60d5', '#6c757d', '#47ad77', '#fa5c7c', '#e3eaef']
 
-export const simplePieOpts: ApexOptions = {
+export const simplePieOpts = {
 	chart: {
 		height: 320,
 		type: 'pie',
@@ -39,7 +39,7 @@ export const simplePieOpts: ApexOptions = {
 	],
 }
 
-export const simpleDonutOpts: ApexOptions = {
+export const simpleDonutOpts = {
 	chart: {
 		height: 320,
 		type: 'donut',
@@ -72,7 +72,7 @@ export const simpleDonutOpts: ApexOptions = {
 	],
 }
 
-export const monochromePieOpts: ApexOptions = {
+export const monochromePieOpts = {
 	chart: {
 		height: 320,
 		type: 'pie',
@@ -109,7 +109,7 @@ export const monochromePieOpts: ApexOptions = {
 	],
 }
 
-export const gradientDonutOpts: ApexOptions = {
+export const gradientDonutOpts = {
 	chart: {
 		height: 320,
 		type: 'donut',
@@ -145,7 +145,7 @@ export const gradientDonutOpts: ApexOptions = {
 	},
 }
 
-export const patternedDonutOpts: ApexOptions = {
+export const patternedDonutOpts = {
 	chart: {
 		height: 320,
 		type: 'donut',
@@ -209,7 +209,7 @@ export const patternedDonutOpts: ApexOptions = {
 	],
 }
 
-export const imagefillOpts: ApexOptions = {
+export const imagefillOpts = {
 	chart: {
 		height: 320,
 		type: 'pie',
@@ -257,7 +257,7 @@ export const imagefillOpts: ApexOptions = {
 	],
 }
 
-export const donutUpdateOpts: ApexOptions = {
+export const donutUpdateOpts = {
 	chart: {
 		height: 320,
 		type: 'donut',

@@ -1,6 +1,6 @@
 import { ApexOptions } from 'apexcharts'
 
-function generateData(count: number, yrange: any) {
+function generateData(count, yrange) {
 	let i = 0
 	const series = []
 	while (i < count) {
@@ -16,7 +16,7 @@ function generateData(count: number, yrange: any) {
 	return series
 }
 
-export const basicHeatmapOpts: ApexOptions = {
+export const basicHeatmapOpts = {
 	chart: {
 		height: 380,
 		type: 'heatmap',
@@ -95,7 +95,7 @@ export const basicHeatmapOpts: ApexOptions = {
 	},
 }
 
-export const multipleHeatmapOpts: ApexOptions = {
+export const multipleHeatmapOpts = {
 	chart: {
 		height: 380,
 		type: 'heatmap',
@@ -174,7 +174,7 @@ export const multipleHeatmapOpts: ApexOptions = {
 	},
 }
 
-export const colorRangeHeatmapOpts: ApexOptions = {
+export const colorRangeHeatmapOpts = {
 	chart: {
 		height: 380,
 		type: 'heatmap',
@@ -283,7 +283,7 @@ export const colorRangeHeatmapOpts: ApexOptions = {
 	],
 }
 
-export const rangewithoutShadeOpts: ApexOptions = {
+export const rangewithoutShadeOpts = {
 	chart: {
 		height: 380,
 		type: 'heatmap',

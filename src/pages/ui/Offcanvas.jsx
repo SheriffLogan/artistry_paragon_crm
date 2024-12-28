@@ -5,7 +5,7 @@ import { PageBreadcrumb } from '../../components'
 import { OffcanvasLayout } from '../../components/HeadlessUI'
 
 const DefaultOffcanvas = () => {
-	const [open, setOpen] = useState<boolean>(false)
+	const [open, setOpen] = useState(false)
 	const handlerOffcanvas = () => {
 		setOpen(!open)
 	}
@@ -34,7 +34,7 @@ const DefaultOffcanvas = () => {
 }
 
 const AutoTargetingOffcanvas = () => {
-	const [open, setOpen] = useState<boolean>(false)
+	const [open, setOpen] = useState(false)
 	const handlerOffcanvas = () => {
 		setOpen(!open)
 	}
@@ -66,10 +66,10 @@ const AutoTargetingOffcanvas = () => {
 }
 
 const OffcanvasPositions = () => {
-	const [left, setLeft] = useState<boolean>(false)
-	const [top, setTop] = useState<boolean>(false)
-	const [right, setRight] = useState<boolean>(false)
-	const [bottom, setBottom] = useState<boolean>(false)
+	const [left, setLeft] = useState(false)
+	const [top, setTop] = useState(false)
+	const [right, setRight] = useState(false)
+	const [bottom, setBottom] = useState(false)
 
 	const handlerLeftOffcanvas = () => {
 		setLeft(!left)

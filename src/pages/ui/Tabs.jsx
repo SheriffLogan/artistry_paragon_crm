@@ -3,14 +3,9 @@ import { Tab } from '@headlessui/react'
 // components
 import { PageBreadcrumb } from '../../components'
 
-interface TabContentItem {
-	id: number
-	title: string
-	text: string
-}
 
 const Tabs = () => {
-	const tabContents: TabContentItem[] = [
+	const tabContents= [
 		{
 			id: 1,
 			title: 'Tab 1',

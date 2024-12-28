@@ -2,9 +2,9 @@ import { ApexOptions } from 'apexcharts'
 
 const sparklineData = [47, 45, 54, 38, 56, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46]
 
-function randomizeArray(arg: number[]) {
+function randomizeArray(arg) {
 	const array = arg.slice()
-	let currentIndex: number = array.length,
+	let currentIndex = array.length,
 		temporaryValue,
 		randomIndex
 
@@ -19,7 +19,7 @@ function randomizeArray(arg: number[]) {
 	return array
 }
 
-export const spark1Opts: ApexOptions = {
+export const spark1Opts = {
 	chart: {
 		type: 'area',
 		height: 160,
@@ -60,7 +60,7 @@ export const spark1Opts: ApexOptions = {
 	},
 }
 
-export const spark2Opts: ApexOptions = {
+export const spark2Opts = {
 	chart: {
 		type: 'area',
 		height: 160,
@@ -101,7 +101,7 @@ export const spark2Opts: ApexOptions = {
 	},
 }
 
-export const spark3Opts: ApexOptions = {
+export const spark3Opts = {
 	chart: {
 		type: 'area',
 		height: 160,
@@ -147,7 +147,7 @@ export const spark3Opts: ApexOptions = {
 	},
 }
 
-export const chart1Opts: ApexOptions = {
+export const chart1Opts = {
 	chart: {
 		type: 'line',
 		width: 140,
@@ -189,7 +189,7 @@ export const chart1Opts: ApexOptions = {
 	},
 }
 
-export const chart2Opts: ApexOptions = {
+export const chart2Opts = {
 	chart: {
 		type: 'line',
 		width: 140,
@@ -231,7 +231,7 @@ export const chart2Opts: ApexOptions = {
 	},
 }
 
-export const chart3Opts: ApexOptions = {
+export const chart3Opts = {
 	chart: {
 		type: 'line',
 		width: 140,
@@ -273,7 +273,7 @@ export const chart3Opts: ApexOptions = {
 	},
 }
 
-export const chart4Opts: ApexOptions = {
+export const chart4Opts = {
 	chart: {
 		type: 'line',
 		width: 140,
@@ -315,7 +315,7 @@ export const chart4Opts: ApexOptions = {
 	},
 }
 
-export const chart5Opts: ApexOptions = {
+export const chart5Opts = {
 	chart: {
 		type: 'bar',
 		width: 100,
@@ -361,7 +361,7 @@ export const chart5Opts: ApexOptions = {
 	},
 }
 
-export const chart6Opts: ApexOptions = {
+export const chart6Opts = {
 	chart: {
 		type: 'bar',
 		width: 100,
@@ -407,7 +407,7 @@ export const chart6Opts: ApexOptions = {
 	},
 }
 
-export const chart7Opts: ApexOptions = {
+export const chart7Opts = {
 	chart: {
 		type: 'bar',
 		width: 100,
@@ -453,7 +453,7 @@ export const chart7Opts: ApexOptions = {
 	},
 }
 
-export const chart8Opts: ApexOptions = {
+export const chart8Opts = {
 	chart: {
 		type: 'bar',
 		width: 100,

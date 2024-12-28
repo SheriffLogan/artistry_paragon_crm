@@ -3,42 +3,11 @@ import avatar1 from '@/assets/images/users/avatar-1.jpg'
 import avatar2 from '@/assets/images/users/avatar-2.jpg'
 import avatar5 from '@/assets/images/users/avatar-5.jpg'
 import avatar10 from '@/assets/images/users/avatar-10.jpg'
-import { Employee } from './types'
+
+
 
 // basic tables
-interface TableRecord {
-	id: number
-	name: string
-	phoneNo: string
-	dob: string
-	country: string
-	accountNo: string
-	image: string
-	cell: string
-	activeClass?: string
-}
-
-interface ExpandableRecord {
-	product: string
-	courier: string
-	variant: string
-	now: number
-	status: string
-	price: string
-	Quantity: string
-	Amount: string
-}
-
-interface NestedRecords {
-	name: string
-	phoneNo: string
-	dob: string
-	country: string
-	children?: NestedRecords[]
-}
-
-// basic tables
-const records: TableRecord[] = [
+const records = [
 	{
 		id: 1,
 		name: 'Risa D. Pearson',
@@ -82,7 +51,7 @@ const records: TableRecord[] = [
 	},
 ]
 
-const expandablerecords: ExpandableRecord[] = [
+const expandablerecords = [
 	{
 		product: 'ASOS Ridley High Waist',
 		courier: 'FedEx',
@@ -145,7 +114,7 @@ const expandablerecords: ExpandableRecord[] = [
 	},
 ]
 
-const nestedrecords: NestedRecords[] = [
+const nestedrecords = [
 	{
 		name: 'Risa D. Pearson',
 		phoneNo: '336-508-2157',
@@ -174,7 +143,7 @@ const nestedrecords: NestedRecords[] = [
 	},
 ]
 
-const dataTableRecords: Employee[] = [
+const dataTableRecords = [
 	{
 		id: 1,
 		name: 'Jonathan',

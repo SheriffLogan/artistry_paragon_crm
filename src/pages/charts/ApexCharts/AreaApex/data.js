@@ -1,6 +1,6 @@
 import { ApexOptions } from 'apexcharts'
 
-function generateDayWiseTimeSeries(baseval: number, count: number, yrange: { max: number; min: number }): any[] {
+function generateDayWiseTimeSeries(baseval, count, yrange){
 	let i = 0
 	const series = []
 	while (i < count) {
@@ -1467,7 +1467,7 @@ let ts1 = 1388534400000
 let ts2 = 1388620800000
 let ts3 = 1389052800000
 
-const dataSet: any = [[], [], []]
+const dataSet = [[], [], []]
 
 for (let i = 0; i < 12; i++) {
 	ts1 = ts1 + 86400000
@@ -3239,7 +3239,7 @@ const githubdata = {
 	],
 }
 //Basic Area Chart
-export const areaApexOpts: ApexOptions = {
+export const areaApexOpts = {
 	chart: {
 		height: 380,
 		type: 'area',
@@ -3299,7 +3299,7 @@ export const areaApexOpts: ApexOptions = {
 	],
 }
 // Spiline Area
-export const spilineAreaApexOpts: ApexOptions = {
+export const spilineAreaApexOpts = {
 	chart: {
 		height: 380,
 		type: 'area',
@@ -3351,7 +3351,7 @@ export const spilineAreaApexOpts: ApexOptions = {
 }
 
 // AREA CHART - DATETIME X-AXIS
-export const dateTimeAreaApexOpts: ApexOptions = {
+export const dateTimeAreaApexOpts = {
 	annotations: {
 		yaxis: [
 			{
@@ -3704,7 +3704,7 @@ export const dateTimeAreaApexOpts: ApexOptions = {
 }
 
 // Area with Negative Values
-export const NavigateAreaApexOpts: ApexOptions = {
+export const NavigateAreaApexOpts = {
 	chart: {
 		height: 380,
 		type: 'area',
@@ -3952,7 +3952,7 @@ export const NavigateAreaApexOpts: ApexOptions = {
 }
 
 //selection - Github style
-export const githubStyleApexOpt1: ApexOptions = {
+export const githubStyleApexOpt1 = {
 	chart: {
 		height: 175,
 		type: 'area',
@@ -3999,7 +3999,7 @@ export const githubStyleApexOpt1: ApexOptions = {
 	},
 }
 
-export const githubStyleApexOpt2: ApexOptions = {
+export const githubStyleApexOpt2 = {
 	chart: {
 		id: 'chartyear',
 		type: 'area',
@@ -4039,13 +4039,13 @@ export const githubStyleApexOpt2: ApexOptions = {
 }
 
 // Stacked Chart
-export const stackedAreaOpts: ApexOptions = {
+export const stackedAreaOpts = {
 	chart: {
 		height: 422,
 		type: 'area',
 		stacked: true,
 		events: {
-			selection: function (e: any) {
+			selection: function (e) {
 				console.log(new Date(e.xaxis.min))
 			},
 		},
@@ -4119,7 +4119,7 @@ export const stackedAreaOpts: ApexOptions = {
 }
 
 //Irregular TimeSeries
-export const irregularTimeSeriesOpts: ApexOptions = {
+export const irregularTimeSeriesOpts = {
 	chart: {
 		type: 'area',
 		stacked: false,
@@ -4175,7 +4175,7 @@ export const irregularTimeSeriesOpts: ApexOptions = {
 			//     color: '#8e8da4',
 			// },
 			offsetX: 0,
-			formatter: function (val: any) {
+			formatter: function (val) {
 				return (val / 1000000).toFixed(0)
 			},
 		},
@@ -4205,7 +4205,7 @@ export const irregularTimeSeriesOpts: ApexOptions = {
 	tooltip: {
 		shared: true,
 		y: {
-			formatter: function (val: any) {
+			formatter: function (val) {
 				return (val / 1000000).toFixed(0) + ' points'
 			},
 		},
@@ -4237,7 +4237,7 @@ export const irregularTimeSeriesOpts: ApexOptions = {
 }
 
 //Area Chart with Null values
-export const areaNullValueOpts: ApexOptions = {
+export const areaNullValueOpts = {
 	chart: {
 		height: 380,
 		type: 'area',

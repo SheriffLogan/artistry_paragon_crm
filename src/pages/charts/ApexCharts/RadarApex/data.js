@@ -1,6 +1,6 @@
 import { ApexOptions } from 'apexcharts'
 
-export const basicRadarOpts: ApexOptions = {
+export const basicRadarOpts = {
 	chart: {
 		height: 350,
 		type: 'radar',
@@ -15,7 +15,7 @@ export const basicRadarOpts: ApexOptions = {
 	labels: ['January', 'February', 'March', 'April', 'May', 'June'],
 }
 
-export const polygonFillOpts: ApexOptions = {
+export const polygonFillOpts = {
 	chart: {
 		height: 350,
 		type: 'radar',
@@ -41,7 +41,7 @@ export const polygonFillOpts: ApexOptions = {
 	},
 	tooltip: {
 		y: {
-			formatter: function (val: number) {
+			formatter: function (val) {
 				return val.toString()
 			},
 		},
@@ -49,7 +49,7 @@ export const polygonFillOpts: ApexOptions = {
 	yaxis: {
 		tickAmount: 7,
 		labels: {
-			formatter: function (val: number, i): string {
+			formatter: function (val, i) {
 				if (i % 2 === 0) {
 					return val.toString()
 				} else {
@@ -60,7 +60,7 @@ export const polygonFillOpts: ApexOptions = {
 	},
 }
 
-export const multipleSeriesOpts: ApexOptions = {
+export const multipleSeriesOpts = {
 	chart: {
 		height: 350,
 		type: 'radar',

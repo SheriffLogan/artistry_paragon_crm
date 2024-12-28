@@ -4,13 +4,8 @@ import 'jsvectormap/dist/maps/us-merc-en'
 //components
 import BaseVectorMap from './BaseVectorMap'
 
-interface UsaVectorMapProps {
-	width?: string
-	height?: string
-	options?: any
-}
 
-const UsaVectorMap = ({ width, height, options }: UsaVectorMapProps) => {
+const UsaVectorMap = ({ width, height, options }) => {
 	return (
 		<>
 			<BaseVectorMap width={width} height={height} options={options} type="us_merc_en" />

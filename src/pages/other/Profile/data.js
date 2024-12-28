@@ -5,8 +5,6 @@ import avatar4 from '@/assets/images/users/avatar-4.jpg'
 import avatar5 from '@/assets/images/users/avatar-5.jpg'
 import avatar6 from '@/assets/images/users/avatar-6.jpg'
 
-import { type ChartConfiguration } from 'chart.js/auto'
-
 export const messages = [
 	{
 		id: 1,
@@ -40,7 +38,7 @@ export const messages = [
 	},
 ]
 
-export const productConfig: ChartConfiguration = {
+export const productConfig= {
 	type: 'bar',
 	data: {
 		labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],

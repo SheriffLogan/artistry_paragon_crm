@@ -7,7 +7,7 @@ import 'react-tooltip/dist/react-tooltip.css'
 import { PageBreadcrumb } from '../../components'
 
 const PlacementTooltips = () => {
-	const placements: PlacesType[] = ['bottom', 'right', 'top', 'left']
+	const placements = ['bottom', 'right', 'top', 'left']
 
 	return (
 		<div className="card">
@@ -29,7 +29,7 @@ const PlacementTooltips = () => {
 }
 
 const ColoredTooltips = () => {
-	const colors: VariantType[] = ['success', 'info', 'dark', 'warning']
+	const colors= ['success', 'info', 'dark', 'warning']
 
 	return (
 		<div className="card">

@@ -3,7 +3,7 @@ import { ApexOptions } from 'apexcharts'
 import messenger from '@/assets/images/brands/messenger.png'
 import instagram from '@/assets/images/brands/instagram.png'
 
-function generateDayWiseTimeSeries(baseval: number, count: number, yrange: { max: number; min: number }): any[] {
+function generateDayWiseTimeSeries(baseval, count, yrange){
 	let i = 0
 	const series = []
 	while (i < count) {
@@ -17,7 +17,7 @@ function generateDayWiseTimeSeries(baseval: number, count: number, yrange: { max
 	return series
 }
 
-export const scatterXYOpts: ApexOptions = {
+export const scatterXYOpts = {
 	chart: {
 		height: 380,
 		type: 'scatter',
@@ -169,7 +169,7 @@ export const scatterXYOpts: ApexOptions = {
 	],
 }
 
-export const datetimeOpts: ApexOptions = {
+export const datetimeOpts = {
 	chart: {
 		height: 380,
 		type: 'scatter',
@@ -256,7 +256,7 @@ export const datetimeOpts: ApexOptions = {
 	],
 }
 
-export const scatterWithImagesOpts: ApexOptions = {
+export const scatterWithImagesOpts = {
 	chart: {
 		height: 380,
 		type: 'scatter',

@@ -1,6 +1,6 @@
 import { ApexOptions } from 'apexcharts'
 
-export const basicTreemapOpts: ApexOptions = {
+export const basicTreemapOpts = {
 	series: [
 		{
 			data: [
@@ -73,7 +73,7 @@ export const basicTreemapOpts: ApexOptions = {
 	},
 }
 
-export const multipleSeriesTreemapOpts: ApexOptions = {
+export const multipleSeriesTreemapOpts = {
 	series: [
 		{
 			name: 'Desktops',
@@ -136,7 +136,7 @@ export const multipleSeriesTreemapOpts: ApexOptions = {
 	},
 }
 
-export const distributedTreemapOpts: ApexOptions = {
+export const distributedTreemapOpts = {
 	series: [
 		{
 			data: [
@@ -216,7 +216,7 @@ export const distributedTreemapOpts: ApexOptions = {
 }
 const colors = ['#3e60d5', '#39afd1']
 
-export const colorRangeTreemapOpts: ApexOptions = {
+export const colorRangeTreemapOpts = {
 	series: [
 		{
 			data: [

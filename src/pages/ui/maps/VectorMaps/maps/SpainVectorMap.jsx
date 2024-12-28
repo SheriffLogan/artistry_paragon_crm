@@ -4,13 +4,8 @@ import 'jsvectormap/dist/maps/spain.js'
 //components
 import BaseVectorMap from './BaseVectorMap'
 
-interface SpainVectorMapProps {
-	width?: string
-	height?: string
-	options?: any
-}
 
-const SpainVectorMap = ({ width, height, options }: SpainVectorMapProps) => {
+const SpainVectorMap = ({ width, height, options }) => {
 	return (
 		<>
 			<BaseVectorMap width={width} height={height} options={options} type="spain" />

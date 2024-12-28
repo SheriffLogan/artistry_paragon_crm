@@ -1,6 +1,6 @@
 import { ApexOptions } from 'apexcharts'
 
-export const basicPolarAreaOpts: ApexOptions = {
+export const basicPolarAreaOpts = {
 	series: [14, 23, 21, 17, 15, 10],
 	chart: {
 		height: 380,
@@ -32,7 +32,7 @@ export const basicPolarAreaOpts: ApexOptions = {
 	],
 }
 
-export const monochromePolarAreaOpts: ApexOptions = {
+export const monochromePolarAreaOpts = {
 	series: [42, 47, 52, 58, 65],
 	chart: {
 		height: 380,

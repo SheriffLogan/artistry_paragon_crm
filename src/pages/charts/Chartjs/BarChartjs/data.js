@@ -1,8 +1,7 @@
-import { type ChartConfiguration } from 'chart.js/auto'
 import hexToRGB from '../../../../utils/chartjs'
 
 const colors = ['#3e60d5', '#47ad77']
-export const borderRadiusConfig: ChartConfiguration = {
+export const borderRadiusConfig = {
 	type: 'bar',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
@@ -53,7 +52,7 @@ export const borderRadiusConfig: ChartConfiguration = {
 	},
 }
 
-export const floatingConfig: ChartConfiguration = {
+export const floatingConfig = {
 	type: 'bar',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
@@ -96,7 +95,7 @@ export const floatingConfig: ChartConfiguration = {
 	},
 }
 
-export const horizontalConfig: ChartConfiguration = {
+export const horizontalConfig = {
 	type: 'bar',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April'],
@@ -142,7 +141,7 @@ export const horizontalConfig: ChartConfiguration = {
 		},
 	},
 }
-export const stackedConfig: ChartConfiguration = {
+export const stackedConfig = {
 	type: 'bar',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April'],
@@ -192,7 +191,7 @@ export const stackedConfig: ChartConfiguration = {
 		},
 	},
 }
-export const groupStackConfig: ChartConfiguration = {
+export const groupStackConfig = {
 	type: 'bar',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April'],
@@ -245,7 +244,7 @@ export const groupStackConfig: ChartConfiguration = {
 		},
 	},
 }
-export const verticalConfig: ChartConfiguration = {
+export const verticalConfig = {
 	type: 'bar',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April'],

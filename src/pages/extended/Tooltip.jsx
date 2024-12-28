@@ -2,7 +2,7 @@
 import { PageBreadcrumb } from '../../components'
 
 import Tippy from '@tippyjs/react'
-import { Placement, roundArrow, followCursor } from 'tippy.js'
+import { roundArrow, followCursor } from 'tippy.js'
 
 // styles
 import 'tippy.js/dist/tippy.css'
@@ -17,12 +17,9 @@ import 'tippy.js/themes/material.css'
 import 'tippy.js/themes/light-border.css'
 import 'tippy.js/dist/svg-arrow.css'
 
-interface tooltip {
-	align: Placement
-	name: string
-}
 
-const placements: tooltip[] = [
+
+const placements = [
 	{
 		align: 'top',
 		name: 'Top',
@@ -49,7 +46,7 @@ const placements: tooltip[] = [
 	},
 ]
 
-const animations: string[] = ['shift-away', 'shift-toward', 'scale', 'perspective']
+const animations = ['shift-away', 'shift-toward', 'scale', 'perspective']
 
 const PlacementTooltips = () => {
 	return (

@@ -1,4 +1,4 @@
-import Chart, { type ChartItem } from 'chart.js/auto'
+import Chart from 'chart.js/auto'
 import { useEffect } from 'react'
 import { interpolationConfig, lineConfig, multiAxesConfig, pointStylingConfig, lineSegmentConfig, steppedConfig } from './data'
 
@@ -7,22 +7,22 @@ import PageBreadcrumb from '../../../../components/PageBreadcrumb'
 
 const LineChartjs = () => {
 	useEffect(() => {
-		const interpolationTag = document.getElementById('interpolation-example') as ChartItem
+		const interpolationTag = document.getElementById('interpolation-example') 
 		const interpolationChart = new Chart(interpolationTag, interpolationConfig)
 
-		const lineTag = document.getElementById('line-example') as ChartItem
+		const lineTag = document.getElementById('line-example') 
 		const lineChart = new Chart(lineTag, lineConfig)
 
-		const multiAxesTag = document.getElementById('multi-axes-example') as ChartItem
+		const multiAxesTag = document.getElementById('multi-axes-example') 
 		const multiAxesChart = new Chart(multiAxesTag, multiAxesConfig)
 
-		const pointStylingTag = document.getElementById('point-styling-example') as ChartItem
+		const pointStylingTag = document.getElementById('point-styling-example') 
 		const pointStylingChart = new Chart(pointStylingTag, pointStylingConfig)
 
-		const lineSegmentTag = document.getElementById('line-segment-example') as ChartItem
+		const lineSegmentTag = document.getElementById('line-segment-example') 
 		const lineSegmentChart = new Chart(lineSegmentTag, lineSegmentConfig)
 
-		const steppedTag = document.getElementById('stepped-example') as ChartItem
+		const steppedTag = document.getElementById('stepped-example') 
 		const steppedChart = new Chart(steppedTag, steppedConfig)
 
 		return () => {

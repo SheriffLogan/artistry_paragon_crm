@@ -1,4 +1,4 @@
-import Chart, { type ChartItem } from 'chart.js/auto'
+import Chart from 'chart.js/auto'
 import { useEffect } from 'react'
 import { borderRadiusConfig, floatingConfig, horizontalConfig, stackedConfig, groupStackConfig, verticalConfig } from './data'
 
@@ -7,22 +7,22 @@ import { PageBreadcrumb } from '../../../../components'
 
 const BarChartjs = () => {
 	useEffect(() => {
-		const borderRadiusTag = document.getElementById('border-radius-example') as ChartItem
+		const borderRadiusTag = document.getElementById('border-radius-example') 
 		const borderRadiusChart = new Chart(borderRadiusTag, borderRadiusConfig)
 
-		const floatingTag = document.getElementById('floating-example') as ChartItem
+		const floatingTag = document.getElementById('floating-example') 
 		const floatingChart = new Chart(floatingTag, floatingConfig)
 
-		const horizontalTag = document.getElementById('horizontal-example') as ChartItem
+		const horizontalTag = document.getElementById('horizontal-example') 
 		const horizontalChart = new Chart(horizontalTag, horizontalConfig)
 
-		const stackedTag = document.getElementById('stacked-example') as ChartItem
+		const stackedTag = document.getElementById('stacked-example') 
 		const stackedChart = new Chart(stackedTag, stackedConfig)
 
-		const groupStackTag = document.getElementById('group-stack-example') as ChartItem
+		const groupStackTag = document.getElementById('group-stack-example') 
 		const groupStackChart = new Chart(groupStackTag, groupStackConfig)
 
-		const verticalTag = document.getElementById('vertical-example') as ChartItem
+		const verticalTag = document.getElementById('vertical-example') 
 		const verticalChart = new Chart(verticalTag, verticalConfig)
 
 		return () => {

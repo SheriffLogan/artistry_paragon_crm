@@ -9,27 +9,10 @@ import img2 from '@/assets/images/small/small-2.jpg'
 import img3 from '@/assets/images/small/small-3.jpg'
 import React, { Fragment } from 'react'
 
-interface TimelineData {
-	[key: string]: {
-		title: string
-		date: string
-		text: string
-		variant: string
-		reactions?: {
-			emoji: string
-			count: string
-		}[]
-		images?: string[]
-		avatar?: {
-			position: string
-			name: string
-			image: string
-		}[]
-	}[]
-}
+
 
 const TimelinePages = () => {
-	const timelineData: TimelineData = {
+	const timelineData = {
 		Today: [
 			{
 				title: 'Completed UX design project for our client',

@@ -3,7 +3,7 @@ import moment from 'moment'
 
 const colors = ['#3e60d5', '#47ad77', '#fa5c7c', '#6c757d', '#39afd1']
 
-export const basicTimelineOpts: ApexOptions = {
+export const basicTimelineOpts = {
 	series: [
 		{
 			data: [
@@ -44,7 +44,7 @@ export const basicTimelineOpts: ApexOptions = {
 	},
 }
 
-export const distributedTimelineOpts: ApexOptions = {
+export const distributedTimelineOpts = {
 	series: [
 		{
 			data: [
@@ -94,7 +94,7 @@ export const distributedTimelineOpts: ApexOptions = {
 	},
 	dataLabels: {
 		enabled: true,
-		formatter: function (val: any[], opts) {
+		formatter: function (val, opts) {
 			let label = opts.w.globals.labels[opts.dataPointIndex]
 			let a = moment(val[0])
 			let b = moment(val[1])
@@ -125,7 +125,7 @@ export const distributedTimelineOpts: ApexOptions = {
 	},
 }
 
-export const multiSeriesTimelineOpts: ApexOptions = {
+export const multiSeriesTimelineOpts = {
 	series: [
 		{
 			name: 'Bob',
@@ -176,7 +176,7 @@ export const multiSeriesTimelineOpts: ApexOptions = {
 	},
 	dataLabels: {
 		enabled: true,
-		formatter: function (val: any[]) {
+		formatter: function (val) {
 			let a = moment(val[0])
 			let b = moment(val[1])
 			let diff = b.diff(a, 'days')
@@ -205,7 +205,7 @@ export const multiSeriesTimelineOpts: ApexOptions = {
 	},
 }
 
-export const advancedTimelineOpts: ApexOptions = {
+export const advancedTimelineOpts = {
 	series: [
 		{
 			name: 'Bob',
@@ -323,7 +323,7 @@ export const advancedTimelineOpts: ApexOptions = {
 	},
 }
 
-export const groupRowsTimelineOpts: ApexOptions = {
+export const groupRowsTimelineOpts = {
 	series: [
 		// George Washington
 		{

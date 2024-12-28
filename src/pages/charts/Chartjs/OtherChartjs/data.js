@@ -1,10 +1,9 @@
-import { type ChartConfiguration } from 'chart.js/auto'
 import hexToRGB from '../../../../utils/chartjs'
 
 const colors1 = ['#3e60d5', '#47ad77']
 const colors2 = ['#3e60d5', '#fa5c7c', '#47ad77', '#ebeff2', '#f56f36']
 
-export const bubbleConfig: ChartConfiguration = {
+export const bubbleConfig = {
 	type: 'bubble',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
@@ -60,7 +59,7 @@ export const bubbleConfig: ChartConfiguration = {
 		},
 	},
 }
-export const donutConfig: ChartConfiguration = {
+export const donutConfig = {
 	type: 'doughnut',
 	data: {
 		labels: ['Direct', 'Affilliate', 'Sponsored', 'E-mail'],
@@ -86,7 +85,7 @@ export const donutConfig: ChartConfiguration = {
 		},
 	},
 }
-export const pieConfig: ChartConfiguration = {
+export const pieConfig = {
 	type: 'pie',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April', 'May'],
@@ -109,7 +108,7 @@ export const pieConfig: ChartConfiguration = {
 		},
 	},
 }
-export const polarAreaConfig: ChartConfiguration = {
+export const polarAreaConfig = {
 	type: 'polarArea',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April', 'May'],
@@ -138,7 +137,7 @@ export const polarAreaConfig: ChartConfiguration = {
 		},
 	},
 }
-export const radarConfig: ChartConfiguration = {
+export const radarConfig = {
 	type: 'radar',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
@@ -167,7 +166,7 @@ export const radarConfig: ChartConfiguration = {
 		},
 	},
 }
-export const scatterConfig: ChartConfiguration = {
+export const scatterConfig = {
 	type: 'scatter',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July'],
@@ -222,7 +221,7 @@ export const scatterConfig: ChartConfiguration = {
 		},
 	},
 }
-export const barLineConfig: ChartConfiguration = {
+export const barLineConfig = {
 	type: 'line',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July'],

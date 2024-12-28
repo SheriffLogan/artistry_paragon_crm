@@ -1,7 +1,7 @@
 import { ApexOptions } from 'apexcharts'
 import small4 from '@/assets/images/small/small-4.jpg'
 
-export const basicBarOpts: ApexOptions = {
+export const basicBarOpts = {
 	chart: {
 		height: 380,
 		type: 'bar',
@@ -37,7 +37,7 @@ export const basicBarOpts: ApexOptions = {
 }
 
 //GroupedBar
-export const groupBarOpts: ApexOptions = {
+export const groupBarOpts = {
 	chart: {
 		height: 380,
 		type: 'bar',
@@ -97,7 +97,7 @@ export const groupBarOpts: ApexOptions = {
 }
 
 //Stacked Bar Chart
-export const stackedBarOpts: ApexOptions = {
+export const stackedBarOpts = {
 	chart: {
 		height: 380,
 		type: 'bar',
@@ -176,7 +176,7 @@ export const stackedBarOpts: ApexOptions = {
 }
 
 //Full Stacked Bar Chart
-export const fullStackedBarOpts: ApexOptions = {
+export const fullStackedBarOpts = {
 	chart: {
 		height: 380,
 		type: 'bar',
@@ -250,7 +250,7 @@ export const fullStackedBarOpts: ApexOptions = {
 }
 
 //Navigate Bar
-export const navigateBarOpts: ApexOptions = {
+export const navigateBarOpts = {
 	chart: {
 		height: 380,
 		type: 'bar',
@@ -298,7 +298,7 @@ export const navigateBarOpts: ApexOptions = {
 	tooltip: {
 		shared: false,
 		x: {
-			formatter: function (val: any) {
+			formatter: function (val) {
 				return val
 			},
 		},
@@ -314,7 +314,7 @@ export const navigateBarOpts: ApexOptions = {
 			text: 'Percent',
 		},
 		labels: {
-			formatter: function (val: any) {
+			formatter: function (val) {
 				return Math.abs(Math.round(val)) + '%'
 			},
 		},
@@ -331,7 +331,7 @@ export const navigateBarOpts: ApexOptions = {
 }
 
 //Reversed Bar Chart
-export const reversedBarOpts: ApexOptions = {
+export const reversedBarOpts = {
 	series: [
 		{
 			data: [400, 430, 448, 470, 540, 580, 690],
@@ -394,7 +394,7 @@ export const reversedBarOpts: ApexOptions = {
 }
 
 // ImageFillBar Chart
-export const imageFillBarOpts: ApexOptions = {
+export const imageFillBarOpts = {
 	chart: {
 		height: 450,
 		type: 'bar',
@@ -455,7 +455,7 @@ export const imageFillBarOpts: ApexOptions = {
 }
 
 // Custom DataLabels Bar
-export const customDataLabelBarOpts: ApexOptions = {
+export const customDataLabelBarOpts = {
 	chart: {
 		height: 450,
 		type: 'bar',
@@ -522,7 +522,7 @@ export const customDataLabelBarOpts: ApexOptions = {
 }
 
 //Patterned Bar Chart
-export const patternedBarOpts: ApexOptions = {
+export const patternedBarOpts = {
 	chart: {
 		height: 380,
 		type: 'bar',
@@ -614,7 +614,7 @@ export const patternedBarOpts: ApexOptions = {
 }
 
 // Bar with Markers
-export const markersBarOpts: ApexOptions = {
+export const markersBarOpts = {
 	series: [
 		{
 			name: 'Actual',

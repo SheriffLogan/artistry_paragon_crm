@@ -4,13 +4,9 @@ import 'jsvectormap/dist/maps/iraq.js'
 //components
 import BaseVectorMap from './BaseVectorMap'
 
-interface IraqVectorMapProps {
-	width?: string
-	height?: string
-	options?: any
-}
 
-const IraqVectorMap = ({ width, height, options }: IraqVectorMapProps) => {
+
+const IraqVectorMap = ({ width, height, options }) => {
 	return (
 		<>
 			<BaseVectorMap width={width} height={height} options={options} type="iraq" />

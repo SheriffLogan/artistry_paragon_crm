@@ -7,7 +7,7 @@ const DynamicLoaded = () => {
 		 * Randomize array element order in-place.
 		 * Using Durstenfeld shuffle algorithm.
 		 */
-		function shuffleArray(array: any) {
+		function shuffleArray(array) {
 			for (let i = array.length - 1; i > 0; i--) {
 				const j = Math.floor(Math.random() * (i + 1))
 				const temp = array[i]
@@ -191,7 +191,7 @@ const DynamicLoaded = () => {
 			return dataYearSeries
 		}
 
-		function updateQuarterChart(sourceChart: any, destChartIDToUpdate: any) {
+		function updateQuarterChart(sourceChart, destChartIDToUpdate) {
 			let series = []
 			const seriesIndex = 0
 			const colors = []
@@ -240,7 +240,7 @@ const DynamicLoaded = () => {
 					show: false,
 				},
 				events: {
-					dataPointSelection: function (_e: any, chart: any, opts: any) {
+					dataPointSelection: function (_e, chart, opts) {
 						const quarterChartEl = document.querySelector('#chart-quarter')
 						const yearChartEl = document.querySelector('#chart-year')
 
@@ -261,7 +261,7 @@ const DynamicLoaded = () => {
 							quarterChartEl?.classList.remove('active')
 						}
 					},
-					updated: function (chart: any) {
+					updated: function (chart) {
 						updateQuarterChart(chart, 'barQuarter')
 					},
 				},
@@ -282,7 +282,7 @@ const DynamicLoaded = () => {
 				style: {
 					colors: ['#fff'],
 				},
-				formatter: function (_val: any, opt: any) {
+				formatter: function (_val, opt) {
 					return opt.w.globals.labels[opt.dataPointIndex]
 				},
 				offsetX: 0,
@@ -313,7 +313,7 @@ const DynamicLoaded = () => {
 				},
 				y: {
 					title: {
-						formatter: function (_val: any, opts: any) {
+						formatter: function (_val, opts) {
 							return opts.w.globals.labels[opts.dataPointIndex]
 						},
 					},
@@ -382,13 +382,13 @@ const DynamicLoaded = () => {
 			},
 			tooltip: {
 				x: {
-					formatter: function (_val: any, opts: any) {
+					formatter: function (_val, opts) {
 						return opts.w.globals.seriesNames[opts.seriesIndex]
 					},
 				},
 				y: {
 					title: {
-						formatter: function (_val: any, opts: any) {
+						formatter: function (_val, opts) {
 							return opts.w.globals.labels[opts.dataPointIndex]
 						},
 					},

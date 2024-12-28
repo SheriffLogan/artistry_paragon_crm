@@ -9,20 +9,11 @@ import { ModalLayout } from '../../components/HeadlessUI'
 import logo from '@/assets/images/logo.svg'
 import logoDark from '@/assets/images/logo-dark.svg'
 
-interface ModalBasedAlert {
-	icon: string
-	title: string
-	variant: string
-}
-interface position {
-	name: string
-	placement: string
-}
 
 const colors = ['bg-primary', 'bg-secondary', 'bg-info', 'bg-warning', 'bg-danger', 'bg-dark']
 const colors2 = ['bg-primary/90', 'bg-secondary/90', 'bg-info/90', 'bg-warning/90', 'bg-danger/90', 'bg-dark/90']
 
-const modalbasedAlert: ModalBasedAlert[] = [
+const modalbasedAlert = [
 	{
 		icon: 'ri-check-line',
 		title: 'Well Done!',
@@ -46,12 +37,8 @@ const modalbasedAlert: ModalBasedAlert[] = [
 ]
 
 const ModalExample = () => {
-	interface ModalSize {
-		name: string
-		width: string
-		variant: string
-	}
-	const sizes: ModalSize[] = [
+
+	const sizes= [
 		{
 			name: 'Standard Modal',
 			width: 'sm:max-w-lg',
@@ -79,9 +66,9 @@ const ModalExample = () => {
 		},
 	]
 
-	const [isModalOpen, setIsModalOpen] = useState<number | null>(null)
+	const [isModalOpen, setIsModalOpen] = useState(null)
 
-	const handleModal = (index: number) => () => {
+	const handleModal = (index) => () => {
 		if (index === isModalOpen) setIsModalOpen(null)
 		else setIsModalOpen(index)
 	}
@@ -135,9 +122,9 @@ const ModalExample = () => {
 }
 
 const ModalWithPages = () => {
-	const [isModalOpen, setIsModalOpen] = useState<number | null>(null)
+	const [isModalOpen, setIsModalOpen] = useState(null)
 
-	const handleModal = (index: number) => () => {
+	const handleModal = (index) => () => {
 		if (index === isModalOpen) setIsModalOpen(null)
 		else setIsModalOpen(index)
 	}
@@ -258,9 +245,9 @@ const ModalWithPages = () => {
 }
 
 const ModalWithAlerts = () => {
-	const [isModalOpen, setIsModalOpen] = useState<number | null>(null)
+	const [isModalOpen, setIsModalOpen] = useState(null)
 
-	const handleModal = (index: number) => () => {
+	const handleModal = (index) => () => {
 		if (index === isModalOpen) setIsModalOpen(null)
 		else setIsModalOpen(index)
 	}
@@ -300,7 +287,7 @@ const ModalWithAlerts = () => {
 }
 
 const ModalPositions = () => {
-	const Positions: position[] = [
+	const Positions = [
 		{
 			name: 'Top',
 			placement: 'justify-center items-start',
@@ -315,9 +302,9 @@ const ModalPositions = () => {
 		},
 	]
 
-	const [isModalOpen, setIsModalOpen] = useState<number | null>(null)
+	const [isModalOpen, setIsModalOpen] = useState(null)
 
-	const handleModal = (index: number) => () => {
+	const handleModal = (index) => () => {
 		if (index === isModalOpen) setIsModalOpen(null)
 		else setIsModalOpen(index)
 	}
@@ -363,9 +350,9 @@ const ModalPositions = () => {
 }
 
 const ModalWithColoredHeader = () => {
-	const [isModalOpen, setIsModalOpen] = useState<number | null>(null)
+	const [isModalOpen, setIsModalOpen] = useState(null)
 
-	const handleModal = (index: number) => () => {
+	const handleModal = (index) => () => {
 		if (index === isModalOpen) setIsModalOpen(null)
 		else setIsModalOpen(index)
 	}
@@ -414,9 +401,9 @@ const ModalWithColoredHeader = () => {
 }
 
 const ModalWithColorFilled = () => {
-	const [isModalOpen, setIsModalOpen] = useState<number | null>(null)
+	const [isModalOpen, setIsModalOpen] = useState(null)
 
-	const handleModal = (index: number) => () => {
+	const handleModal = (index) => () => {
 		if (index === isModalOpen) setIsModalOpen(null)
 		else setIsModalOpen(index)
 	}
@@ -465,9 +452,9 @@ const ModalWithColorFilled = () => {
 }
 
 const MultipleModal = () => {
-	const [isModalOpen, setIsModalOpen] = useState<number | null>(null)
+	const [isModalOpen, setIsModalOpen] = useState(null)
 
-	const handleModal = (index: number) => () => {
+	const handleModal = (index) => () => {
 		if (index === isModalOpen) setIsModalOpen(null)
 		else setIsModalOpen(index)
 	}
@@ -526,7 +513,7 @@ const MultipleModal = () => {
 }
 
 const FullscreenModal = () => {
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+	const [isModalOpen, setIsModalOpen] = useState(false)
 
 	const handleModal = () => {
 		setIsModalOpen(!isModalOpen)

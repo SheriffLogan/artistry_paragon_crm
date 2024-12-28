@@ -38,7 +38,7 @@ const RaterWithStep = () => {
 }
 
 const RaterWithRandomNumber = () => {
-	const [randomValue, setRandomValue] = useState<number>(0)
+	const [randomValue, setRandomValue] = useState(0)
 
 	const handleRandomValue = () => {
 		const randomNumber = Math.floor(Math.random() * 5)
@@ -60,7 +60,7 @@ const RaterWithRandomNumber = () => {
 
 const RaterWithHover = () => {
 	const count = [1, 2, 3, 4, 5]
-	const [hoverValue, setHoverValue] = useState<number>(1)
+	const [hoverValue, setHoverValue] = useState(1)
 	return (
 		<div className="card">
 			<div className="p-6">
@@ -79,7 +79,7 @@ const RaterWithHover = () => {
 }
 
 const ResetRater = () => {
-	const [ratingsCount, setRatingsCount] = useState<number>(2)
+	const [ratingsCount, setRatingsCount] = useState(2)
 
 	const resetRating = () => {
 		setRatingsCount(0)

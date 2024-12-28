@@ -1,7 +1,6 @@
-import { type ChartConfiguration } from 'chart.js/auto'
 import hexToRGB from '../../../../utils/chartjs'
 
-export const boundariesConfig: ChartConfiguration = {
+export const boundariesConfig = {
 	type: 'line',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
@@ -40,7 +39,7 @@ export const boundariesConfig: ChartConfiguration = {
 }
 
 const datasetColors = ['#3e60d5', '#fa5c7c', '#47ad77', '#ebeff2', '#f56f36']
-export const datasetConfig: ChartConfiguration = {
+export const datasetConfig = {
 	type: 'line',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
@@ -111,7 +110,7 @@ export const datasetConfig: ChartConfiguration = {
 }
 
 const drawTimeColors = ['#3e60d5', '#47ad77']
-export const drawTimeConfig: ChartConfiguration = {
+export const drawTimeConfig = {
 	type: 'line',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
@@ -166,7 +165,7 @@ export const drawTimeConfig: ChartConfiguration = {
 }
 
 const stackedColors = ['#3e60d5', '#fa5c7c', '#47ad77', '#ebeff2', '#f56f36']
-export const stackedConfig: ChartConfiguration = {
+export const stackedConfig = {
 	type: 'line',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
@@ -246,7 +245,7 @@ export const stackedConfig: ChartConfiguration = {
 }
 
 const radarColors = ['#3e60d5', '#fa5c7c', '#47ad77', '#ebeff2', '#f56f36']
-export const radarConfig: ChartConfiguration = {
+export const radarConfig = {
 	type: 'radar',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],

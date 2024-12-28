@@ -3,20 +3,12 @@ import { Link } from 'react-router-dom'
 // components
 import { PageBreadcrumb, handleDismiss } from '../../components'
 
-const colors: string[] = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark']
+const colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark']
 
-interface DefaultVariant {
-	variant: string
-	isBG: boolean
-}
 
-interface IconAlertVariant {
-	variant: string
-	icon: string
-}
 
 const DefaultAlerts = () => {
-	const defaultAlertVariants: DefaultVariant[] = [
+	const defaultAlertVariants= [
 		{
 			variant: 'primary',
 			isBG: false,
@@ -71,7 +63,7 @@ const DefaultAlerts = () => {
 }
 
 const DismissibleAlerts = () => {
-	const dismissibleAlertVariants: DefaultVariant[] = [
+	const dismissibleAlertVariants = [
 		{
 			variant: 'primary',
 			isBG: true,
@@ -174,7 +166,7 @@ const LinkColor = () => {
 }
 
 const IconWithAlert = () => {
-	const iconAlertVariants: IconAlertVariant[] = [
+	const iconAlertVariants = [
 		{
 			variant: 'success',
 			icon: 'ri-check-line',

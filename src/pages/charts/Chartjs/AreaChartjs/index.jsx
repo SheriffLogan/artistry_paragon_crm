@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import Chart, { type ChartItem } from 'chart.js/auto'
 
 // components
 import { PageBreadcrumb } from '../../../../components'
@@ -11,19 +10,19 @@ import { boundariesConfig, datasetConfig, drawTimeConfig, radarConfig, stackedCo
 
 const AreaChartjs = () => {
 	useEffect(() => {
-		const boundariesTag = document.getElementById('boundaries-example') as ChartItem
+		const boundariesTag = document.getElementById('boundaries-example') 
 		const boundariesChart = new Chart(boundariesTag, boundariesConfig)
 
-		const datasetTag = document.getElementById('dataset-example') as ChartItem
+		const datasetTag = document.getElementById('dataset-example') 
 		const datasetChart = new Chart(datasetTag, datasetConfig)
 
-		const drawTimeTag = document.getElementById('draw-time-example') as ChartItem
+		const drawTimeTag = document.getElementById('draw-time-example') 
 		const drawTimeChart = new Chart(drawTimeTag, drawTimeConfig)
 
-		const stackedTag = document.getElementById('stacked-example') as ChartItem
+		const stackedTag = document.getElementById('stacked-example') 
 		const stackedChart = new Chart(stackedTag, stackedConfig)
 
-		const radarTag = document.getElementById('radar-example') as ChartItem
+		const radarTag = document.getElementById('radar-example') 
 		const radarChart = new Chart(radarTag, radarConfig)
 
 		return () => {

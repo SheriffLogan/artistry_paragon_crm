@@ -1,6 +1,6 @@
 import { ApexOptions } from 'apexcharts'
 
-export const basicBoxplotOpts: ApexOptions = {
+export const basicBoxplotOpts = {
 	series: [
 		{
 			type: 'boxPlot',
@@ -56,7 +56,7 @@ export const basicBoxplotOpts: ApexOptions = {
 	},
 }
 
-export const scatterBoxplotOpts: ApexOptions = {
+export const scatterBoxplotOpts = {
 	series: [
 		{
 			name: 'Box',
@@ -129,7 +129,7 @@ export const scatterBoxplotOpts: ApexOptions = {
 	xaxis: {
 		type: 'datetime',
 		tooltip: {
-			formatter: function (val: string) {
+			formatter: function (val) {
 				return new Date(val).getFullYear().toString()
 			},
 		},
@@ -153,7 +153,7 @@ export const scatterBoxplotOpts: ApexOptions = {
 	},
 }
 
-export const horizontalBoxPlotOpts: ApexOptions = {
+export const horizontalBoxPlotOpts = {
 	series: [
 		{
 			data: [

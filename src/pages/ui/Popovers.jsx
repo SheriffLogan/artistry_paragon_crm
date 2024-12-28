@@ -36,7 +36,7 @@ const AutoTargetingPopover = () => {
 }
 
 const CustomPositionPopovers = () => {
-	const directions: Placement[] = ['top', 'bottom', 'left', 'right']
+	const directions = ['top', 'bottom', 'left', 'right']
 
 	return (
 		<div className="card">

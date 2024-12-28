@@ -1,12 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import type { Placement } from '@floating-ui/dom'
 
 // components
 import { PageBreadcrumb } from '../../components'
 import { PopoverLayout } from '../../components/HeadlessUI'
 
-const alignments: Placement[] = ['right', 'left', 'top', 'bottom']
+const alignments = ['right', 'left', 'top', 'bottom']
 
 const colors = ['primary', 'secondary', 'success', 'info', 'warning', 'danger']
 
@@ -83,7 +82,7 @@ const MenuAlignmentDropdown = () => {
 		)
 	}
 
-	const AlignmentToggle = ({ align }: { align: string }) => {
+	const AlignmentToggle = ({ align }) => {
 		return (
 			<>
 				Dropdown {align} <i className="ri-arrow-down-s-fill ms-1"></i>
@@ -147,7 +146,7 @@ const MenuAlignmentDropdown = () => {
 }
 
 const ColorVariantDropdown = () => {
-	const PopoverToggle = ({ name }: { name: string }) => {
+	const PopoverToggle = ({ name }) => {
 		return (
 			<>
 				{name.charAt(0).toUpperCase() + name.slice(1)} <i className="ri-arrow-down-s-fill ms-1"></i>
@@ -240,7 +239,7 @@ const ButtonSizes = () => {
 		},
 	]
 
-	const PopoverToggle = ({ name }: { name: string }) => {
+	const PopoverToggle = ({ name }) => {
 		return (
 			<>
 				{name.charAt(0).toUpperCase() + name.slice(1)} <i className="ri-arrow-down-s-fill ms-1"></i>

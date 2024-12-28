@@ -6,12 +6,9 @@ import { PageBreadcrumb } from '../../components'
 // style
 import 'plyr-react/plyr.css'
 
-interface videocontent {
-	id: string
-	source: 'youtube' | 'vimeo'
-}
 
-const contents: videocontent[] = [
+
+const contents = [
 	{
 		id: 'PrUxWZiQfy4',
 		source: 'youtube',

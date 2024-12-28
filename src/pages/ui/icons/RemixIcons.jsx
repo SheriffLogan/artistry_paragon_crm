@@ -5,7 +5,7 @@ import { PageBreadcrumb } from '../../../components'
 // components
 
 const RemixIcons = () => {
-	const headings: string[][] = []
+	const headings = []
 	headings.push(Object.keys(remixIconsList[0]))
 
 	return (
@@ -23,7 +23,7 @@ const RemixIcons = () => {
 
 								<div className="grid lg:grid-cols-4 md:grid-cols-3 gap-6 icons-list-demo" id="icons">
 									{heading !== 'Editor'
-										? remixIconsList[0][heading].map((icon: string, idx: number) => {
+										? remixIconsList[0][heading].map((icon, idx) => {
 												return (
 													<React.Fragment key={idx}>
 														<div className="flex items-center">

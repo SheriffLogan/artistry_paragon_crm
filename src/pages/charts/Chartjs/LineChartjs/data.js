@@ -1,18 +1,17 @@
-import { type ChartConfiguration } from 'chart.js/auto'
 import hexToRGB from '../../../../utils/chartjs'
 
 const colors = ['#3e60d5', '#47ad77']
 const datapoints = [0, 20, 20, 60, 60, 120, NaN, 180, 120, 125, 105, 110, 170]
 
-function skipped(ctx: any, value: any) {
+function skipped(ctx, value) {
 	return ctx.p0.skip || ctx.p1.skip ? value : undefined
 }
 
-function down(ctx: any, value: any) {
+function down(ctx, value) {
 	return ctx.p0.parsed.y > ctx.p1.parsed.y ? value : undefined
 }
 
-export const interpolationConfig: ChartConfiguration = {
+export const interpolationConfig = {
 	type: 'line',
 	data: {
 		labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
@@ -69,7 +68,7 @@ export const interpolationConfig: ChartConfiguration = {
 		},
 	},
 }
-export const lineConfig: ChartConfiguration = {
+export const lineConfig = {
 	type: 'line',
 	data: {
 		labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -118,7 +117,7 @@ export const lineConfig: ChartConfiguration = {
 		},
 	},
 }
-export const multiAxesConfig: ChartConfiguration = {
+export const multiAxesConfig = {
 	type: 'line',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July'],
@@ -182,7 +181,7 @@ export const multiAxesConfig: ChartConfiguration = {
 		},
 	},
 }
-export const pointStylingConfig: ChartConfiguration = {
+export const pointStylingConfig = {
 	type: 'line',
 	data: {
 		labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
@@ -223,7 +222,7 @@ export const pointStylingConfig: ChartConfiguration = {
 		},
 	},
 }
-export const lineSegmentConfig: ChartConfiguration = {
+export const lineSegmentConfig = {
 	type: 'line',
 	data: {
 		labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July'],
@@ -272,7 +271,7 @@ export const lineSegmentConfig: ChartConfiguration = {
 		},
 	},
 }
-export const steppedConfig: ChartConfiguration = {
+export const steppedConfig = {
 	type: 'line',
 	data: {
 		labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],

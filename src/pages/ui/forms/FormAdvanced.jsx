@@ -111,7 +111,7 @@ const FlatpickrDate = () => {
 								placeholder="Disabling dates"
 								options={{
 									disable: [
-										function (date: Date) {
+										function (date) {
 											return date.getDay() === 0 || date.getDay() === 6
 										},
 									],
@@ -396,7 +396,7 @@ const InputMasks = () => {
 const ColorPicker = () => {
 	const [color, setColor] = useState()
 
-	const handleColorChange = (e: any) => {
+	const handleColorChange = (e) => {
 		setColor(e)
 	}
 	return (
@@ -411,21 +411,21 @@ const ColorPicker = () => {
 							<p className="text-gray-400 grow">
 								Use <code>Sketchpicker</code> to set Sketch colorpicker.
 							</p>
-							<SketchPicker color={color} onChangeComplete={(e: any) => handleColorChange(e)} />
+							<SketchPicker color={color} onChangeComplete={(e) => handleColorChange(e)} />
 						</div>
 						<div className="bg-light dark:bg-gray-700 p-4 rounded-md flex flex-col">
 							<h5 className="text-base text-gray-400 mb-2 shrink-0 dark:text-gray-300">Monolith Demo</h5>
 							<p className="text-gray-400 grow">
 								Use <code>Chromepicker</code> to set Chrome colorpicker.
 							</p>
-							<ChromePicker color={color} onChangeComplete={(e: any) => handleColorChange(e)} />
+							<ChromePicker color={color} onChangeComplete={(e) => handleColorChange(e)} />
 						</div>
 						<div className="bg-light dark:bg-gray-700 p-4 rounded-md flex flex-col">
 							<h5 className="text-base text-gray-400 mb-2 shrink-0 dark:text-gray-300">Nano Demo</h5>
 							<p className="text-gray-400 grow">
 								Use <code>Blockpicker</code>to set Block colorpicker..
 							</p>
-							<BlockPicker color={color} onChangeComplete={(e: any) => handleColorChange(e)} />
+							<BlockPicker color={color} onChangeComplete={(e) => handleColorChange(e)} />
 						</div>
 					</div>
 				</div>
@@ -439,7 +439,7 @@ const ColorPicker = () => {
 							<p className="text-gray-400 grow">
 								Use <code>GithubPicker</code> to set GithubPicker option colorpicker.
 							</p>
-							<GithubPicker color={color} onChangeComplete={(e: any) => handleColorChange(e)} width={'240'} />
+							<GithubPicker color={color} onChangeComplete={(e) => handleColorChange(e)} width={'240'} />
 						</div>
 
 						<div className="bg-light dark:bg-gray-700 p-4 rounded-md flex flex-col">
@@ -447,7 +447,7 @@ const ColorPicker = () => {
 							<p className="text-gray-400 grow">
 								Use <code>colorpicker hue</code>to set colorpicker with hue.
 							</p>
-							<HuePicker color={color} onChangeComplete={(e: any) => handleColorChange(e)} width={'250'} />
+							<HuePicker color={color} onChangeComplete={(e) => handleColorChange(e)} width={'250'} />
 						</div>
 
 						<div className="bg-light dark:bg-gray-700 p-4 rounded-md flex flex-col">
@@ -455,7 +455,7 @@ const ColorPicker = () => {
 							<p className="text-gray-400 grow">
 								Use <code>switchesPicker</code> to set switch colorpicker.
 							</p>
-							<SwatchesPicker color={color} width={240} onChangeComplete={(e: any) => handleColorChange(e)} />
+							<SwatchesPicker color={color} width={240} onChangeComplete={(e) => handleColorChange(e)} />
 						</div>
 
 						<div className="bg-light dark:bg-gray-700 p-4 rounded-md flex flex-col">
@@ -463,7 +463,7 @@ const ColorPicker = () => {
 							<p className="text-gray-400 grow">
 								Use <code>CompactPicker</code> to set colorpicker with input.
 							</p>
-							<CompactPicker color={color} onChangeComplete={(e: any) => handleColorChange(e)} />
+							<CompactPicker color={color} onChangeComplete={(e) => handleColorChange(e)} />
 						</div>
 
 						<div className="bg-light dark:bg-gray-700 p-4 rounded-md flex flex-col">
@@ -471,7 +471,7 @@ const ColorPicker = () => {
 							<p className="text-gray-400 grow">
 								Use <code>TwitterPicker</code> to set colorpicker with format option.
 							</p>
-							<TwitterPicker color={color} onChangeComplete={(e: any) => handleColorChange(e)} />
+							<TwitterPicker color={color} onChangeComplete={(e) => handleColorChange(e)} />
 						</div>
 					</div>
 				</div>

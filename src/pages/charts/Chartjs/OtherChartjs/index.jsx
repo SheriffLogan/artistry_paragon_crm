@@ -1,4 +1,4 @@
-import Chart, { type ChartItem } from 'chart.js/auto'
+import Chart from 'chart.js/auto'
 import { useEffect } from 'react'
 import { bubbleConfig, donutConfig, pieConfig, polarAreaConfig, radarConfig, scatterConfig, barLineConfig } from './data'
 
@@ -7,25 +7,25 @@ import PageBreadcrumb from '../../../../components/PageBreadcrumb'
 
 const OtherChartjs = () => {
 	useEffect(() => {
-		const bubbleTag = document.getElementById('bubble-example') as ChartItem
+		const bubbleTag = document.getElementById('bubble-example') 
 		const bubbleChart = new Chart(bubbleTag, bubbleConfig)
 
-		const donutTag = document.getElementById('donut-example') as ChartItem
+		const donutTag = document.getElementById('donut-example') 
 		const donutChart = new Chart(donutTag, donutConfig)
 
-		const pieTag = document.getElementById('pie-example') as ChartItem
+		const pieTag = document.getElementById('pie-example') 
 		const pieChart = new Chart(pieTag, pieConfig)
 
-		const polarAreaTag = document.getElementById('polar-area-example') as ChartItem
+		const polarAreaTag = document.getElementById('polar-area-example') 
 		const polarAreaChart = new Chart(polarAreaTag, polarAreaConfig)
 
-		const radarTag = document.getElementById('radar-example') as ChartItem
+		const radarTag = document.getElementById('radar-example') 
 		const radarChart = new Chart(radarTag, radarConfig)
 
-		const scatterTag = document.getElementById('scatter-example') as ChartItem
+		const scatterTag = document.getElementById('scatter-example')
 		const scatterChart = new Chart(scatterTag, scatterConfig)
 
-		const barLineTag = document.getElementById('bar-line-example') as ChartItem
+		const barLineTag = document.getElementById('bar-line-example') 
 		const barLine = new Chart(barLineTag, barLineConfig)
 
 		return () => {

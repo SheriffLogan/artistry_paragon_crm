@@ -1,8 +1,8 @@
 import { ApexOptions } from 'apexcharts'
 
-function generateData(baseval: number, count: number, yrange: any): number[] {
+function generateData(baseval, count, yrange){
 	let i = 0
-	const series: any = []
+	const series = []
 	while (i < count) {
 		const x = Math.floor(Math.random() * (750 - 1 + 1)) + 1
 		const y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min
@@ -15,9 +15,9 @@ function generateData(baseval: number, count: number, yrange: any): number[] {
 	return series
 }
 
-function generateData1(baseval1: number, count: number, yrange: any): number[] {
+function generateData1(baseval1, count, yrange) {
 	let i = 0
-	const series: any = []
+	const series = []
 	while (i < count) {
 		//let x =Math.floor(Math.random() * (750 - 1 + 1)) + 1;;
 		const y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min
@@ -29,7 +29,7 @@ function generateData1(baseval1: number, count: number, yrange: any): number[] {
 	}
 	return series
 }
-export const simpleBubbleChartOpts: ApexOptions = {
+export const simpleBubbleChartOpts = {
 	chart: {
 		height: 380,
 		type: 'bubble',
@@ -88,7 +88,7 @@ export const simpleBubbleChartOpts: ApexOptions = {
 	},
 }
 
-export const secondBubbleChartOpts: ApexOptions = {
+export const secondBubbleChartOpts = {
 	chart: {
 		height: 380,
 		type: 'bubble',

@@ -1,6 +1,6 @@
 import { ApexOptions } from 'apexcharts'
 
-const basicColumnOpts: ApexOptions = {
+const basicColumnOpts = {
 	chart: {
 		height: 396,
 		type: 'bar',
@@ -71,7 +71,7 @@ const basicColumnOpts: ApexOptions = {
 	},
 }
 
-const columnWithDataTableOpts: ApexOptions = {
+const columnWithDataTableOpts = {
 	chart: {
 		height: 380,
 		type: 'bar',
@@ -185,7 +185,7 @@ const columnWithDataTableOpts: ApexOptions = {
 	},
 }
 
-const stackedColumnOpts: ApexOptions = {
+const stackedColumnOpts = {
 	chart: {
 		height: 380,
 		type: 'bar',
@@ -236,7 +236,7 @@ const stackedColumnOpts: ApexOptions = {
 	},
 }
 
-const fullStackedColumnOpts: ApexOptions = {
+const fullStackedColumnOpts = {
 	chart: {
 		height: 380,
 		type: 'bar',
@@ -287,7 +287,7 @@ const fullStackedColumnOpts: ApexOptions = {
 	},
 }
 
-const columnwithMarkersOpts: ApexOptions = {
+const columnwithMarkersOpts = {
 	series: [
 		{
 			name: 'Actual',
@@ -417,7 +417,7 @@ const columnwithMarkersOpts: ApexOptions = {
 	},
 }
 
-const columnGroupLabelOpts: ApexOptions = {
+const columnGroupLabelOpts = {
 	series: [
 		{
 			name: 'Sales',
@@ -504,7 +504,7 @@ const columnGroupLabelOpts: ApexOptions = {
 	},
 }
 
-const columnWithRotatedlabelsOpts: ApexOptions = {
+const columnWithRotatedlabelsOpts = {
 	annotations: {
 		points: [
 			{
@@ -583,7 +583,7 @@ const columnWithRotatedlabelsOpts: ApexOptions = {
 	},
 }
 
-const columnwithnegativevalueOpts: ApexOptions = {
+const columnwithnegativevalueOpts = {
 	chart: {
 		height: 380,
 		type: 'bar',
@@ -647,7 +647,7 @@ const columnwithnegativevalueOpts: ApexOptions = {
 	},
 }
 
-const distributedColumnOpts: ApexOptions = {
+const distributedColumnOpts = {
 	chart: {
 		height: 380,
 		type: 'bar',
@@ -696,7 +696,7 @@ const distributedColumnOpts: ApexOptions = {
 	},
 }
 
-const rangeColumnOpts: ApexOptions = {
+const rangeColumnOpts = {
 	chart: {
 		height: 380,
 		type: 'rangeBar',

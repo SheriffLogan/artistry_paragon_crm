@@ -1,7 +1,7 @@
 import { ApexOptions } from 'apexcharts'
 import small2 from '@/assets/images/small/small-2.jpg'
 
-export const basicRadialBarOpts: ApexOptions = {
+export const basicRadialBarOpts = {
 	chart: {
 		height: 320,
 		type: 'radialBar',
@@ -21,7 +21,7 @@ export const basicRadialBarOpts: ApexOptions = {
 	labels: ['CRICKET'],
 }
 
-export const multipleRadialBarsOpts: ApexOptions = {
+export const multipleRadialBarsOpts = {
 	chart: {
 		height: 320,
 		type: 'radialBar',
@@ -53,7 +53,7 @@ export const multipleRadialBarsOpts: ApexOptions = {
 	],
 }
 
-export const customAngleOpts: ApexOptions = {
+export const customAngleOpts = {
 	chart: {
 		height: 380,
 		type: 'radialBar',
@@ -114,7 +114,7 @@ export const customAngleOpts: ApexOptions = {
 	],
 }
 
-export const circleWithImageOpts: ApexOptions = {
+export const circleWithImageOpts = {
 	chart: {
 		height: 360,
 		type: 'radialBar',
@@ -149,7 +149,7 @@ export const circleWithImageOpts: ApexOptions = {
 	],
 }
 
-export const strokedCircularGuageOpts: ApexOptions = {
+export const strokedCircularGuageOpts = {
 	chart: {
 		height: 380,
 		type: 'radialBar',
@@ -208,7 +208,7 @@ export const strokedCircularGuageOpts: ApexOptions = {
 	],
 }
 
-export const gradientCircularOpts: ApexOptions = {
+export const gradientCircularOpts = {
 	chart: {
 		height: 330,
 		type: 'radialBar',
@@ -251,7 +251,7 @@ export const gradientCircularOpts: ApexOptions = {
 					fontSize: '17px',
 				},
 				value: {
-					formatter: function (val: number) {
+					formatter: function (val) {
 						return val.toString()
 					},
 					color: '#111',
@@ -281,7 +281,7 @@ export const gradientCircularOpts: ApexOptions = {
 	labels: ['Percent'],
 }
 
-export const semiCircleGaugeOpts: ApexOptions = {
+export const semiCircleGaugeOpts = {
 	series: [76],
 	chart: {
 		type: 'radialBar',

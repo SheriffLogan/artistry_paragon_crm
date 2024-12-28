@@ -1,6 +1,6 @@
 import { ApexOptions } from 'apexcharts'
 
-const lineColumnChartOpts: ApexOptions = {
+const lineColumnChartOpts = {
 	chart: {
 		height: 380,
 		type: 'line',
@@ -52,7 +52,7 @@ const lineColumnChartOpts: ApexOptions = {
 	},
 }
 
-const multipleYAxisChartOpts: ApexOptions = {
+const multipleYAxisChartOpts = {
 	chart: {
 		height: 380,
 		type: 'line',
@@ -178,7 +178,7 @@ const multipleYAxisChartOpts: ApexOptions = {
 	],
 }
 
-const lineAreaChartOpts: ApexOptions = {
+const lineAreaChartOpts = {
 	chart: {
 		height: 380,
 		type: 'line',
@@ -260,7 +260,7 @@ const lineAreaChartOpts: ApexOptions = {
 	],
 }
 
-const lineColumnAreaChartOpts: ApexOptions = {
+const lineColumnAreaChartOpts = {
 	chart: {
 		height: 380,
 		type: 'line',

@@ -1,7 +1,7 @@
 // components
 import { PageBreadcrumb } from '../../components'
 
-const colors: string[] = ['bg-primary/75', 'bg-secondary/75', 'bg-success/75', 'bg-danger/75', 'bg-warning/75', 'bg-info/75', 'bg-light/75', 'bg-dark/75']
+const colors = ['bg-primary/75', 'bg-secondary/75', 'bg-success/75', 'bg-danger/75', 'bg-warning/75', 'bg-info/75', 'bg-light/75', 'bg-dark/75']
 
 const BorderSpinner = () => {
 	return (
@@ -34,7 +34,7 @@ const GrowingSpinner = () => {
 }
 
 const ColorsSpinner = () => {
-	const colors: string[] = ['text-primary', 'text-secondary', 'text-success', 'text-danger', 'text-warning', 'text-info', 'text-light', 'text-dark']
+	const colors = ['text-primary', 'text-secondary', 'text-success', 'text-danger', 'text-warning', 'text-info', 'text-light', 'text-dark']
 
 	return (
 		<div className="card">

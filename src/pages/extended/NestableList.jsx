@@ -12,35 +12,22 @@ import avatar4 from '@/assets/images/users/avatar-4.jpg'
 import avatar5 from '@/assets/images/users/avatar-5.jpg'
 import avatar7 from '@/assets/images/users/avatar-7.jpg'
 
-interface ItemType {
-	id: number
-	variant: string
-	class?: string
-}
 
-interface TeamMemberType {
-	id: number
-	name: string
-	avatar: string
-	position: string
-	desc?: string
-}
-
-function getNestableItems(count: number) {
+function getNestableItems(count) {
 	return Array(count)
 		.fill({ id: 0 })
 		.map((item, idx) => item.id + idx + 1)
 }
 
-const ListMovable = ({ item }: { item: number }) => {
+const ListMovable = ({ item }) => {
 	return <div className="rounded cursor-grab px-6 py-3 border border-gray-200 dark:border-gray-600">Item {item}</div>
 }
 
-const ListMovable2 = ({ item, classname }: { item: number; classname: string }) => {
+const ListMovable2 = ({ item, classname }) => {
 	return <div className={`${item === 2 ? `${classname} bg-danger text-white font-bold` : ''} rounded cursor-grab px-6 py-3 border border-gray-200 dark:border-gray-600`}>Item {item}</div>
 }
 
-const MovableCard = ({ item }: { item: ItemType }) => {
+const MovableCard = ({ item }) => {
 	return (
 		<div className={`bg-${item.variant} text-white rounded-md`}>
 			<div className="p-6">
@@ -53,7 +40,7 @@ const MovableCard = ({ item }: { item: ItemType }) => {
 	)
 }
 
-const MovableCard2 = ({ item }: { item: TeamMemberType }) => {
+const MovableCard2 = ({ item }) => {
 	return (
 		<div className="card">
 			<div className="p-6">
@@ -75,7 +62,7 @@ const MovableCard2 = ({ item }: { item: TeamMemberType }) => {
 	)
 }
 
-const MovableCard3 = ({ item }: { item: TeamMemberType }) => {
+const MovableCard3 = ({ item }) => {
 	return (
 		<div className="card">
 			<div className="p-6">
@@ -93,7 +80,7 @@ const MovableCard3 = ({ item }: { item: TeamMemberType }) => {
 }
 
 const SimpleDragAndDrop = () => {
-	const [items, setItems] = useState<ItemType[]>([
+	const [items, setItems] = useState([
 		{
 			id: 1,
 			variant: 'primary',
@@ -138,7 +125,7 @@ const SimpleDragAndDrop = () => {
 }
 
 const SharedList = () => {
-	const [team1, setTeam1] = useState<TeamMemberType[]>([
+	const [team1, setTeam1] = useState([
 		{
 			id: 1,
 			name: 'Louis K. Bond',
@@ -162,7 +149,7 @@ const SharedList = () => {
 		},
 	])
 
-	const [team2, setTeam2] = useState<TeamMemberType[]>([
+	const [team2, setTeam2] = useState([
 		{
 			id: 1,
 			name: 'James M. Short',
@@ -216,7 +203,7 @@ const SharedList = () => {
 }
 
 const MoveWithHandle = () => {
-	const [part1, setPart1] = useState<TeamMemberType[]>([
+	const [part1, setPart1] = useState([
 		{
 			id: 1,
 			name: 'Louis K. Bond',
@@ -237,7 +224,7 @@ const MoveWithHandle = () => {
 		},
 	])
 
-	const [part2, setPart2] = useState<TeamMemberType[]>([
+	const [part2, setPart2] = useState([
 		{
 			id: 1,
 			name: 'James M. Short',

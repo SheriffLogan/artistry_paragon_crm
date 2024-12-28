@@ -5,13 +5,8 @@ import 'jsvectormap/dist/css/jsvectormap.css'
 //components
 import BaseVectorMap from './BaseVectorMap'
 
-interface WorldVectorMapProps {
-	width?: string
-	height?: string
-	options?: any
-}
 
-const WorldMap = ({ width, height, options }: WorldVectorMapProps) => {
+const WorldMap = ({ width, height, options }) => {
 	return (
 		<>
 			<BaseVectorMap width={width} height={height} options={options} type="world" />

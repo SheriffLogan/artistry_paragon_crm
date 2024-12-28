@@ -190,7 +190,7 @@ const seriesDataLinear = [
 	},
 ]
 
-export const simpleCandlestickOpts: ApexOptions = {
+export const simpleCandlestickOpts = {
 	chart: {
 		height: 400,
 		type: 'candlestick',
@@ -222,7 +222,7 @@ export const simpleCandlestickOpts: ApexOptions = {
 	},
 }
 
-export const comboCandlestickOpts: ApexOptions = {
+export const comboCandlestickOpts = {
 	chart: {
 		height: 240,
 		type: 'candlestick',
@@ -254,7 +254,7 @@ export const comboCandlestickOpts: ApexOptions = {
 	},
 }
 
-export const comboBarCandlestickOpts: ApexOptions = {
+export const comboBarCandlestickOpts = {
 	chart: {
 		height: 160,
 		type: 'bar',
@@ -329,7 +329,7 @@ export const comboBarCandlestickOpts: ApexOptions = {
 	},
 }
 
-export const categoryXAxisOpts: ApexOptions = {
+export const categoryXAxisOpts = {
 	series: [
 		{
 			name: 'candle',
@@ -639,7 +639,7 @@ export const categoryXAxisOpts: ApexOptions = {
 	},
 }
 
-export const candlestickwithLineOpts: ApexOptions = {
+export const candlestickwithLineOpts = {
 	series: [
 		{
 			name: 'Line',

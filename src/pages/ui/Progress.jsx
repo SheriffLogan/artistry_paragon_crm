@@ -1,20 +1,11 @@
 // Components
 import { PageBreadcrumb } from '../../components'
 
-const colors: string[] = ['bg-primary w-3/12', 'bg-success w-4/12', 'bg-info w-5/12', 'bg-warning w-6/12', 'bg-danger w-7/12']
+const colors = ['bg-primary w-3/12', 'bg-success w-4/12', 'bg-info w-5/12', 'bg-warning w-6/12', 'bg-danger w-7/12']
 
-interface HeightProgressbar {
-	height: string
-	valueNow: number
-	variant: string
-}
 
-interface ProgressBar {
-	variant: string
-	valueNow: number
-}
 
-const heightProgress: HeightProgressbar[] = [
+const heightProgress = [
 	{
 		height: 'px',
 		valueNow: 25,
@@ -47,7 +38,7 @@ const heightProgress: HeightProgressbar[] = [
 	},
 ]
 
-const backgroundProgress: ProgressBar[] = [
+const backgroundProgress = [
 	{
 		variant: 'bg-success',
 		valueNow: 25,

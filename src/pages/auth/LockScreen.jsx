@@ -7,9 +7,7 @@ import AuthContainer from '../../components/AuthPageLayout/AuthContainer'
 import AuthLayout from '../../components/AuthPageLayout/AuthLayout'
 import { FormInput, VerticalForm } from '../../components'
 
-interface UserData {
-	password: string
-}
+
 
 /**
  * bottom links
@@ -38,7 +36,7 @@ const LockScreen = () => {
 	/*
 	 * handle form submission
 	 */
-	const onSubmit = (formData: UserData) => {
+	const onSubmit = (formData) => {
 		console.log(formData.password)
 	}
 
@@ -46,7 +44,7 @@ const LockScreen = () => {
 		<>
 			<AuthContainer>
 				<AuthLayout authTitle="Reset Password" helpText="Enter your email address and we'll send you an email with instructions to reset your password." bottomLinks={<BottomLink />}>
-					<VerticalForm<UserData> onSubmit={onSubmit} resolver={schemaResolver}>
+					<VerticalForm onSubmit={onSubmit} resolver={schemaResolver}>
 						<FormInput label="Password" labelClassName="font-semibold text-gray-500" type="password" name="password" placeholder="Enter your password" containerClass="mb-6 space-y-2" className="form-input" />
 
 						<div className="text-center mb-6">

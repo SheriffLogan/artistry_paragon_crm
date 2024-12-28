@@ -1465,7 +1465,7 @@ const series = {
 }
 
 let ts2 = 1484418600000
-const dates: any = []
+const dates = []
 // let spikes = [5, -5, 3, -3, 8, -8]
 for (let i = 0; i < 120; i++) {
 	ts2 = ts2 + 86400000
@@ -1473,9 +1473,9 @@ for (let i = 0; i < 120; i++) {
 	dates.push(innerArr)
 }
 
-export function generateDayWiseTimeSeries(baseval: number, count: number, yrange: any): number[] {
+export function generateDayWiseTimeSeries(baseval, count, yrange) {
 	let i = 0
-	const series: any = []
+	const series = []
 	while (i < count) {
 		const x = baseval
 		const y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min
@@ -1487,12 +1487,12 @@ export function generateDayWiseTimeSeries(baseval: number, count: number, yrange
 	return series
 }
 
-const data: any = generateDayWiseTimeSeries(new Date('11 Feb 2017').getTime(), 185, {
+const data = generateDayWiseTimeSeries(new Date('11 Feb 2017').getTime(), 185, {
 	min: 30,
 	max: 90,
 })
 
-const lineChartOpts: ApexOptions = {
+const lineChartOpts = {
 	chart: {
 		height: 380,
 		type: 'line',
@@ -1546,7 +1546,7 @@ const lineChartOpts: ApexOptions = {
 	],
 }
 
-export const lineWithDataLabelOpts: ApexOptions = {
+export const lineWithDataLabelOpts = {
 	chart: {
 		height: 380,
 		type: 'line',
@@ -1627,7 +1627,7 @@ export const lineWithDataLabelOpts: ApexOptions = {
 	],
 }
 
-export const zoomableTimeseriesOpts: ApexOptions = {
+export const zoomableTimeseriesOpts = {
 	chart: {
 		type: 'area',
 		stacked: false,
@@ -1734,7 +1734,7 @@ export const zoomableTimeseriesOpts: ApexOptions = {
 	],
 }
 
-export const lineChartwithAnnotationOpts: ApexOptions = {
+export const lineChartwithAnnotationOpts = {
 	annotations: {
 		yaxis: [
 			{
@@ -1850,7 +1850,7 @@ export const lineChartwithAnnotationOpts: ApexOptions = {
 	],
 }
 
-export const syncingChartOpts: ApexOptions = {
+export const syncingChartOpts = {
 	chart: {
 		height: 200,
 		type: 'line',
@@ -1920,7 +1920,7 @@ export const syncingChartOpts: ApexOptions = {
 	},
 }
 
-export const syncingChartOpts2: ApexOptions = {
+export const syncingChartOpts2 = {
 	chart: {
 		type: 'line',
 		height: 160,
@@ -1978,7 +1978,7 @@ export const syncingChartOpts2: ApexOptions = {
 	},
 }
 
-export const gradientLineChartOpts: ApexOptions = {
+export const gradientLineChartOpts = {
 	chart: {
 		height: 374,
 		type: 'line',
@@ -2071,7 +2071,7 @@ export const gradientLineChartOpts: ApexOptions = {
 	],
 }
 
-export const missingChartOpts: ApexOptions = {
+export const missingChartOpts = {
 	chart: {
 		height: 380,
 		type: 'line',
@@ -2118,7 +2118,7 @@ export const missingChartOpts: ApexOptions = {
 	},
 }
 
-export const dashedLineChartOpts: ApexOptions = {
+export const dashedLineChartOpts = {
 	chart: {
 		height: 380,
 		type: 'line',
@@ -2175,7 +2175,7 @@ export const dashedLineChartOpts: ApexOptions = {
 	},
 }
 
-export const steplineChartOpts: ApexOptions = {
+export const steplineChartOpts = {
 	chart: {
 		type: 'line',
 		height: 344,
@@ -2203,7 +2203,7 @@ export const steplineChartOpts: ApexOptions = {
 	},
 }
 
-export const brushChartOpts: ApexOptions = {
+export const brushChartOpts = {
 	series: [
 		{
 			data: data,
@@ -2236,7 +2236,7 @@ export const brushChartOpts: ApexOptions = {
 	},
 }
 
-export const brushChartOpts2: ApexOptions = {
+export const brushChartOpts2 = {
 	series: [
 		{
 			data: data,

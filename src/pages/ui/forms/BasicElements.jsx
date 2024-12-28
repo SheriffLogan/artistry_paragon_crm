@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 // components
 import { FormInput, PageBreadcrumb } from '../../../components'
 
-const colors: string[] = ['primary', 'success', 'info', 'secondary', 'warning', 'danger', 'dark']
+const colors = ['primary', 'success', 'info', 'secondary', 'warning', 'danger', 'dark']
 const BasicInputElements = () => {
 	const methods = useForm({
 		defaultValues: {

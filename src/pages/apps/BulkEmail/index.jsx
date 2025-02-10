@@ -13,6 +13,11 @@ import Img1 from '@/assets/images/small/small-1.jpg'
 import Img2 from '@/assets/images/small/small-2.jpg'
 import Img3 from '@/assets/images/small/small-3.jpg'
 import Img4 from '@/assets/images/small/small-4.jpg'
+import axios from 'axios'
+import { Modal } from 'antd'
+import { set } from 'react-hook-form'
+import CreateNewGroupModal from './CreateNewGroupModal'
+import AddToExistingGroupModal from './AddToExistingGroupModal'
 
 const colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark']
 
@@ -37,7 +42,19 @@ const BulkEmail = () => {
 	const itemsPerPage = 10
 
 	const [selectedRows, setSelectedRows] = useState([])
-	const [selectedRecipients, setSelectedRecipients] = useState('')
+	const [selectedRecipients, setSelectedRecipients] = useState([])
+	const [messageSubject, setMessageSubject] = useState('')
+
+	const [groups, setGroups] = useState([
+		{ id: 1, name: 'Group 1', recipients: ['raghhavtaneja@gmail.com', 'user2@example.com'] },
+		{ id: 2, name: 'Group 2', recipients: ['user3@example.com', 'user4@example.com'] },
+	])
+	const [finalRecipients, setFinalRecipients] = useState([])
+
+	const [openAddToExistingGroupModal, setOpenAddToExistingGroupModal] = useState(false)
+	const [openCreateNewGroupModal, setOpenCreateNewGroupModal] = useState(false)
+
+	const [confirmGroupModalLoading, setConfirmGroupModalLoading] = useState(false)
 
 	const handleRowSelection = (row, isChecked) => {
 		if (isChecked) {
@@ -47,13 +64,71 @@ const BulkEmail = () => {
 		}
 	}
 
-	const handleContinueBtnClick = () => {
+	const handleGroupModalOk = () => {
+		setConfirmGroupModalLoading(true)
+		setTimeout(() => {
+			setOpenGroupModal(false)
+			setConfirmGroupModalLoading(false)
+		}, 2000)
+	}
+
+	const handleGroupModalCancel = () => {
+		console.log('Clicked cancel button')
+		setOpenGroupModal(false)
+	}
+
+	const handleCreateNewGroupBtnClick = () => {
+		const selectedRecipients = selectedRows
+			.filter((row) => row.Name) // Filter rows where Name is defined
+			.map((row) => ({
+				email: row.Name, // Assuming Email is the field name in row
+				name: row.Name,
+			}))
+
+		console.log('selected recipients', selectedRecipients)
+
+		// Update the selected recipients state
+		setSelectedRecipients(selectedRecipients)
+		setOpenCreateNewGroupModal(true)
+	}
+
+	const handleCreateNewGroup = () => {
+		console.log('create new group')
+	}
+	const handleAddToExistingGroup = () => {
+		console.log('add to existing group')
+	}
+
+	const handleAddToExistingGroupBtnClick = () => {
 		// Extract emails from selected rows
 		const emails = selectedRows
-			.map((row) => row.Name) // Adjust the key "email" based on your data structure
+			.map((row) => row.Name)
+			.filter((Name) => Name)
+			.join(', ')
+		// Update the selected recipients state
+		setSelectedRecipients(emails)
+		setOpenAddToExistingGroupModal(true)
+	}
+
+	const handleContinueBtnClick = () => {
+		showGroupModal()
+		// Extract emails from selected rows
+		const emails = selectedRows
+			.map((row) => row.Name) // Adjust the key "Name" based on your data structure
 			.filter((Name) => Name) // Ensure there's an email present
 			.join(', ')
 
+		// Create a new group with the selected recipients
+		const newGroup = {
+			id: Date.now(), // Unique ID for the new group, you can customize this
+			name: 'New Group', // Or allow the user to specify the name
+			recipients: emails.split(', '), // Split emails to an array
+		}
+
+		// Add this group to your groups state (assuming you have it)
+		setGroups((prevGroups) => [...prevGroups, newGroup])
+
+		// Update the selected recipients state if needed
 		setSelectedRecipients(emails)
 	}
 
@@ -76,6 +151,7 @@ const BulkEmail = () => {
 			reader.readAsArrayBuffer(file)
 		}
 	}
+
 	const handleFileSelection = (file) => {
 		const reader = new FileReader()
 		reader.onload = (e) => {
@@ -91,6 +167,21 @@ const BulkEmail = () => {
 		reader.readAsArrayBuffer(file)
 	}
 
+	const handleGroupCheckboxChange = (group) => {
+		// Check if the group is already in finalRecipients
+		if (finalRecipients.some((recipient) => group.recipients.includes(recipient))) {
+			// Remove recipients of the group from finalRecipients
+			setFinalRecipients((prev) => prev.filter((recipient) => !group.recipients.includes(recipient)))
+		} else {
+			// Add recipients of the group to finalRecipients
+			setFinalRecipients((prev) => [...prev, ...group.recipients])
+		}
+	}
+
+	const getRecipientsList = () => {
+		return groups.filter((group) => finalRecipients.includes(group.id)).flatMap((group) => group.recipients)
+	}
+
 	const handleCheckboxChange = (e, file) => {
 		if (e.target.checked) {
 			console.log('Selected:', file.name)
@@ -103,6 +194,35 @@ const BulkEmail = () => {
 		handleFileUpload(uploadedFiles)
 	}
 
+	const handleSendMessage = async () => {
+		console.log('Sending message to...', selectedRecipients, editorValue, messageSubject)
+
+		try {
+			const response = await fetch('http://127.0.0.1:8000/send-mail', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					To: finalRecipients,
+					Body: editorValue,
+					Subject: messageSubject,
+				}),
+			})
+
+			// Check if the response is okay
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`)
+			}
+
+			// Parse the response as JSON
+			const responseData = await response.json()
+			console.log('Response from backend:', responseData)
+		} catch (err) {
+			console.error('Error occurred:', err)
+		}
+	}
+
 	const indexOfLastItem = currentPage * itemsPerPage
 	const indexOfFirstItem = indexOfLastItem - itemsPerPage
 	const currentItems = fileData.slice(indexOfFirstItem, indexOfLastItem)
@@ -111,6 +231,9 @@ const BulkEmail = () => {
 
 	return (
 		<div className="container mx-auto px-4">
+			<CreateNewGroupModal open={openCreateNewGroupModal} onOk={handleCreateNewGroup} onCancel={() => setOpenCreateNewGroupModal(false)} selectedRecipients={selectedRecipients} />
+			<AddToExistingGroupModal open={openAddToExistingGroupModal} onOk={handleAddToExistingGroup} onCancel={() => setOpenAddToExistingGroupModal(false)} selectedRecipients={selectedRecipients} />
+
 			<PageBreadcrumb title="Bulk Email" subName="Apps" />
 			<div className="card max-w-full mx-auto">
 				<div className="p-6">
@@ -118,9 +241,9 @@ const BulkEmail = () => {
 						<h4 className="card-title mb-1">Dropzone</h4>
 					</div>
 
-					<div className="pt-5">
+					<div className="pt-2">
 						<FileUploader icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text="Drop files here or click to upload." fileTypes={['text/csv', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', '.csv', '.xls', '.xlsx']} onFileUpload={setUploadedFiles} />
-						<div className="text-center mt-4">
+						<div className="text-center mt-3">
 							<button type="button" className="btn bg-violet-500 border-violet-500 text-white" onClick={handleUploadButtonClick}>
 								Upload Files
 							</button>
@@ -204,14 +327,88 @@ const BulkEmail = () => {
 											Next
 										</button>
 									</div>
-									<button className="mt-4 btn bg-blue-500 text-white" onClick={handleContinueBtnClick}>
-										Continue
-									</button>
+									{/* <button className="mt-4 btn bg-blue-500 text-white" onClick={handleContinueBtnClick}>
+										Continue (Create or Add to a group)
+									</button> */}
+									<div className="flex gap-3">
+										<button className="mt-4 btn bg-blue-500 text-white" onClick={handleCreateNewGroupBtnClick}>
+											Create a New Group
+										</button>
+										<button className="mt-4 btn bg-blue-500 text-white" onClick={handleAddToExistingGroupBtnClick}>
+											Add to existing Group
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				)}
+				<div className="flex w-full gap-6">
+					<div className="overflow-hidden m-3 sm:mx-auto flex flex-col w-full bg-white shadow-sm rounded dark:bg-gray-800">
+						<div className="px-6 pt-6 pb-0">
+							<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Email Groups</h3>
+							<div className="mt-4">
+								{groups.map((group) => (
+									<div key={group.id} className="flex items-center mb-4">
+										<div className="flex w-full justify-between gap-4 px-10">
+											{/* Group Name Column */}
+											<div className="flex items-center">
+												<input type="checkbox" id={`group-${group.id}`} className="mr-2" onChange={() => handleGroupCheckboxChange(group)} checked={finalRecipients.some((recipient) => group.recipients.includes(recipient))} />
+												<label htmlFor={`group-${group.id}`} className="text-gray-800 dark:text-gray-200 font-semibold">
+													{group.name}
+												</label>
+											</div>
+
+											{/* Members List Column */}
+											<div className="flex col-span-2 text-gray-600 dark:text-gray-400">
+												{group.recipients.map((recipient, index) => (
+													<p key={index}>{recipient}, </p>
+												))}
+											</div>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
+						<div className="px-6 py-4 bg-gray-50 dark:bg-gray-700">
+							<button onClick={() => console.log('Final Recipients:', getRecipientsList())} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+								Add to Group
+							</button>
+						</div>
+					</div>
+					<div className="overflow-hidden m-3 sm:mx-auto flex flex-col w-full bg-white shadow-sm rounded dark:bg-gray-800">
+						<div className="px-6 pt-6 pb-0">
+							<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Available Groups</h3>
+							<div className="mt-4">
+								{groups.map((group) => (
+									<div key={group.id} className="flex items-center mb-4">
+										<div className="flex w-full justify-between gap-4 px-10">
+											{/* Group Name Column */}
+											<div className="flex items-center">
+												<input type="checkbox" id={`group-${group.id}`} className="mr-2" onChange={() => handleGroupCheckboxChange(group)} checked={finalRecipients.some((recipient) => group.recipients.includes(recipient))} />
+												<label htmlFor={`group-${group.id}`} className="text-gray-800 dark:text-gray-200 font-semibold">
+													{group.name}
+												</label>
+											</div>
+
+											{/* Members List Column */}
+											<div className="flex col-span-2 text-gray-600 dark:text-gray-400">
+												{group.recipients.map((recipient, index) => (
+													<p key={index}>{recipient}, </p>
+												))}
+											</div>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
+						<div className="px-6 py-4 bg-gray-50 dark:bg-gray-700">
+							<button onClick={() => console.log('Final Recipients:', getRecipientsList())} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+								Send Email to Selected Groups
+							</button>
+						</div>
+					</div>
+				</div>
 				<div className="grid xl:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-6">
 					<div className="overflow-hidden m-3 sm:mx-auto flex flex-col bg-white shadow-sm rounded dark:bg-gray-800">
 						<div className="p-1.5">
@@ -221,14 +418,14 @@ const BulkEmail = () => {
 										<label htmlFor="msgto" className="text-gray-500 font-semibold">
 											To
 										</label>
-										<input type="text" id="msgto" className="form-input" placeholder="Example@email.com" value={selectedRecipients} />
+										<input type="text" id="msgto" className="form-input" placeholder="Example@email.com" value={finalRecipients} onChange={(e) => setSelectedRecipients(e.target.value)} />
 									</div>
 
 									<div className="mb-3 space-y-2">
 										<label htmlFor="mailsubject" className="text-gray-500 font-semibold">
 											Subject
 										</label>
-										<input type="text" id="mailsubject" className="form-input" placeholder="Your subject" />
+										<input type="text" id="mailsubject" className="form-input" placeholder="Your subject" value={messageSubject} onChange={(e) => setMessageSubject(e.target.value)} />
 									</div>
 
 									<div className="mb-3">
@@ -250,7 +447,7 @@ const BulkEmail = () => {
 								</form>
 							</div>
 							<div className="flex items-center gap-1 px-6 py-6">
-								<button type="button" className="btn bg-primary text-white">
+								<button type="button" className="btn bg-primary text-white" onClick={handleSendMessage}>
 									<i className="ri-send-plane-2-line me-1"></i> Send Message
 								</button>
 								<button type="button" className="btn bg-light text-gray-800 dark:bg-gray-700 dark:text-gray-200">

@@ -23,6 +23,7 @@
     "@hookform/resolvers": "^3.1.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@tippyjs/react": "^4.2.6",
+    "antd": "^5.23.2",
     "apexcharts": "^3.41.0",
     "axios": "^0.21.1",
     "axios-mock-adapter": "^1.19.0",

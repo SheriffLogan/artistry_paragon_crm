@@ -1,5 +1,5 @@
 const config = {
-    API_URL: 'http://127.0.0.1:8000',
+    API_URL: 'https://hootmonk-backend.vercel.app',
 }
 
 export default config

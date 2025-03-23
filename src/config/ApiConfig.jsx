@@ -21,7 +21,7 @@ export const fetchGroups = async () => {
 
 export const createGroup = async (groupName, selectedRecipients) => {
     try {
-        const response = await axios.post("http://127.0.0.1:8000/group", {
+        const response = await axios.post("https://hootmonk-backend.vercel.app/group", {
             Group_Name: groupName,
             People: selectedRecipients.map(recipient => ({
                 Name: recipient.name,
@@ -42,7 +42,7 @@ export const createGroup = async (groupName, selectedRecipients) => {
 
 export const addToExistingGroup = async (groupName, selectedRecipients) => {
     try {
-        const response = await axios.put("http://127.0.0.1:8000/groups/add-people", {
+        const response = await axios.put("https://hootmonk-backend.vercel.app/groups/add-people", {
             Group_Name: groupName,
             People: selectedRecipients.map(recipient => ({
                 Name: recipient.name,

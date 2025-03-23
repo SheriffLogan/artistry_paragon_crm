@@ -18,6 +18,7 @@ import { Modal } from 'antd'
 import { set } from 'react-hook-form'
 import CreateNewGroupModal from './CreateNewGroupModal'
 import AddToExistingGroupModal from './AddToExistingGroupModal'
+import { fetchGroups, createGroup, addToExistingGroup, sendEmail } from '../../../config/ApiConfig'
 
 const colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark']
 
@@ -41,63 +42,139 @@ const BulkEmail = () => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const itemsPerPage = 10
 
-	const [selectedRows, setSelectedRows] = useState([])
+	// const [selectedRows, setSelectedRows] = useState([])
+	const [selectedRows, setSelectedRows] = useState(new Set());
+	const [selectedGroupIds, setSelectedGroupIds] = useState(new Set()); // Tracks which groups are selected
+	// const [removedRecipients, setRemovedRecipients] = useState(new Set()); // Tracks manually removed recipient emails
 	const [selectedRecipients, setSelectedRecipients] = useState([])
 	const [messageSubject, setMessageSubject] = useState('')
 
-	const [groups, setGroups] = useState([
-		{ id: 1, name: 'Group 1', recipients: ['raghhavtaneja@gmail.com', 'user2@example.com'] },
-		{ id: 2, name: 'Group 2', recipients: ['user3@example.com', 'user4@example.com'] },
-	])
+	const [groups, setGroups] = useState([])
 	const [finalRecipients, setFinalRecipients] = useState([])
+	const [newEmail, setNewEmail] = useState("");
+
 
 	const [openAddToExistingGroupModal, setOpenAddToExistingGroupModal] = useState(false)
 	const [openCreateNewGroupModal, setOpenCreateNewGroupModal] = useState(false)
 
-	const [confirmGroupModalLoading, setConfirmGroupModalLoading] = useState(false)
+	// const [confirmGroupModalLoading, setConfirmGroupModalLoading] = useState(false)
+	// This state holds groups created locally (but not necessarily saved)
+	const [localGroups, setLocalGroups] = useState([]);
+
+	// State for viewing a group
+	// const [viewGroupModalOpen, setViewGroupModalOpen] = useState(false);
+	// const [currentGroup, setCurrentGroup] = useState(null);
+	// const [groupViewPage, setGroupViewPage] = useState(1);
+	// const recipientsPerPage = 7;
+	// const [groupEditMode, setGroupEditMode] = useState(false);
+	// const [groupEditSelectedRows, setGroupEditSelectedRows] = useState(new Set());
+
+	const fetchAllGroups = async () => {
+		try {
+			const response = await fetchGroups();
+			console.log("fetch group", response)
+			if (response && response.data) {
+				setGroups(response.data); // API returns groups under "data"
+			} else {
+				setGroups([]); // Ensure empty state is handled
+			}
+		} catch (error) {
+			console.error("Error fetching groups:", error);
+		}
+	};
+	console.log("groups", groups)
+
+	useEffect(() => {
+		console.log('Fetching groups...')
+		fetchAllGroups();
+
+	}, []);
 
 	const handleRowSelection = (row, isChecked) => {
-		if (isChecked) {
-			setSelectedRows((prev) => [...prev, row])
-		} else {
-			setSelectedRows((prev) => prev.filter((selected) => selected !== row))
-		}
-	}
+		setSelectedRows((prevSelected) => {
+			// Create a new Set to trigger re-render
+			const newSelected = new Set(prevSelected);
+			if (isChecked) {
+				newSelected.add(row._rowId);
+			} else {
+				newSelected.delete(row._rowId);
+			}
+			return newSelected;
+		});
+	};
 
-	const handleGroupModalOk = () => {
-		setConfirmGroupModalLoading(true)
-		setTimeout(() => {
-			setOpenGroupModal(false)
-			setConfirmGroupModalLoading(false)
-		}, 2000)
-	}
+	// const handleGroupModalOk = () => {
+	// 	setConfirmGroupModalLoading(true)
+	// 	setTimeout(() => {
+	// 		setOpenGroupModal(false)
+	// 		setConfirmGroupModalLoading(false)
+	// 	}, 2000)
+	// }
 
-	const handleGroupModalCancel = () => {
-		console.log('Clicked cancel button')
-		setOpenGroupModal(false)
-	}
+	// const handleGroupModalCancel = () => {
+	// 	console.log('Clicked cancel button')
+	// 	setOpenGroupModal(false)
+	// }
 
 	const handleCreateNewGroupBtnClick = () => {
-		const selectedRecipients = selectedRows
-			.filter((row) => row.Name) // Filter rows where Name is defined
+		// Filter fileData to get rows whose _rowId is in the selectedRows Set and have a defined Name
+		const recipients = fileData
+			.filter((row) => selectedRows.has(row._rowId) && row.Name)
 			.map((row) => ({
-				email: row.Name, // Assuming Email is the field name in row
+				email: row.Email,  // Assuming Email is the field name in the row
 				name: row.Name,
-			}))
-
-		console.log('selected recipients', selectedRecipients)
-
+				location: row.Location,
+				title: row.Title,
+			}));
+	
+		console.log('selected recipients', recipients, Array.from(selectedRows));
+	
 		// Update the selected recipients state
-		setSelectedRecipients(selectedRecipients)
-		setOpenCreateNewGroupModal(true)
-	}
+		setSelectedRecipients(recipients);
+		setOpenCreateNewGroupModal(true);
+	};
 
-	const handleCreateNewGroup = () => {
-		console.log('create new group')
-	}
-	const handleAddToExistingGroup = () => {
-		console.log('add to existing group')
-	}
+	const handleCreateNewGroup = (groupName, selectedRecipients) => {
+		if (groupName.trim() && selectedRecipients.length > 0) {
+		  const newGroup = {
+			id: Date.now(), // unique id
+			Group_Name: groupName,
+			People: selectedRecipients,
+			saved: false, // track whether the group has been saved
+		  };
+		  setLocalGroups((prev) => [...prev, newGroup]);
+		}
+		setOpenCreateNewGroupModal(false);
+	  };
+
+	  // Function to save a specific group (calls the API)
+	const handleSaveGroup = async (group) => {
+		try {
+		const response = await createGroup(group.Group_Name, group.People);
+		if (response) {
+			console.log("response of create group", response);
+			// Mark the group as saved in the localGroups state
+			setLocalGroups((prev) =>
+			prev.map((g) => (g.id === group.id ? { ...g, saved: true } : g))
+			);
+		}
+		} catch (error) {
+		console.error("Error creating group:", error);
+		}
+	};
+
+	const handleAddToExistingGroup = async (groupName, selectedRecipients) => {
+		try {
+			const response = await addToExistingGroup(groupName, selectedRecipients);
+
+			if (response){
+				fetchGroups(); // Refresh groups after adding people
+				setOpenAddToExistingGroupModal(false);
+			}
+		} catch (error) {
+			console.error("Error adding people to group:", error);
+		}
+	};
 
 	const handleAddToExistingGroupBtnClick = () => {
 		// Extract emails from selected rows
@@ -110,47 +187,27 @@ const BulkEmail = () => {
 		setOpenAddToExistingGroupModal(true)
 	}
 
-	const handleContinueBtnClick = () => {
-		showGroupModal()
-		// Extract emails from selected rows
-		const emails = selectedRows
-			.map((row) => row.Name) // Adjust the key "Name" based on your data structure
-			.filter((Name) => Name) // Ensure there's an email present
-			.join(', ')
-
-		// Create a new group with the selected recipients
-		const newGroup = {
-			id: Date.now(), // Unique ID for the new group, you can customize this
-			name: 'New Group', // Or allow the user to specify the name
-			recipients: emails.split(', '), // Split emails to an array
-		}
-
-		// Add this group to your groups state (assuming you have it)
-		setGroups((prevGroups) => [...prevGroups, newGroup])
-
-		// Update the selected recipients state if needed
-		setSelectedRecipients(emails)
-	}
-
 	const handleFileUpload = (files) => {
-		console.log('uploaded files', files)
+		console.log('uploaded files', files);
 		if (files.length > 0) {
-			const file = files[0]
-			const reader = new FileReader()
+			const file = files[0];
+			const reader = new FileReader();
 			reader.onload = (e) => {
-				const data = new Uint8Array(e.target.result)
-				const workbook = read(data, { type: 'array' })
-				const sheetName = workbook.SheetNames[0]
-				const worksheet = workbook.Sheets[sheetName]
-				const json = utils.sheet_to_json(worksheet)
-				setFileData(json)
-				setFileName(file.name)
-				setUploadedFiles(files)
-				setCurrentPage(1) // Reset to first page on new file upload
-			}
-			reader.readAsArrayBuffer(file)
+				const data = new Uint8Array(e.target.result);
+				const workbook = read(data, { type: 'array' });
+				const sheetName = workbook.SheetNames[0];
+				const worksheet = workbook.Sheets[sheetName];
+				const json = utils.sheet_to_json(worksheet);
+				// Assign a unique _rowId to each row
+				const jsonWithIds = json.map((row, index) => ({ ...row, _rowId: index }));
+				setFileData(jsonWithIds);
+				setFileName(file.name);
+				setUploadedFiles(files);
+				setCurrentPage(1); // Reset to first page on new file upload
+			};
+			reader.readAsArrayBuffer(file);
 		}
-	}
+	};
 
 	const handleFileSelection = (file) => {
 		const reader = new FileReader()
@@ -167,20 +224,56 @@ const BulkEmail = () => {
 		reader.readAsArrayBuffer(file)
 	}
 
-	const handleGroupCheckboxChange = (group) => {
-		// Check if the group is already in finalRecipients
-		if (finalRecipients.some((recipient) => group.recipients.includes(recipient))) {
-			// Remove recipients of the group from finalRecipients
-			setFinalRecipients((prev) => prev.filter((recipient) => !group.recipients.includes(recipient)))
-		} else {
-			// Add recipients of the group to finalRecipients
-			setFinalRecipients((prev) => [...prev, ...group.recipients])
-		}
-	}
 
-	const getRecipientsList = () => {
-		return groups.filter((group) => finalRecipients.includes(group.id)).flatMap((group) => group.recipients)
-	}
+	// Handler to toggle a group checkbox
+	const handleGroupCheckboxChange = (group) => {
+		const groupId = group.id || group._id; // Ensure you use the unique identifier
+		setSelectedGroupIds((prev) => {
+		const newSet = new Set(prev);
+		if (newSet.has(groupId)) {
+			newSet.delete(groupId);
+		} else {
+			newSet.add(groupId);
+		}
+		return newSet;
+		});
+	};
+
+	// Handler to compute finalRecipients when "Send Email to Selected Groups" button is clicked
+	const handleSendEmailToSelectedGroups = () => {
+		let emails = [];
+		groups.forEach((group) => {
+		const groupId = group.id || group._id;
+		if (selectedGroupIds.has(groupId)) {
+			// Assuming group.People is an array of objects with an Email property
+			emails = emails.concat(group.People.map((person) => person.Email));
+		}
+		});
+		// Remove duplicate emails
+		emails = Array.from(new Set(emails));
+		setFinalRecipients(emails);
+	};
+	  
+	  const handleRemoveRecipient = (email) => {
+		setFinalRecipients((prev) => prev.filter((e) => e !== email));
+
+	  };
+
+	// Update finalRecipients based on selected groups and removals
+	// const updateFinalRecipients = (groupIds) => {
+	// 	let newRecipients = [];
+	// 	groups.forEach((g) => {
+	// 	if (groupIds.has(g.id)) {
+	// 		// Concatenate emails from this group
+	// 		newRecipients = newRecipients.concat(g.People.map((person) => person.Email));
+	// 	}
+	// 	});
+	// 	// Remove duplicates and filter out any manually removed emails
+	// 	newRecipients = Array.from(new Set(newRecipients)).filter(
+	// 	(email) => !removedRecipients.has(email)
+	// 	);
+	// 	setFinalRecipients(newRecipients);
+	// };
 
 	const handleCheckboxChange = (e, file) => {
 		if (e.target.checked) {
@@ -194,40 +287,56 @@ const BulkEmail = () => {
 		handleFileUpload(uploadedFiles)
 	}
 
-	const handleSendMessage = async () => {
-		console.log('Sending message to...', selectedRecipients, editorValue, messageSubject)
-
-		try {
-			const response = await fetch('http://127.0.0.1:8000/send-mail', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					To: finalRecipients,
-					Body: editorValue,
-					Subject: messageSubject,
-				}),
-			})
-
-			// Check if the response is okay
-			if (!response.ok) {
-				throw new Error(`HTTP error! Status: ${response.status}`)
-			}
-
-			// Parse the response as JSON
-			const responseData = await response.json()
-			console.log('Response from backend:', responseData)
-		} catch (err) {
-			console.error('Error occurred:', err)
+	// Handler to add a new email
+	const handleAddEmail = () => {
+		// Trim the email to remove extra spaces
+		const emailToAdd = newEmail.trim();
+	
+		// Only add if non-empty and either the list is empty or the email is not already in the list
+		if (emailToAdd && (finalRecipients.length === 0 || !finalRecipients.includes(emailToAdd))) {
+			setFinalRecipients((prev) => [...prev, emailToAdd]);
 		}
-	}
+		setNewEmail(""); // Clear input after adding
+	};
+
+	// Example usage inside your send message handler:
+	const handleSendMessage = async () => {
+		console.log('Sending message to...', finalRecipients, editorValue, messageSubject);
+		try {
+		const responseData = await sendEmail(finalRecipients, messageSubject, editorValue);
+		alert(responseData.message || 'Emails sent successfully!');
+		} catch (error) {
+		alert('Error: ' + error.message);
+		}
+	};
 
 	const indexOfLastItem = currentPage * itemsPerPage
 	const indexOfFirstItem = indexOfLastItem - itemsPerPage
 	const currentItems = fileData.slice(indexOfFirstItem, indexOfLastItem)
 
 	const totalPages = Math.ceil(fileData.length / itemsPerPage)
+
+	const EyeIcon = () => {
+		const [hover, setHover] = useState(false);
+		return (
+			<div className="relative flex items-center justify-center">
+			  {/* Tooltip */}
+			  {hover && (
+				<div className="absolute bottom-full mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-md">
+				  View
+				  <div className="absolute left-1/2 transform -translate-x-1/2 w-0 h-0 border-x-4 border-x-transparent border-t-4 border-t-gray-800"></div>
+				</div>
+			  )}
+		
+			  {/* Eye Icon */}
+			  <i
+				className={`${hover ? "ri-eye-fill" : "ri-eye-line"} text-xl cursor-pointer`}
+				onMouseEnter={() => setHover(true)}
+				onMouseLeave={() => setHover(false)}
+			  ></i>
+			</div>
+		  );
+		};
 
 	return (
 		<div className="container mx-auto px-4">
@@ -294,22 +403,32 @@ const BulkEmail = () => {
 													<th className="px-4 py-2 w-8">Select</th>
 													{fileData.length > 0 &&
 														Object.keys(fileData[0]).map((key, idx) => (
-															<th key={idx} className="px-4 py-2 max-w-16">
-																{key}
-															</th>
+															// Skip the _rowId field from header if needed
+															key !== "_rowId" && (
+																<th key={idx} className="px-4 py-2 max-w-16">
+																	{key}
+																</th>
+															)
 														))}
 												</tr>
 											</thead>
 											<tbody>
-												{currentItems.map((row, rowIdx) => (
-													<tr key={rowIdx}>
+											{currentItems.map((row) => (
+													<tr key={row._rowId}>
 														<td className="border px-4 py-2 w-8">
-															<input type="checkbox" onChange={(e) => handleRowSelection(row, e.target.checked)} />
+															<input
+																type="checkbox"
+																checked={selectedRows.has(row._rowId)}
+																onChange={(e) => handleRowSelection(row, e.target.checked)}
+															/>
 														</td>
-														{Object.values(row).map((value, colIdx) => (
-															<td key={colIdx} className="border px-3 py-2 max-w-30 truncate">
-																{value}
-															</td>
+														{Object.entries(row).map(([key, value], colIdx) => (
+															// Optionally skip displaying _rowId
+															key === "_rowId" ? null : (
+																<td key={colIdx} className="border px-3 py-2 max-w-30 truncate">
+																	{value}
+																</td>
+															)
 														))}
 													</tr>
 												))}
@@ -343,70 +462,89 @@ const BulkEmail = () => {
 						</div>
 					</div>
 				)}
-				<div className="flex w-full gap-6">
-					<div className="overflow-hidden m-3 sm:mx-auto flex flex-col w-full bg-white shadow-sm rounded dark:bg-gray-800">
+				<div className="flex w-full gap-3">
+					{/* Conditionally display Email Groups div only when localGroups exist */}
+					{localGroups.length > 0 && (
+					<div className="overflow-hidden m-3 sm:mx-auto flex flex-col w-1/2 bg-white shadow-sm rounded dark:bg-gray-800">
 						<div className="px-6 pt-6 pb-0">
-							<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Email Groups</h3>
-							<div className="mt-4">
-								{groups.map((group) => (
-									<div key={group.id} className="flex items-center mb-4">
-										<div className="flex w-full justify-between gap-4 px-10">
-											{/* Group Name Column */}
-											<div className="flex items-center">
-												<input type="checkbox" id={`group-${group.id}`} className="mr-2" onChange={() => handleGroupCheckboxChange(group)} checked={finalRecipients.some((recipient) => group.recipients.includes(recipient))} />
-												<label htmlFor={`group-${group.id}`} className="text-gray-800 dark:text-gray-200 font-semibold">
-													{group.name}
-												</label>
-											</div>
+						<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 text-center">
+							Email Groups
+						</h3>
+						<div className="mt-4">
+							{localGroups.map((group) => (
+							<div key={group.id} className="flex items-center mb-4">
+								<div className="flex w-full justify-between gap-4 px-10">
+								{/* Group Name Column */}
+								<div className="flex items-center">
+									<label className="text-gray-800 dark:text-gray-200 font-semibold">
+									{group.Group_Name}
+									</label>
+								</div>
 
-											{/* Members List Column */}
-											<div className="flex col-span-2 text-gray-600 dark:text-gray-400">
-												{group.recipients.map((recipient, index) => (
-													<p key={index}>{recipient}, </p>
-												))}
-											</div>
-										</div>
-									</div>
-								))}
+								{/* Members List Column */}
+								<div className="flex col-span-2 text-gray-600 dark:text-gray-400">
+									{group.People.map((person, index) => (
+									<p key={index}>
+										{/* {person.email} */}
+										{/* {index !== group.People.length - 1 ? ", " : ""} */}
+									</p>
+									))}
+								</div>
+
+								{/* Save Button: only if group is not already saved */}
+								{!group.saved && (
+									<button
+									className="btn bg-blue-500 text-white hover:bg-green-600 px-4 py-1 rounded"
+									onClick={() => handleSaveGroup(group)}
+									disabled={!group.Group_Name.trim()} // Disable if group name is empty
+									>
+									Save
+									</button>
+								)}
+								</div>
 							</div>
+							))}
 						</div>
-						<div className="px-6 py-4 bg-gray-50 dark:bg-gray-700">
-							<button onClick={() => console.log('Final Recipients:', getRecipientsList())} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-								Add to Group
-							</button>
 						</div>
 					</div>
-					<div className="overflow-hidden m-3 sm:mx-auto flex flex-col w-full bg-white shadow-sm rounded dark:bg-gray-800">
-						<div className="px-6 pt-6 pb-0">
-							<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Available Groups</h3>
-							<div className="mt-4">
-								{groups.map((group) => (
-									<div key={group.id} className="flex items-center mb-4">
-										<div className="flex w-full justify-between gap-4 px-10">
-											{/* Group Name Column */}
-											<div className="flex items-center">
-												<input type="checkbox" id={`group-${group.id}`} className="mr-2" onChange={() => handleGroupCheckboxChange(group)} checked={finalRecipients.some((recipient) => group.recipients.includes(recipient))} />
-												<label htmlFor={`group-${group.id}`} className="text-gray-800 dark:text-gray-200 font-semibold">
-													{group.name}
-												</label>
-											</div>
-
-											{/* Members List Column */}
-											<div className="flex col-span-2 text-gray-600 dark:text-gray-400">
-												{group.recipients.map((recipient, index) => (
-													<p key={index}>{recipient}, </p>
-												))}
-											</div>
-										</div>
-									</div>
-								))}
+					)}
+					<div className="overflow-hidden m-3 sm:mx-auto flex flex-col w-1/2 bg-white shadow-sm rounded dark:bg-gray-800">
+					<div className="px-6 pt-6 pb-0">
+						<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 text-center">Available Groups</h3>
+						<div className="mt-4">
+						{groups.map((group) => {
+							// Use group.id if available; otherwise use group._id
+							const groupId = group.id || group._id;
+							return (
+							<div key={groupId} className="flex items-center mb-4">
+								<div className="flex w-full justify-between gap-4 px-10">
+								{/* Group Name Column */}
+								<div className="flex items-center">
+									<input
+									type="checkbox"
+									id={`group-${groupId}`}
+									className="mr-2"
+									onChange={() => handleGroupCheckboxChange(group)}
+									checked={selectedGroupIds.has(groupId)}
+									/>
+									<label htmlFor={`group-${groupId}`} className="text-gray-800 dark:text-gray-200 font-semibold">
+									{group.Group_Name}
+									</label>
+								</div>
+								</div>
 							</div>
+							);
+						})}
 						</div>
-						<div className="px-6 py-4 bg-gray-50 dark:bg-gray-700">
-							<button onClick={() => console.log('Final Recipients:', getRecipientsList())} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-								Send Email to Selected Groups
-							</button>
-						</div>
+					</div>
+					<div className="px-6 py-4 bg-gray-50 dark:bg-gray-700">
+						<button
+						onClick={handleSendEmailToSelectedGroups}
+						className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+						>
+						Send Email to Selected Groups
+						</button>
+					</div>
 					</div>
 				</div>
 				<div className="grid xl:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-6">
@@ -414,12 +552,54 @@ const BulkEmail = () => {
 						<div className="p-1.5">
 							<div className="px-6 pt-6 pb-0">
 								<form>
-									<div className="mb-3 space-y-2">
+								<div className="mb-3 space-y-2">
 										<label htmlFor="msgto" className="text-gray-500 font-semibold">
-											To
+										To
 										</label>
-										<input type="text" id="msgto" className="form-input" placeholder="Example@email.com" value={finalRecipients} onChange={(e) => setSelectedRecipients(e.target.value)} />
-									</div>
+										{/* Input Section for adding new email */}
+										<div className="flex gap-2">
+										<input
+											type="email"
+											value={newEmail}
+											onChange={(e) => setNewEmail(e.target.value)}
+											onKeyDown={(e) => {
+												if (e.key === "Enter") {
+												  e.preventDefault(); // Prevent form submission
+												  handleAddEmail();
+												}
+											  }}
+											placeholder="Add email"
+											className="border border-gray-300 rounded p-2 flex-1"
+										/>
+										<button
+											type="button"  // Prevents default form submission behavior
+											onClick={handleAddEmail}
+											className="btn bg-blue-500 text-white px-4 py-2 rounded"
+										>
+											Add
+										</button>
+										</div>
+										{/* Conditionally render recipients list only if there are emails */}
+										{finalRecipients.length > 0 && (
+											<div className="border border-gray-300 rounded p-2 max-h-40 overflow-x-auto flex flex-wrap gap-2 mt-2">
+											{finalRecipients.map((email) => (
+												<div
+												key={email}
+												className="flex items-center border border-gray-400 rounded px-2 py-1"
+												>
+												<span>{email}</span>
+												<button
+													type="button"
+													onClick={() => handleRemoveRecipient(email)}
+													className="ml-1 text-red-500"
+												>
+													&times;
+												</button>
+												</div>
+											))}
+											</div>
+										)}
+										</div>
 
 									<div className="mb-3 space-y-2">
 										<label htmlFor="mailsubject" className="text-gray-500 font-semibold">
@@ -462,10 +642,12 @@ const BulkEmail = () => {
 								<img className="w-full h-auto rounded-t-md" src={Img1} alt="Image Description" />
 								<div className="p-6">
 									<h3 className="card-title">USP Based</h3>
-									{/* <p className="mt-1 text-gray-800 dark:text-gray-400 mb-4">Some quick example text</p> */}
-									<Link className="btn bg-primary text-white mt-2" to="#">
-										Select
-									</Link>
+									<div className="flex items-center mt-2 space-x-4">
+										<Link className="btn bg-primary text-white" to="#">
+											Select
+										</Link>
+										<EyeIcon/>
+									</div>
 								</div>
 							</div>
 
@@ -473,10 +655,12 @@ const BulkEmail = () => {
 								<img className="w-full h-auto rounded-t-md" src={Img2} alt="Image Description" />
 								<div className="p-6">
 									<h3 className="card-title">New Launch</h3>
-									{/* <p className="mt-1 text-gray-800 dark:text-gray-400 mb-4">Some quick example text</p> */}
-									<Link className="btn bg-primary text-white mt-2" to="#">
-										Select
-									</Link>
+									<div className="flex items-center mt-2 space-x-4">
+										<Link className="btn bg-primary text-white" to="#">
+											Select
+										</Link>
+										<EyeIcon/>
+									</div>
 								</div>
 							</div>
 
@@ -484,10 +668,12 @@ const BulkEmail = () => {
 								<img className="w-full h-auto rounded-t-md" src={Img3} alt="Image Description" />
 								<div className="p-6">
 									<h3 className="card-title">Offer/Discount</h3>
-									{/* <p className="mt-1 text-gray-800 dark:text-gray-400 mb-4">Some quick example text</p> */}
-									<Link className="btn bg-primary text-white mt-2" to="#">
-										Select
-									</Link>
+									<div className="flex items-center mt-2 space-x-4">
+										<Link className="btn bg-primary text-white" to="#">
+											Select
+										</Link>
+										<EyeIcon/>
+									</div>
 								</div>
 							</div>
 
@@ -495,10 +681,12 @@ const BulkEmail = () => {
 								<img className="w-full h-auto rounded-t-md" src={Img4} alt="Image Description" />
 								<div className="p-6">
 									<h3 className="card-title">Webinar Invitation</h3>
-									{/* <p className="mt-1 text-gray-800 dark:text-gray-400 mb-4">Some quick example text</p> */}
-									<Link className="btn bg-primary text-white mt-2" to="#">
-										Select
-									</Link>
+									<div className="flex items-center mt-2 space-x-4">
+										<Link className="btn bg-primary text-white" to="#">
+											Select
+										</Link>
+										<EyeIcon/>
+									</div>
 								</div>
 							</div>
 						</div>

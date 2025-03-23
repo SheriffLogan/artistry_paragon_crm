@@ -1,44 +1,10 @@
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
-
 import config from '../../config';
 
-// content type
+// ✅ Set default base URL for Axios
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.baseURL = config.API_URL;
-
-// intercepting to capture errors
-axios.interceptors.response.use(
-	(response) => {
-		return response;
-	},
-	(error) => {
-		// Any status codes that falls outside the range of 2xx cause this function to trigger
-		let message;
-
-		if (error && error.response && error.response.status === 404) {
-			// window.location.href = '/not-found';
-		} else if (error && error.response && error.response.status === 403) {
-			window.location.href = '/access-denied';
-		} else {
-			switch (error.response.status) {
-				case 401:
-					message = 'Invalid credentials';
-					break;
-				case 403:
-					message = 'Access Forbidden';
-					break;
-				case 404:
-					message = 'Sorry! the data you are looking for could not be found';
-					break;
-				default: {
-					message = error.response && error.response.data ? error.response.data['message'] : error.message || error;
-				}
-			}
-			return Promise.reject(message);
-		}
-	}
-);
 
 const AUTH_SESSION_KEY = 'attex_user';
 
@@ -58,47 +24,37 @@ const getUserFromCookie = () => {
 
 class APICore {
 	/**
-	 * Fetches data from given url
+	 * Fetches data from given URL
 	 */
 	get = (url, params) => {
-		let response;
 		if (params) {
-			const queryString = params
-				? Object.keys(params)
-						.map((key) => key + '=' + params[key])
-						.join('&')
-				: '';
-			response = axios.get(`${url}?${queryString}`, params);
+			const queryString = Object.keys(params)
+				.map((key) => key + '=' + params[key])
+				.join('&');
+			return axios.get(`${url}?${queryString}`);
 		} else {
-			response = axios.get(`${url}`, params);
+			return axios.get(url);
 		}
-		return response;
 	};
 
 	getFile = (url, params) => {
-		let response;
 		if (params) {
-			const queryString = params
-				? Object.keys(params)
-						.map((key) => key + '=' + params[key])
-						.join('&')
-				: '';
-			response = axios.get(`${url}?${queryString}`, { responseType: 'blob' });
+			const queryString = Object.keys(params)
+				.map((key) => key + '=' + params[key])
+				.join('&');
+			return axios.get(`${url}?${queryString}`, { responseType: 'blob' });
 		} else {
-			response = axios.get(`${url}`, { responseType: 'blob' });
+			return axios.get(url, { responseType: 'blob' });
 		}
-		return response;
 	};
 
 	getMultiple = (urls, params) => {
 		const reqs = [];
 		let queryString = '';
 		if (params) {
-			queryString = params
-				? Object.keys(params)
-						.map((key) => key + '=' + params[key])
-						.join('&')
-				: '';
+			queryString = Object.keys(params)
+				.map((key) => key + '=' + params[key])
+				.join('&');
 		}
 
 		for (const url of urls) {
@@ -108,7 +64,7 @@ class APICore {
 	};
 
 	/**
-	 * post given data to url
+	 * Post given data to URL
 	 */
 	create = (url, data) => {
 		return axios.post(url, data);
@@ -136,7 +92,7 @@ class APICore {
 	};
 
 	/**
-	 * post given data to url with file
+	 * Post given data to URL with file
 	 */
 	createWithFile = (url, data) => {
 		const formData = new FormData();
@@ -154,7 +110,7 @@ class APICore {
 	};
 
 	/**
-	 * post given data to url with file
+	 * Updates data with file upload
 	 */
 	updateWithFile = (url, data) => {
 		const formData = new FormData();
@@ -177,14 +133,15 @@ class APICore {
 		if (!user) {
 			return false;
 		}
-		const decoded = jwtDecode(user.token);
-		const currentTime = Date.now() / 1000;
-		if (decoded.exp < currentTime) {
-			console.warn('access token expired');
-			return false;
-		} else {
-			return true;
-		}
+		// const decoded = jwtDecode(user.token);
+		// const currentTime = Date.now() / 1000;
+		// if (decoded.exp < currentTime) {
+		// 	console.warn('Access token expired');
+		// 	return false;
+		// } else {
+		// 	return true;
+		// }
+		return true;
 	};
 
 	setLoggedInUser = (session) => {
@@ -195,7 +152,7 @@ class APICore {
 	};
 
 	/**
-	 * Returns the logged in user
+	 * Returns the logged-in user
 	 */
 	getLoggedInUser = () => {
 		return getUserFromCookie();
@@ -211,7 +168,7 @@ class APICore {
 }
 
 /*
-Check if token available in session
+✅ Check if token is available in session
 */
 const user = getUserFromCookie();
 if (user) {

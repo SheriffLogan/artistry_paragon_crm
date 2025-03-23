@@ -1,11 +1,4 @@
-interface DownloadFileProps {
-	data: any
-	filename: string
-	mime: any
-	bom: any
-}
-
-const downloadFile = ({ data, filename, mime, bom }: DownloadFileProps) => {
+const downloadFile = ({ data, filename, mime, bom }) => {
 	let blobData = typeof bom !== 'undefined' ? [bom, data] : [data]
 	let blob = new Blob(blobData, { type: mime || 'application/octet-stream' })
 

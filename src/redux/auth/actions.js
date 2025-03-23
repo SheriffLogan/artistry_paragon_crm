@@ -10,7 +10,15 @@ export const authApiResponseSuccess = (actionType, data) => ({
 // common error
 export const authApiResponseError = (actionType, error) => ({
 	type: AuthActionTypes.API_RESPONSE_ERROR,
-	payload: { actionType, error },
+	payload: {
+		actionType,
+		error: {
+			message: error.message,
+			code: error.code,
+			status: error.response ? error.response.status : null,
+			data: error.response ? error.response.data : null,
+		},
+	},
 });
 
 export const loginUser = (username, password) => ({

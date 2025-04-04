@@ -21,7 +21,8 @@ export const fetchGroups = async () => {
 
 export const createGroup = async (groupName, selectedRecipients) => {
     try {
-        const response = await axios.post("https://hootmonk-backend.vercel.app/group", {
+        const url = `${endpoint.base_url}${endpoint.group_endpoints.createGroup}`;
+        const response = await axios.post(url, {
             Group_Name: groupName,
             People: selectedRecipients.map(recipient => ({
                 Name: recipient.name,

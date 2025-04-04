@@ -62,6 +62,13 @@ const MENU_ITEMS = [
 		url: '/apps/calendar',
 	},
 	{
+		key: 'apps-configure-email',
+		label: 'Configure Email',
+		isTitle: false,
+		icon: 'ri-settings-3-line',
+		url: '/apps/configure-email',
+	},
+	{
 		key: 'apps-chat',
 		label: 'Chat',
 		isTitle: false,

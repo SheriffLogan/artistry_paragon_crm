@@ -18,7 +18,7 @@ import { Modal } from 'antd'
 import { set } from 'react-hook-form'
 import CreateNewGroupModal from './CreateNewGroupModal'
 import AddToExistingGroupModal from './AddToExistingGroupModal'
-import { fetchGroups, createGroup, addToExistingGroup, sendEmail } from '../../../config/ApiConfig'
+import { fetchGroups, createGroup, addToExistingGroup, sendEmail, fetchConfigurations } from '../../../config/ApiConfig'
 
 const colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark']
 
@@ -48,6 +48,9 @@ const BulkEmail = () => {
 	// const [removedRecipients, setRemovedRecipients] = useState(new Set()); // Tracks manually removed recipient emails
 	const [selectedRecipients, setSelectedRecipients] = useState([])
 	const [messageSubject, setMessageSubject] = useState('')
+	const [configuredEmails, setConfiguredEmails] = useState([]);
+	const [selectedFromEmail, setSelectedFromEmail] = useState("");
+
 
 	const [groups, setGroups] = useState([])
 	const [finalRecipients, setFinalRecipients] = useState([])
@@ -89,6 +92,23 @@ const BulkEmail = () => {
 		fetchAllGroups();
 
 	}, []);
+
+	  // Fetch the list of configured email IDs using the imported API function
+	  useEffect(() => {
+		fetchConfigurations()
+		  .then((res) => {
+			// Assuming your API returns an object like { data: [{ email: "..." }, ...] }
+			console.log('config res', res)
+			const emails = res.data?.map((config) => config.email) || [];
+			setConfiguredEmails(emails);
+			if (emails.length > 0) {
+			  setSelectedFromEmail(emails[0]);
+			}
+		  })
+		  .catch((error) => {
+			console.error("Error fetching configurations:", error);
+		  });
+	  }, []);
 
 	const handleRowSelection = (row, isChecked) => {
 		setSelectedRows((prevSelected) => {
@@ -301,14 +321,14 @@ const BulkEmail = () => {
 
 	// Example usage inside your send message handler:
 	const handleSendMessage = async () => {
-		console.log('Sending message to...', finalRecipients, editorValue, messageSubject);
+		console.log('Sending message from...', selectedFromEmail, 'to', finalRecipients, 'with subject', messageSubject);
 		try {
-		const responseData = await sendEmail(finalRecipients, messageSubject, editorValue);
-		alert(responseData.message || 'Emails sent successfully!');
+		  const responseData = await sendEmail(selectedFromEmail, finalRecipients, messageSubject, editorValue);
+		  alert(responseData.message || "Emails sent successfully!");
 		} catch (error) {
-		alert('Error: ' + error.message);
+		  alert("Error: " + error.message);
 		}
-	};
+	  };
 
 	const indexOfLastItem = currentPage * itemsPerPage
 	const indexOfFirstItem = indexOfLastItem - itemsPerPage
@@ -599,6 +619,24 @@ const BulkEmail = () => {
 											))}
 											</div>
 										)}
+										</div>
+										{/* From Section */}
+										<div className="mb-3 space-y-2">
+										<label htmlFor="fromEmail" className="text-gray-500 font-semibold">
+											From
+										</label>
+										<select
+											id="fromEmail"
+											value={selectedFromEmail}
+											onChange={(e) => setSelectedFromEmail(e.target.value)}
+											className="m-2 border border-gray-300 rounded p-2 flex-1"
+										>
+											{configuredEmails.map((email) => (
+											<option key={email} value={email}>
+												{email}
+											</option>
+											))}
+										</select>
 										</div>
 
 									<div className="mb-3 space-y-2">

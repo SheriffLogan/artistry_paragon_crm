@@ -2,7 +2,7 @@ const testUrl = 'http://127.0.0.1:8000';
 const deployedUrl = 'https://hootmonk-backend.vercel.app'
 
 const endpoint = {
-    base_url: deployedUrl,
+    base_url: testUrl,
 
     group_endpoints: {
         fetchGroups: '/groups',
@@ -13,6 +13,10 @@ const endpoint = {
     },
     email_endpoints: {
         sendEmail: '/send-mail',
+        fetchConfigurations: '/configurations',
+        saveConfiguration: '/configurations',
+        setupGmail: "/setup-smtp/gmail/",
+        setupCustom: "/setup-smtp/"
     },
     template_endpoints: {
         fetchTemplates: '/templates',

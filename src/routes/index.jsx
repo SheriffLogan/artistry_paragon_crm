@@ -3,6 +3,8 @@ import { Navigate, Route } from 'react-router-dom';
 
 // components
 import PrivateRoute from './PrivateRoute';
+import { element } from 'prop-types';
+import ConfigureEmail from '../pages/apps/ConfigureEmail';
 
 // lazy load all the views
 
@@ -203,6 +205,16 @@ const calendarAppRoutes = {
 	header: 'Apps',
 };
 
+const configureEmailRoutes = {
+	path: '/apps/configure-email',
+	name: 'Configure Email',
+	route: PrivateRoute,
+	roles: ['Admin'],
+	icon: 'configure-email',
+	element: <ConfigureEmail />,
+	header: 'Apps',
+};
+
 const chatAppRoutes = {
 	path: '/apps/chat',
 	name: 'Chat',
@@ -277,7 +289,7 @@ const fileAppRoutes = {
 	header: 'Apps',
 };
 
-const appRoutes = [bulkEmailRoutes ,calendarAppRoutes, chatAppRoutes, emailAppRoutes, tasksAppRoutes, kanbanAppRoutes, fileAppRoutes];
+const appRoutes = [bulkEmailRoutes ,calendarAppRoutes, configureEmailRoutes, chatAppRoutes, emailAppRoutes, tasksAppRoutes, kanbanAppRoutes, fileAppRoutes];
 
 // pages
 const customPagesRoutes = {

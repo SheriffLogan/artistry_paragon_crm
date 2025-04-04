@@ -2,7 +2,7 @@ const testUrl = 'http://127.0.0.1:8000';
 const deployedUrl = 'https://hootmonk-backend.vercel.app'
 
 const endpoint = {
-    base_url: testUrl,
+    base_url: deployedUrl,
 
     group_endpoints: {
         fetchGroups: '/groups',

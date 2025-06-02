@@ -1,138 +1,51 @@
+// src/config/ApiConfig.jsx
 import axios from 'axios';
 import endpoint from './endpoint';
 
-export const fetchGroups = async () => {
-    try {
-        const url = `${endpoint.base_url}${endpoint.group_endpoints.fetchGroups}`;
-        const response = await axios.get(url, {
-            headers: {
-                'accept': 'application/json'
-            }
-        });
+const client = axios.create({
+  baseURL: endpoint.base_url,
+  headers: { 'Content-Type': 'application/json' },
+});
 
-        console.log("response of fetch groups", response.data);
+// CART
+export const fetchCart = () =>
+  client.get(endpoint.cart_endpoints.getCart).then(res => res.data);
 
-        return response.data;
-            
-    } catch (error) {
-        console.error("Error fetching groups:", error);
-    }
+export const addCartItem = (variantId, quantity) =>
+  client.post(endpoint.cart_endpoints.addItem, { variantId, quantity })
+        .then(res => res.data);
+
+export const removeCartItem = (itemId) =>
+  client.delete(`${endpoint.cart_endpoints.removeItem}${itemId}`)
+        .then(res => res.data);
+
+export const clearCart = () =>
+  client.delete(endpoint.cart_endpoints.clearCart);
+
+// ORDERS
+export const createOrder = (items) =>
+  client.post(endpoint.order_endpoints.createOrder, { items })
+        .then(res => res.data);
+
+export const listOrders = () =>
+  client.get(endpoint.order_endpoints.listOrders).then(res => res.data);
+
+export const getOrder = (orderId) =>
+  client.get(`${endpoint.order_endpoints.getOrder}${orderId}`)
+        .then(res => res.data);
+
+// PRODUCTS
+export const fetchProducts = () =>
+  client.get(endpoint.product_endpoints.list).then(res => res.data);
+
+export const fetchProduct = (productId) =>
+  client.get(`${endpoint.product_endpoints.getOne}${productId}`)
+        .then(res => res.data);
+
+// add more exports for shipments, promotions, returns, inventory, support…
+
+export default {
+  fetchCart, addCartItem, removeCartItem, clearCart,
+  createOrder, listOrders, getOrder,
+  fetchProducts, fetchProduct,
 };
-
-export const createGroup = async (groupName, selectedRecipients) => {
-    try {
-        const url = `${endpoint.base_url}${endpoint.group_endpoints.createGroup}`;
-        const response = await axios.post(url, {
-            Group_Name: groupName,
-            People: selectedRecipients.map(recipient => ({
-                Name: recipient.name,
-                Email: recipient.email,
-                Location: recipient.location || "",
-                Title: recipient.title || ""
-            }))
-        });
-
-        if (response){
-            return response.data;
-        }
-
-    } catch (error) {
-        console.error("Error creating group:", error);
-    }
-};
-
-export const addToExistingGroup = async (groupName, selectedRecipients) => {
-    try {
-        const response = await axios.put("https://hootmonk-backend.vercel.app/groups/add-people", {
-            Group_Name: groupName,
-            People: selectedRecipients.map(recipient => ({
-                Name: recipient.name,
-                Email: recipient.email,
-                Location: recipient.location || "",
-                Title: recipient.title || ""
-            }))
-        });
-
-        if (response){
-            return response.data;
-        }
-
-    } catch (error) {
-        console.error("Error adding people to group:", error);
-    }
-};
-
-// Define the sendEmail API function
-export const sendEmail = async (fromEmail, to, subject, body) => {
-    try {
-      // Assuming endpoint.email_endpoints.sendEmail is defined as '/send-mail'
-      const url = `${endpoint.base_url}${endpoint.email_endpoints.sendEmail}`;
-      const response = await axios.post(
-        url,
-        {
-            From: fromEmail,
-            To: to,
-            Subject: subject,
-            Body: body,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      console.log("Response from send email:", response.data);
-      return response.data;
-    } catch (error) {
-      console.error("Error sending email:", error);
-      throw error;
-    }
-  };
-
-  export const fetchConfigurations = async () => {
-    try {
-      const url = `${endpoint.base_url}${endpoint.email_endpoints.fetchConfigurations}`;
-      const response = await axios.get(url, {
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-      console.log("Response from fetchConfigurations:", response.data);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching configurations:", error);
-      throw error;
-    }
-  };
-  
-  export const saveConfiguration = async (configData) => {
-    try {
-      const url = `${endpoint.base_url}${endpoint.email_endpoints.saveConfiguration}`;
-      const response = await axios.post(url, configData, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      console.log("Configuration saved:", response.data);
-      return response.data;
-    } catch (error) {
-      console.error("Error saving configuration:", error);
-      throw error;
-    }
-  };
-
-  export const configureEmail = async (emailType, payload) => {
-    const url = emailType === "gmail" 
-      ? `${endpoint.base_url}${endpoint.email_endpoints.setupGmail}`
-      : `${endpoint.base_url}${endpoint.email_endpoints.setupCustom}`;
-  
-    try {
-      const response = await axios.post(url, payload, {
-        headers: { "Content-Type": "application/json" }
-      });
-      return response.data; // Return response data
-    } catch (error) {
-      console.error("Error configuring email:", error);
-      throw error; // Throw error to be handled in UI
-    }
-  };

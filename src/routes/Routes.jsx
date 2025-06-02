@@ -35,24 +35,18 @@ const AllRoutes = (props) => {
 				</Route>
 
 				<Route>
-					{authProtectedFlattenRoutes.map((route, idx) => (
+					{authProtectedFlattenRoutes.map((route, idx) => {
+						const element = api.isUserAuthenticated()
+						? <VerticalLayout {...props}>{route.element}</VerticalLayout>
+						: <Navigate to="/auth/login2" replace />;
+					return (
 						<Route
-							path={route.path}
-							element={
-								api.isUserAuthenticated() === false ? (
-									<Navigate
-										to={{
-											pathname: '/auth/login',
-											search: 'next=' + route.path,
-										}}
-									/>
-								) : (
-									<VerticalLayout {...props}>{route.element}</VerticalLayout>
-								)
-							}
 							key={idx}
+							path={route.path}
+							element={element}
 						/>
-					))}
+						)
+					})}
 					;
 				</Route>
 			</Routes>

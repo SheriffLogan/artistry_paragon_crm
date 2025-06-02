@@ -1,26 +1,35 @@
+// src/helpers/api/auth.js
 import { APICore } from './apiCore';
+import endpoint from '../../config/endpoint';
 
 const api = new APICore();
 
-// account
-function login(params) {
-	const baseUrl = '/login/';
-	return api.create(`${baseUrl}`, params);
+export function login(params) {
+  return api.create(endpoint.auth.login, params);
 }
 
-function logout() {
-	const baseUrl = '/logout/';
-	return api.create(`${baseUrl}`, {});
+export function signup(params) {
+  return api.create(endpoint.auth.register, params);
 }
 
-function signup(params) {
-	const baseUrl = '/register/';
-	return api.create(`${baseUrl}`, params);
+export function refreshToken(token) {
+  return api.create(endpoint.auth.refresh, { refreshToken: token });
 }
 
-function forgotPassword(params) {
-	const baseUrl = '/forgot-password/';
-	return api.create(`${baseUrl}`, params);
+export function getProfile() {
+  return api.get(endpoint.auth.profile);
 }
 
-export { login, logout, signup, forgotPassword };
+/**
+ * Send password-reset email
+ * @param {{ email: string }} payload
+ */
+export function forgotPassword(payload) {
+  return api.create(endpoint.auth.forgotPassword, payload)
+            .then(res => res.data);
+}
+
+export function logout() {
+  api.setLoggedInUser(null);
+  api.setAuthorization(null);
+}

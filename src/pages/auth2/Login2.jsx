@@ -1,8 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AuthLayout2 from './AuthLayout2';
+import { useEffect } from 'react';
+
 
 // components
 import { FormInput, VerticalForm } from '../../components';
@@ -35,25 +37,33 @@ const BottomLink = () => {
 
 const Login2 = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const { loading } = useSelector((state) => ({
+    const { loading, error, userLoggedIn } = useSelector((state) => ({
         user: state.Auth.user,
         loading: state.Auth.loading,
         error: state.Auth.error,
         userLoggedIn: state.Auth.userLoggedIn,
     }));
 
+    useEffect(() => {
+        if (userLoggedIn) {
+        navigate('/dashboard/overview', { replace: true });
+        }
+    }, [userLoggedIn, navigate]);
+
     /**
      * handle form submission
      */
-    const onSubmit = (formData) => {
-        dispatch(loginUser(formData.username, formData.password));
+    const onSubmit = ({ username, password }) => {
+        dispatch(loginUser(username, password))
     };
 
     return (
         <>
             <AuthLayout2 title="Sign In" helpText="Enter your email address and password to access account." hasThirdPartyLogin bottomLinks={<BottomLink />}>
-                <VerticalForm onSubmit={onSubmit} resolver={schemaResolver} defaultValues={{ username: 'attex@coderthemes.com', password: 'attex' }}>
+             {error && <div className="text-red-500 mb-4">{error.message}</div>}
+                <VerticalForm onSubmit={onSubmit} resolver={schemaResolver} defaultValues={{ username: 'admin@paragon.com', password: 'admin123' }}>
                     <FormInput label="Email address" labelClassName="font-semibold text-gray-500" type="email" className="form-input" name="username" placeholder={'Enter your email'} containerClass="mb-6 space-y-2" />
 
                     <FormInput label={'Password'} type="password" name="password" labelClassName="font-semibold text-gray-500" className="form-input rounded-e-none" placeholder={'Enter your password'} containerClass={'mb-6 space-y-2'} labelContainerClassName="flex justify-between items-center mb-2">

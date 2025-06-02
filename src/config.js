@@ -1,5 +1,5 @@
 const config = {
-    API_URL: 'https://hootmonk-backend.vercel.app',
+    API_URL: 'http://localhost:3000/',
 }
 
 export default config

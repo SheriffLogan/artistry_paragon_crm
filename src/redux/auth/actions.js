@@ -21,9 +21,9 @@ export const authApiResponseError = (actionType, error) => ({
 	},
 });
 
-export const loginUser = (username, password) => ({
+export const loginUser = (email, password) => ({
 	type: AuthActionTypes.LOGIN_USER,
-	payload: { username, password },
+	payload: { email, password },
 });
 
 export const logoutUser = () => ({

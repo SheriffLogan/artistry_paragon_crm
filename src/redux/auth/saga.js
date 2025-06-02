@@ -19,20 +19,27 @@ const api = new APICore();
  * @param {*} payload - username and password
  */
 
-function* login({ payload: { username, password } }) {
-	try {
-		const response = yield call(loginApi, { username, password });
-		const user = response.data;
-		// NOTE - You can change this according to response format from your api
-		api.setLoggedInUser(user);
-		setAuthorization(user['token']);
-		yield put(authApiResponseSuccess(AuthActionTypes.LOGIN_USER, user));
-	} catch (error) {
-		yield put(authApiResponseError(AuthActionTypes.LOGIN_USER, error));
-		api.setLoggedInUser(null);
-		setAuthorization(null);
-	}
+function* login({ payload: { email, password } }) {
+  try {
+    // call your new backend endpoint
+    const response = yield call(loginApi, { email, password });
+    // response.data = { user, accessToken, refreshToken }
+    const { user, accessToken } = response.data;
+
+    // store in session & axios header
+    api.setLoggedInUser({ token: accessToken, user });
+    setAuthorization(accessToken);
+
+    // dispatch success with full payload
+    yield put(authApiResponseSuccess(AuthActionTypes.LOGIN_USER, response.data));
+
+  } catch (error) {
+    yield put(authApiResponseError(AuthActionTypes.LOGIN_USER, error));
+    api.setLoggedInUser(null);
+    setAuthorization(null);
+  }
 }
+
 
 /**
  * Logout the user

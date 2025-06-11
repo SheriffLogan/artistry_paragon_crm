@@ -1754,15 +1754,15 @@ graphemer@^1.4.0:
   resolved "https://registry.npmjs.org/graphemer/-/graphemer-1.4.0.tgz"
   integrity sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==
 
-gridjs-react@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.npmjs.org/gridjs-react/-/gridjs-react-6.0.1.tgz"
-  integrity sha512-Cb9tti25vlQH7qn1J61NMzu+1sRYxGCbTdlj+/iJmhWTe+8C0VI6snr6Gi2LKDsvcUhlBSb56T6IZQ8UF3D6aQ==
+gridjs-react@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.npmjs.org/gridjs-react/-/gridjs-react-6.1.1.tgz"
+  integrity sha512-MOu/t4naXR6vIeLdcE+vUFtyUcYuRn75sThJnShlMntQcrVCSKSBApmNWU1MzLuNrqOH5sbDImqk7pIXYumKxA==
 
-gridjs@^6.0.1, gridjs@^6.0.6:
-  version "6.0.6"
-  resolved "https://registry.npmjs.org/gridjs/-/gridjs-6.0.6.tgz"
-  integrity sha512-TZ20nY+weE/wlyXOd3A9FJyJlsJ/MrHr6frMgUHFN29RmWZCYtnyfF0zuspXC81oePwSJeSZ8HY651aeyX8+rQ==
+gridjs@^6.0.6, gridjs@^6.1.0:
+  version "6.2.0"
+  resolved "https://registry.npmjs.org/gridjs/-/gridjs-6.2.0.tgz"
+  integrity sha512-EAGGfHjyEXWh12Txs6DjTGnWTo226wbowtMrLI+yNZQaJpvs0m7yDcyM7r+D4RA7rZQVj/cfmwEaRz/rlxg8LA==
   dependencies:
     preact "^10.11.3"
 
@@ -3011,7 +3011,7 @@ react-window@^1.8.8:
     "@babel/runtime" "^7.0.0"
     memoize-one ">=3.1.1 <6"
 
-react@*, "react@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^15.5.x || ^16.x || ^17.x || ^18.x", "react@^16 || ^17 || ^18", "react@^16.3.0 || ^17.0.0 || ^18.0.0", "react@^16.7.0 || ^17 || ^18", "react@^16.8 || ^17 || ^18 || ^19", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.3 || ^17 || ^18", "react@^16.8.5 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17 || ^18", "react@^16.9.0 || ^17.0.0 || ^18", react@^18.2.0, "react@>= 16.8 || 18.0.0", react@>=0.13, "react@>=16, <=18", react@>=16.0.0, react@>=16.11.0, react@>=16.14.0, react@>=16.3.0, react@>=16.6.0, react@>=16.8, react@>=16.8.0, react@>=16.9.0, react@>=17.x:
+react@*, "react@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^15.5.x || ^16.x || ^17.x || ^18.x", "react@^16 || ^17 || ^18", "react@^16.3.0 || ^17.0.0 || ^18.0.0", "react@^16.7.0 || ^17 || ^18", "react@^16.8 || ^17 || ^18 || ^19", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.3 || ^17 || ^18", "react@^16.8.5 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17 || ^18", "react@^16.9.0 || ^17.0.0 || ^18", react@^18.2.0, "react@>= 16.8 || 18.0.0", react@>=0.13, "react@>=16, <=18", react@>=16.0.0, react@>=16.11.0, react@>=16.14.0, react@>=16.3.0, react@>=16.6.0, react@>=16.8, react@>=16.8.0, react@>=16.9.0, react@>=18.x:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==

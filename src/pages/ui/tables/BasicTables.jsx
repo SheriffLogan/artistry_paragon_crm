@@ -1,3 +1,5 @@
+//src\pages\ui\tables\BasicTables.jsx
+
 import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 

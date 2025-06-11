@@ -1,8 +1,7 @@
 // src/helpers/api/auth.js
-import { APICore } from './apiCore';
+import { api } from './apiCore';
 import endpoint from '../../config/endpoint';
 
-const api = new APICore();
 
 export function login(params) {
   return api.create(endpoint.auth.login, params);

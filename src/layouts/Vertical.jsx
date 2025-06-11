@@ -1,3 +1,4 @@
+// src/layouts/Vertical.jsx
 import React, { Suspense, useEffect } from 'react';
 import PropTypes from 'prop-types'; // Import PropTypes
 import { useSelector, useDispatch } from 'react-redux';
@@ -29,6 +30,10 @@ const VerticalLayout = ({ children }) => {
         layoutPosition: state.Layout.layoutPosition,
         isOpenRightSideBar: state.Layout.isOpenRightSideBar,
     }));
+
+    // Get user role from Redux state for menu filtering
+    const userRoleName = useSelector(state => state.Auth.user?.role?.name);
+    console.log("VerticalLayout - User Role for Menu:", userRoleName);
     
 
     useEffect(() => {
@@ -76,12 +81,14 @@ const VerticalLayout = ({ children }) => {
     const isCondensed = sideBarType === 'LEFT_SIDEBAR_TYPE_SMALL';
     const isLight = sideBarTheme === 'LEFT_SIDEBAR_THEME_LIGHT';
 
+    console.log("VerticalLayout - User Role for Menu:", userRoleName);
+    
     return (
         <>
             <Suspense fallback={loading()}>
                 <div className="flex wrapper">
                     <Suspense fallback={loading()}>
-                        <LeftSideBar isCondensed={isCondensed} isLight={isLight} hideUserProfile={true} />
+                        <LeftSideBar isCondensed={isCondensed} isLight={isLight} hideUserProfile={true} userRoleName={userRoleName} />
                     </Suspense>
 
                     <div className="page-content">

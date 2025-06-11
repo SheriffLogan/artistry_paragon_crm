@@ -1,3 +1,37 @@
 // Custom Variables
 @import "assets/scss/app.scss";
 @import "assets/scss/icons.scss";
+
+html, body, #root {
+  height: 100%;
+  min-height: 100vh;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-y: auto; /* Allow vertical scroll */
+}
+
+/* Ensure wrapper takes full height and handles overflow */
+.wrapper {
+  min-height: 100vh;
+  /* Add flex properties if not already there, e.g., display: flex; flex-direction: row; */
+}
+
+/* Ensure page-content expands and scrolls internally if needed */
+.page-content {
+  flex-grow: 1;
+  overflow-x: hidden; /* Crucial: hide horizontal overflow for content */
+  overflow-y: auto; /* Allow content to scroll vertically */
+}
+
+/* Example in your main.scss or a custom CSS file */
+.menu-arrow::before {
+    font-family: 'Remixicon'; /* Or whatever font icon library you use */
+    content: "\eA09"; /* Default down arrow icon code */
+    /* Add transition for smooth animation */
+    transition: transform 0.3s ease;
+}
+
+.menu-item.menuitem-active .menu-arrow::before,
+.menu-link.open .menu-arrow::before {
+    content: "\eA0B"; /* Up arrow icon code */
+    transform: rotate(180deg); /* Or just change content */
+}

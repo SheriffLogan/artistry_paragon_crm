@@ -1,3 +1,5 @@
+//src\pages\ui\tables\DataTables.jsx
+
 import { Grid } from 'gridjs-react'
 
 // Components

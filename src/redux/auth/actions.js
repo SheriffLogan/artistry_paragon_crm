@@ -1,3 +1,4 @@
+// src/redux/auth/actions.js
 // constants
 import { AuthActionTypes } from './constants';
 
@@ -26,6 +27,12 @@ export const loginUser = (email, password) => ({
 	payload: { email, password },
 });
 
+// Action to set user session data after successful login or hydration from storage
+export const loginUserSuccess = (sessionData) => ({
+    type: AuthActionTypes.LOGIN_USER_SUCCESS, // New action type
+    payload: sessionData, // Payload will be {user, accessToken, refreshToken}
+});
+
 export const logoutUser = () => ({
 	type: AuthActionTypes.LOGOUT_USER,
 	payload: {},
@@ -44,4 +51,29 @@ export const forgotPassword = (username) => ({
 export const resetAuth = () => ({
 	type: AuthActionTypes.RESET,
 	payload: {},
+});
+
+// --- NEW USER MANAGEMENT ACTIONS ---
+
+export const fetchUsers = () => ({
+    type: AuthActionTypes.FETCH_USERS,
+});
+
+export const addUser = (userData) => ({
+    type: AuthActionTypes.ADD_USER,
+    payload: { userData },
+});
+
+export const updateUser = (userId, userData) => ({
+    type: AuthActionTypes.UPDATE_USER,
+    payload: { userId, userData },
+});
+
+export const deleteUser = (userId) => ({
+    type: AuthActionTypes.DELETE_USER,
+    payload: { userId },
+});
+
+export const fetchRoles = () => ({
+    type: AuthActionTypes.FETCH_ROLES,
 });

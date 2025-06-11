@@ -1,4 +1,4 @@
-// app constants
+//src\utils\layout.js
 import { SideBarType, LayoutWidth } from '../constants/layout';
 
 const getLayoutConfigs = (layoutWidth) => {

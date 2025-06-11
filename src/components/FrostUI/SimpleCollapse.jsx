@@ -1,13 +1,32 @@
-import { ElementType, useRef } from 'react';
+//src\components\FrostUI\SimpleCollapse.jsx
+import { ElementType, useRef, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
 
 // Define the CollapseProps structure for component props
-const SimpleCollapse = ({ open, children, classNames, as: Tag = 'div' }) => {
-    const ref = useRef(null);
-    const height = open ? ref.current?.scrollHeight ?? 0 : 0;
+const SimpleCollapse = ({ in: isOpen, children, classNames, as: Tag = 'div' }) => {
+    const contentRef  = useRef(null);
+    const [maxHeight, setMaxHeight] = useState('0px');
+
+    useEffect(() => {
+        if (contentRef.current) {
+        if (isOpen) {
+            setMaxHeight(`${contentRef.current.scrollHeight}px`);
+        } else {
+            setMaxHeight('0px');
+        }
+        }
+    }, [isOpen]);
+
+    // const height = open ? ref.current?.scrollHeight ?? 0 : 0;
 
     return (
-        <Tag ref={ref} className={`transition-all overflow-hidden ${classNames || ''}`} style={{ height: height }}>
-            {children}
+        <Tag // Use Tag as a wrapper, default to 'div'
+        ref={contentRef}
+        className={`transition-all overflow-hidden ${classNames || ''}`}
+        style={{ maxHeight: maxHeight }}
+        >
+        {children}
         </Tag>
     );
 };

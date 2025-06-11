@@ -1,32 +1,3 @@
-// const testUrl = 'http://127.0.0.1:8000';
-// const deployedUrl = 'https://hootmonk-backend.vercel.app'
-
-// const endpoint = {
-//     base_url: deployedUrl,
-
-//     group_endpoints: {
-//         fetchGroups: '/groups',
-//         createGroup: '/group',
-//         updateGroup: '/groups/update',
-//         addToExistingGroup: '/groups/add-people',
-//         deleteGroup: '/groups'
-//     },
-//     email_endpoints: {
-//         sendEmail: '/send-mail',
-//         fetchConfigurations: '/configurations',
-//         saveConfiguration: '/configurations',
-//         setupGmail: "/setup-smtp/gmail/",
-//         setupCustom: "/setup-smtp/"
-//     },
-//     template_endpoints: {
-//         fetchTemplates: '/templates',
-//         createTemplate: '/template',
-//         deleteTemplate: '/template'
-//     }
-// }
-
-// export default endpoint;
-
 // src/config/endpoint.js
 const endpoint = {
   // base_url: process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000',  // your NestJS URL
@@ -39,6 +10,18 @@ const endpoint = {
     refresh:  '/auth/refresh',
     profile:  '/auth/profile',
     forgotPassword:  '/auth/forgot-password',
+  },
+
+  // Users and Roles Management (NEW)
+  users: {
+    list: '/users',
+    getOne: '/users/', // + userId
+    create: '/users',
+    update: '/users/', // + userId
+    remove: '/users/', // + userId
+  },
+  roles: { // Assuming you will add a GET /roles endpoint in your backend
+    list: '/roles',
   },
 
   // carts

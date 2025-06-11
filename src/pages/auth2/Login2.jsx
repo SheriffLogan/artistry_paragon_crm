@@ -11,6 +11,7 @@ import { FormInput, VerticalForm } from '../../components';
 
 // redux
 import { loginUser } from '../../redux/actions';
+import {api} from '../../helpers/api/apiCore'
 
 /**
  * Form validator
@@ -40,23 +41,31 @@ const Login2 = () => {
     const navigate = useNavigate();
 
     const { loading, error, userLoggedIn } = useSelector((state) => ({
-        user: state.Auth.user,
         loading: state.Auth.loading,
         error: state.Auth.error,
         userLoggedIn: state.Auth.userLoggedIn,
     }));
 
+    // CRITICAL: Navigate only when the 'user' object is fully populated with role.name
     useEffect(() => {
         if (userLoggedIn) {
-        navigate('/dashboard/overview', { replace: true });
+            console.log("Login2.jsx: Redux userLoggedIn is true, navigating to /dashboard/overview.");
+            // Use replace: true to prevent going back to login via browser back button
+            navigate('/dashboard/overview', { replace: true });
         }
-    }, [userLoggedIn, navigate]);
+        if (error) {
+            console.error("Login2.jsx: Login Error detected in Redux state:", error);
+            // You might want to display a toast notification or an error message here.
+            // Example: alert(error.message || "Login failed. Please check your credentials.");
+        }
+    }, [ userLoggedIn, error, navigate]); // Dependencies: user, error, navigate
 
     /**
      * handle form submission
      */
-    const onSubmit = ({ username, password }) => {
-        dispatch(loginUser(username, password))
+    const onSubmit = (formData) => {
+        console.log("Login2.jsx: Submitting login form. Dispatching loginUser action.");
+        dispatch(loginUser(formData.username, formData.password));
     };
 
     return (

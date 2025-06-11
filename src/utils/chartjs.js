@@ -1,3 +1,4 @@
+//src\utils\chartjs.js
 export default function hexToRGB(hex, alpha) {
 	let r = parseInt(hex.slice(1, 3), 16),
 		g = parseInt(hex.slice(3, 5), 16),

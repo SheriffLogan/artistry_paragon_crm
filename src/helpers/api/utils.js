@@ -1,3 +1,4 @@
+//src\helpers\api\utils.js
 const downloadFile = ({ data, filename, mime, bom }) => {
 	let blobData = typeof bom !== 'undefined' ? [bom, data] : [data]
 	let blob = new Blob(blobData, { type: mime || 'application/octet-stream' })

@@ -1,3 +1,4 @@
+//src\redux\auth\saga.js
 import { all, fork, put, takeEvery, call } from 'redux-saga/effects';
 
 // apicore
@@ -20,23 +21,18 @@ import { AuthActionTypes } from './constants';
 
 function* login({ payload: { email, password } }) {
   try {
-    console.log("Saga (Login): Attempting login for email:", email);
     const response = yield call(loginApi, { email, password });
     console.log("Saga (Login): Login API Response (full):", response); // Log full response for debugging
-    console.log("Saga (Login): Login API Response (data):", response.data);
 
     // Call setLoggedInUser with the full response.data object
-    console.log("Saga (Login): Calling api.setLoggedInUser with response.data...");
     const sessionData = response.data.data;
     api.setLoggedInUser(sessionData);
-    console.log("Saga (Login): api.setLoggedInUser call completed.");
 
     // Set the Authorization header with the accessToken
     setAuthorization(sessionData.accessToken);
 
     // Dispatch success to update Redux state
     yield put(authApiResponseSuccess(AuthActionTypes.LOGIN_USER, sessionData));
-    console.log("Saga (Login): Login successful, Redux state dispatch initiated.");
 
   } catch (error) {
     console.error("Saga (Login): Login failed. Error details:", error.response ? error.response.data : error.message);
@@ -93,11 +89,9 @@ function* forgotPassword({ payload: { username } }) {
 
 function* fetchUsersSaga() {
     try {
-        console.log("Saga (FetchUsers): Calling api.fetchUsers...");
         const response = yield call(api.fetchUsers);
         console.log("Saga (FetchUsers): API Response:", response.data.data);
         yield put(authApiResponseSuccess(AuthActionTypes.FETCH_USERS, response.data));
-        console.log("Saga (FetchUsers): Successfully fetched users.");
     } catch (error) {
         console.error("Saga (FetchUsers): Failed to fetch users:", error.response ? error.response.data : error.message);
         yield put(authApiResponseError(AuthActionTypes.FETCH_USERS, error));
@@ -147,11 +141,9 @@ function* deleteUserSaga({ payload: { userId } }) {
 
 function* fetchRolesSaga() {
     try {
-        console.log("Saga (FetchRoles): Calling api.fetchRoles...");
         const response = yield call(api.fetchRoles);
         console.log("Saga (FetchRoles): API Response:", response.data.data);
         yield put(authApiResponseSuccess(AuthActionTypes.FETCH_ROLES, response.data.data));
-        console.log("Saga (FetchRoles): Successfully fetched roles.");
     } catch (error) {
         console.error("Saga (FetchRoles): Failed to fetch roles:", error.response ? error.response.data : error.message);
         yield put(authApiResponseError(AuthActionTypes.FETCH_ROLES, error));

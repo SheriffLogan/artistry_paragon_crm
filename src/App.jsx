@@ -24,7 +24,6 @@ const App = () => {
 
     useEffect(() => {
         // This useEffect runs once on mount to check initial auth status
-        console.log("App.jsx: Initializing auth check...");
         const session = api.getLoggedInUser(); // Get the full session from storage
 
         if (session && session.user && session.accessToken) {
@@ -40,7 +39,6 @@ const App = () => {
             dispatch(loginUserSuccess(null)); // Or a specific action to clear auth state
         }
         setIsAuthReady(true); // Mark authentication system as ready
-        console.log("App.jsx: Auth check complete. isAuthReady set to true.");
 
     }, [dispatch]); // Depend only on dispatch
 

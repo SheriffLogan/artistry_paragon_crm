@@ -17,10 +17,8 @@ const AUTH_SESSION_KEY = 'attex_user';
 export const setAuthorization = (token) => {
     if (token) {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-        console.log("APICore: Authorization Header Set. Token prefix: Bearer.");
     } else {
         delete axios.defaults.headers.common['Authorization'];
-        console.log("APICore: Authorization Header Cleared.");
     }
 };
 
@@ -28,15 +26,12 @@ export const setAuthorization = (token) => {
 const getUserSessionFromStorage = () => { // Renamed for clarity (not just "Cookie")
     try {
         const userString = sessionStorage.getItem(AUTH_SESSION_KEY);
-        console.log("APICore (getUserSessionFromStorage): Attempting to get from sessionStorage. Key:", AUTH_SESSION_KEY, "Raw string:", userString ? userString.substring(0, 100) + "..." : "null"); // Log first 100 chars
 
         if (userString) {
             const parsedSession = JSON.parse(userString);
-            console.log("APICore (getUserSessionFromStorage): Parsed session object:", parsedSession);
 
             // Validate the parsed session object structure
             if (parsedSession && typeof parsedSession === 'object' && parsedSession.accessToken && parsedSession.user) {
-                console.log("APICore (getUserSessionFromStorage): Session is valid and complete.");
                 return parsedSession; // Return the entire session object { token, user }
             } else {
                 console.warn("APICore (getUserSessionFromStorage): Retrieved session data is incomplete or malformed. Clearing sessionStorage.", parsedSession);
@@ -58,16 +53,12 @@ const getUserSessionFromStorage = () => { // Renamed for clarity (not just "Cook
  */
 const setUserSessionInStorage = (session) => { // Renamed for clarity
     try {
-        console.log("APICore (setUserSessionInStorage): Attempting to set session. Input session:", session);
         if (session && typeof session === 'object' && session.accessToken && session.user) {
             const sessionString = JSON.stringify(session);
             sessionStorage.setItem(AUTH_SESSION_KEY, sessionString);
-            console.log("APICore (setUserSessionInStorage): SUCCESS! Session stored. Key:", AUTH_SESSION_KEY, "Value length:", sessionString.length, "Value (truncated):", sessionString.substring(0, 100) + "...");
             const storedValue = sessionStorage.getItem(AUTH_SESSION_KEY);
-            console.log("APICore (setUserSessionInStorage): IMMEDIATE CHECK: Stored value exists?", !!storedValue);
         } else if (session === null) {
             sessionStorage.removeItem(AUTH_SESSION_KEY);
-            console.log("APICore (setUserSessionInStorage): Session cleared from sessionStorage.");
         } else {
             console.warn("APICore (setUserSessionInStorage): Invalid session data provided. Session NOT stored. Clearing existing if any. Input:", session);
             sessionStorage.removeItem(AUTH_SESSION_KEY);

@@ -31,9 +31,9 @@ const AllRoutes = (props) => {
 
     useEffect(() => {
         // Log authentication status when component mounts or state changes
-        console.log(`Routes.jsx - Current User: ${user ? user.email : 'null'}`);
-        console.log(`Routes.jsx - Is Authenticated (Redux): ${userLoggedIn}`);
-        console.log(`Routes.jsx - User Role Name: ${userRoleName}`);
+        // console.log(`Routes.jsx - Current User: ${user ? user.email : 'null'}`);
+        // console.log(`Routes.jsx - Is Authenticated (Redux): ${userLoggedIn}`);
+        // console.log(`Routes.jsx - User Role Name: ${userRoleName}`);
     }, [userLoggedIn, user, userRoleName]); // Re-run when these change
 
 	return (
@@ -62,23 +62,23 @@ const AllRoutes = (props) => {
 						const isAuthenticated = userLoggedIn;
 						const isAuthorized = route.roles ? route.roles.includes(userRoleName) : true; // No roles means accessible to all authenticated
 
-						console.log(`Routes.jsx: Checking route: ${route.path}`);
-						console.log(`Routes.jsx:   - IsAuthenticated: ${isAuthenticated}`);
-						console.log(`Routes.jsx:   - User Role: ${userRoleName}`);
-						console.log(`Routes.jsx:   - Required Roles: ${route.roles ? route.roles.join(', ') : 'None'}`);
-						console.log(`Routes.jsx:   - IsAuthorized: ${isAuthorized}`);
+						// console.log(`Routes.jsx: Checking route: ${route.path}`);
+						// console.log(`Routes.jsx:   - IsAuthenticated: ${isAuthenticated}`);
+						// console.log(`Routes.jsx:   - User Role: ${userRoleName}`);
+						// console.log(`Routes.jsx:   - Required Roles: ${route.roles ? route.roles.join(', ') : 'None'}`);
+						// console.log(`Routes.jsx:   - IsAuthorized: ${isAuthorized}`);
 
 						let element;
 						if (isAuthenticated && isAuthorized) {
 							element = <VerticalLayout {...props}>{route.element}</VerticalLayout>;
-							console.log(`Routes.jsx: Access granted for ${route.path} (Authenticated, Role Matched)`);
+							// console.log(`Routes.jsx: Access granted for ${route.path} (Authenticated, Role Matched)`);
 						} else if (isAuthenticated && !isAuthorized) {
 							// Authenticated but not authorized for this specific route
-							console.log(`Routes.jsx: Redirecting to /auth/login2 from ${route.path} (Authenticated but Unauthorized)`);
+							// console.log(`Routes.jsx: Redirecting to /auth/login2 from ${route.path} (Authenticated but Unauthorized)`);
 							element = <Navigate to="/auth/login2" replace />; // Redirect to login, or a 403 page
 						} else {
 							// Not authenticated
-							console.log(`Routes.jsx: Redirecting to /auth/login2 from ${route.path} (Not Authenticated)`);
+							// console.log(`Routes.jsx: Redirecting to /auth/login2 from ${route.path} (Not Authenticated)`);
 							element = <Navigate to="/auth/login2" replace state={{ from: location.pathname }} />;
 						}
 

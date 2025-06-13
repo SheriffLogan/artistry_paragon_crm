@@ -42,7 +42,7 @@ const UserFormModal = ({ isOpen, onClose, userToEdit, onSaveSuccess, roles, role
         lastName: '',
         email: '',
         password: '',
-        roleId: roles.length > 0 ? roles[0].id : 1, // Default to first role or 1
+        roleId: roles?.length > 0 ? roles[0].id : 1, // Default to first role or 1
       });
     }
   }
@@ -189,14 +189,14 @@ const UserFormModal = ({ isOpen, onClose, userToEdit, onSaveSuccess, roles, role
               onChange={handleInputChange}
               className="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 bg-white"
               required
-              disabled={isLoading || roles.length === 0}
+              disabled={isLoading || roles?.length === 0}
             >
               {rolesLoading ? (
                 <option value="">Loading roles...</option>
               ) : rolesError ? (
                 <option value="">Error loading roles</option>
               ) : (
-                roles.map(role => (
+                roles?.map(role => (
                   <option key={role.id} value={role.id}>
                     {role.name}
                   </option>

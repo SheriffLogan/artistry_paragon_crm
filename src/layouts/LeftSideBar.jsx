@@ -57,7 +57,7 @@ const LeftSideBar = ({ hideLogo, userRoleName }) => {
     }, [userRoleName]); // Recalculate if userRoleName changes
 
     const filteredMenuItems = filterMenuByRole(allMenuItems);
-    console.log("LeftSideBar: Filtered Menu Items for role", userRoleName, ":", filteredMenuItems);
+    // console.log("LeftSideBar: Filtered Menu Items for role", userRoleName, ":", filteredMenuItems);
 
     return (
         <div className="app-menu" ref={menuNodeRef}>

@@ -271,6 +271,12 @@ export const ecommerceRoutes = [
   { path: '/ecommerce/orders', element: <OrdersMgmtPage />, route: PrivateRoute },
 ];
 
+// --- User Management ---
+const UserManagementPage = React.lazy(() => import('../pages/UserManagement/UserManagement'));
+export const userManagementRoutes = [
+  { path: '/users', element: <UserManagementPage />, route: PrivateRoute },
+];
+
 // --- Combine Protected Routes ---
 export const protectedRoutes = [
   // Redirect base '/dashboard' to overview
@@ -278,6 +284,7 @@ export const protectedRoutes = [
   ...dashboardRoutes,
   ...analyticsRoutes,
   ...ecommerceRoutes,
+  ...userManagementRoutes,
   // add other modules here...
 ];
 

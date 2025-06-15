@@ -887,10 +887,10 @@ const MENU_ITEMS = [
     key: 'user-management',
     label: 'User Management',
     isTitle: false,
-    icon: 'ri-group-line',
+    icon: 'ri-account-circle-line', // Changed icon
     children: [
-      { key: 'user-management-admins', label: 'Admin Users', url: '/user-management/admins', parentKey: 'user-management' },
-      { key: 'user-management-roles', label: 'Roles & Permissions', url: '/user-management/roles', parentKey: 'user-management' },
+      { key: 'user-management-all', label: 'All Users', url: '/users', parentKey: 'user-management' }, // Changed URL and label
+      // { key: 'user-management-roles', label: 'Roles & Permissions', url: '/user-management/roles', parentKey: 'user-management' }, // Commented out for now
     ],
   },
 

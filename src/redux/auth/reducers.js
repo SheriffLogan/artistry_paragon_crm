@@ -8,6 +8,7 @@ const api = new APICore();
 
 const INIT_STATE = {
 	user: api.getLoggedInUser(),
+	users: [], // Added users to initial state
 	loading: false,
 };
 
@@ -20,6 +21,12 @@ const Auth = (state = INIT_STATE, action) => {
 						...state,
 						user: action.payload.data,
 						userLoggedIn: true,
+						loading: false,
+					};
+				case AuthActionTypes.FETCH_USERS: // Added FETCH_USERS case
+					return {
+						...state,
+						users: action.payload.data.data, // Changed to action.payload.data.data
 						loading: false,
 					};
 				case AuthActionTypes.SIGNUP_USER:
@@ -48,6 +55,12 @@ const Auth = (state = INIT_STATE, action) => {
 
 		case AuthActionTypes.API_RESPONSE_ERROR:
 			switch (action.payload.actionType) {
+				case AuthActionTypes.FETCH_USERS: // Added FETCH_USERS error case
+					return {
+						...state,
+						loading: false,
+						fetchUsersError: action.payload.error,
+					};
 				case AuthActionTypes.LOGIN_USER:
 					return {
 						...state,
@@ -73,10 +86,14 @@ const Auth = (state = INIT_STATE, action) => {
 					return { ...state };
 			}
 
+		case AuthActionTypes.FETCH_USERS: // Added FETCH_USERS loading case
+			return { ...state, loading: true, fetchUsersError: null };
 		case AuthActionTypes.LOGIN_USER:
 			return { ...state, loading: true, userLoggedIn: false };
-		case AuthActionTypes.LOGOUT_USER:
+		case AuthActionTypes.LOGOUT_USER: // Corrected: This is for initiating logout
 			return { ...state, loading: true, userLogout: false };
+		// The API_RESPONSE_ERROR for LOGOUT_USER is handled under the API_RESPONSE_ERROR block correctly.
+		// No specific error action type for logout in the original structure, so it would fall to default or a general error.
 		case AuthActionTypes.RESET:
 			return {
 				...state,

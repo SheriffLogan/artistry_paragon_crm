@@ -14,9 +14,9 @@ const UserManagementPage = () => {
 // const usersData = Array.isArray(usersState) ? usersState : [];
 // const rolesData = Array.isArray(rolesState) ? rolesState : [];
 
-  const usersData = (usersState?.data || []).map(user => ({ ...user }));
+  const usersData = Array.isArray(usersState?.data) ? usersState.data.map(user => JSON.parse(JSON.stringify(user))) : [];
   // Roles data extraction, assuming it's also an object with a 'data' property
-  const rolesData = (rolesState?.data || []);
+  const rolesData = Array.isArray(rolesState) ? rolesState.map(role => JSON.parse(JSON.stringify(role))) : [];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userToEdit, setUserToEdit] = useState(null); // Null for create, user object for edit
@@ -39,7 +39,7 @@ const UserManagementPage = () => {
     try {
       const response = await api.fetchUserById(userId);
       console.log("UserManagementPage: Fetched user for editing:", response.data);
-      setUserToEdit(...response.data);
+      setUserToEdit(JSON.parse(JSON.stringify(response.data)));
       setIsModalOpen(true);
     } catch (error) {
       console.error('UserManagementPage: Failed to fetch user for editing:', error.response ? error.response.data : error.message);
@@ -68,7 +68,7 @@ const UserManagementPage = () => {
     handleModalClose();
   };
 
-  const columns = [
+  const columns = React.useMemo(() => [
     { id: 'id', name: 'ID', width: '50px' },
     { id: 'firstName', name: 'First Name' },
     { id: 'lastName', name: 'Last Name' },
@@ -83,8 +83,9 @@ const UserManagementPage = () => {
       id: 'actions',
       name: 'Actions',
       sort: false,
-      formatter: (cell, row) => {
-        const userId = row.cells[0].data; // Assuming ID is the first column
+      formatter: (cell, row) => { // 'cell' will be undefined as there's no 'actions' property on user object
+                                  // 'row' will be the user object itself
+        const userId = row.id; // Access userId directly from the row object
 
         return (
           <div className="flex items-center justify-start space-x-3">
@@ -106,7 +107,7 @@ const UserManagementPage = () => {
         );
       },
     },
-  ];
+  ], [handleOpenEditModal, handleDeleteUser]);
 
   console.log("UserManagementPage: Current users data:", usersData);
   console.log("UserManagementPage: Current roles data:", rolesData);
@@ -141,15 +142,7 @@ const UserManagementPage = () => {
 
         {!usersLoading && !usersError && usersData.length > 0 && (
           <Grid
-            data={usersData.map(user => [
-              user.id,
-              user.firstName,
-              user.lastName,
-              user.email,
-              user.role?.name || 'N/A',
-              new Date(user.createdAt).toLocaleDateString(),
-              null, // Placeholder for actions column (buttons)
-            ])} // Data comes from Redux state
+            data={usersData} // Data comes from Redux state
             columns={columns}
             pagination={{ enabled: true, limit: 10 }}
             search={true}

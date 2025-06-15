@@ -7,7 +7,7 @@ import { APICore, setAuthorization } from '../../helpers/api/apiCore';
 import { login as loginApi, logout as logoutApi, signup as signupApi, forgotPassword as forgotPasswordApi } from '../../helpers/api/auth';
 
 // actions
-import { authApiResponseSuccess, authApiResponseError } from './actions';
+import { authApiResponseSuccess, authApiResponseError, fetchUsers } from './actions'; // Added fetchUsers
 
 // constants
 import { AuthActionTypes } from './constants';
@@ -95,7 +95,91 @@ export function* watchForgotPassword() {
 }
 
 function* authSaga() {
-	yield all([fork(watchLoginUser), fork(watchLogout), fork(watchSignup), fork(watchForgotPassword)]);
+	yield all([
+		fork(watchLoginUser),
+		fork(watchLogout),
+		fork(watchSignup),
+		fork(watchForgotPassword),
+		// User Management watchers
+		fork(watchFetchUsers),
+		fork(watchAddUser),
+		fork(watchUpdateUser),
+		fork(watchDeleteUser),
+		fork(watchFetchRoles),
+	]);
+}
+
+// Saga functions for User Management
+function* fetchUsersSaga() {
+	try {
+		const response = yield call(api.get, '/users'); // Assuming api.get can be used directly if api.fetchUsers doesn't exist
+		// console.log("Saga (FetchUsers): API Response:", response.data); // Original response.data
+		yield put(authApiResponseSuccess(AuthActionTypes.FETCH_USERS, response.data)); // Pass response.data as per user's reducer structure
+	} catch (error) {
+		// console.error("Saga (FetchUsers): Failed to fetch users:", error.response ? error.response.data : error.message);
+		yield put(authApiResponseError(AuthActionTypes.FETCH_USERS, error));
+	}
+}
+
+function* addUserSaga({ payload: { userData } }) {
+	try {
+		const response = yield call(api.create, '/users', userData); // Assuming api.create for POST
+		yield put(authApiResponseSuccess(AuthActionTypes.ADD_USER, response.data));
+		yield put(fetchUsers());
+	} catch (error) {
+		yield put(authApiResponseError(AuthActionTypes.ADD_USER, error));
+	}
+}
+
+function* updateUserSaga({ payload: { userId, userData } }) {
+	try {
+		const response = yield call(api.update, `/users/${userId}`, userData); // Assuming api.update for PUT
+		yield put(authApiResponseSuccess(AuthActionTypes.UPDATE_USER, response.data));
+		yield put(fetchUsers());
+	} catch (error) {
+		yield put(authApiResponseError(AuthActionTypes.UPDATE_USER, error));
+	}
+}
+
+function* deleteUserSaga({ payload: { userId } }) {
+	try {
+		yield call(api.delete, `/users/${userId}`); // Assuming api.delete
+		yield put(authApiResponseSuccess(AuthActionTypes.DELETE_USER, { userId }));
+		yield put(fetchUsers());
+	} catch (error) {
+		yield put(authApiResponseError(AuthActionTypes.DELETE_USER, error));
+	}
+}
+
+function* fetchRolesSaga() {
+	try {
+		const response = yield call(api.get, '/roles'); // Assuming api.get for /roles
+		// console.log("Saga (FetchRoles): API Response:", response.data); // Original response.data for roles
+		yield put(authApiResponseSuccess(AuthActionTypes.FETCH_ROLES, response.data)); // Pass response.data, reducer expects .data.data
+	} catch (error) {
+		yield put(authApiResponseError(AuthActionTypes.FETCH_ROLES, error));
+	}
+}
+
+// Watcher sagas for User Management
+export function* watchFetchUsers() {
+	yield takeEvery(AuthActionTypes.FETCH_USERS, fetchUsersSaga);
+}
+
+export function* watchAddUser() {
+	yield takeEvery(AuthActionTypes.ADD_USER, addUserSaga);
+}
+
+export function* watchUpdateUser() {
+	yield takeEvery(AuthActionTypes.UPDATE_USER, updateUserSaga);
+}
+
+export function* watchDeleteUser() {
+	yield takeEvery(AuthActionTypes.DELETE_USER, deleteUserSaga);
+}
+
+export function* watchFetchRoles() {
+	yield takeEvery(AuthActionTypes.FETCH_ROLES, fetchRolesSaga);
 }
 
 export default authSaga;

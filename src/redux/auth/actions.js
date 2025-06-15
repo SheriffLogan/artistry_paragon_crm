@@ -46,8 +46,7 @@ export const resetAuth = () => ({
 	payload: {},
 });
 
-// --- NEW USER MANAGEMENT ACTIONS ---
-
+// User Management Action Creators
 export const fetchUsers = () => ({
     type: AuthActionTypes.FETCH_USERS,
 });
@@ -70,3 +69,52 @@ export const deleteUser = (userId) => ({
 export const fetchRoles = () => ({
     type: AuthActionTypes.FETCH_ROLES,
 });
+
+// User Management Action Creators
+export const fetchUsers = () => ({
+    type: AuthActionTypes.FETCH_USERS,
+});
+
+export const addUser = (userData) => ({
+    type: AuthActionTypes.ADD_USER,
+    payload: { userData },
+});
+
+export const updateUser = (userId, userData) => ({
+    type: AuthActionTypes.UPDATE_USER,
+    payload: { userId, userData },
+});
+
+export const deleteUser = (userId) => ({
+    type: AuthActionTypes.DELETE_USER,
+    payload: { userId },
+});
+
+export const fetchRoles = () => ({
+    type: AuthActionTypes.FETCH_ROLES,
+});
+
+// --- NEW USER MANAGEMENT ACTIONS ---
+
+// export const fetchUsers = () => ({
+//     type: AuthActionTypes.FETCH_USERS,
+// });
+
+// export const addUser = (userData) => ({
+//     type: AuthActionTypes.ADD_USER,
+//     payload: { userData },
+// });
+
+// export const updateUser = (userId, userData) => ({
+//     type: AuthActionTypes.UPDATE_USER,
+//     payload: { userId, userData },
+// });
+
+// export const deleteUser = (userId) => ({
+//     type: AuthActionTypes.DELETE_USER,
+//     payload: { userId },
+// });
+
+// export const fetchRoles = () => ({
+//     type: AuthActionTypes.FETCH_ROLES,
+// });

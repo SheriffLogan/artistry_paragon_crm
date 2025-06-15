@@ -9,6 +9,13 @@ const AuthActionTypes = {
 	FORGOT_PASSWORD_CHANGE: '@@auth/FORGOT_PASSWORD_CHANGE',
 
 	RESET: '@@auth/RESET',
+
+	// User Management Actions
+	FETCH_USERS: '@@auth/FETCH_USERS',
+	ADD_USER: '@@auth/ADD_USER',
+	UPDATE_USER: '@@auth/UPDATE_USER',
+	DELETE_USER: '@@auth/DELETE_USER',
+	FETCH_ROLES: '@@auth/FETCH_ROLES',
 };
 
 export { AuthActionTypes };

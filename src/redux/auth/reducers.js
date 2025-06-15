@@ -8,8 +8,15 @@ const api = new APICore();
 
 const INIT_STATE = {
 	user: api.getLoggedInUser(),
-	users: [], // Added users to initial state
-	loading: false,
+	loading: false, // General loading for auth actions like login/signup
+	// User Management specific states
+	users: [],
+	usersLoading: false,
+	usersError: null,
+	// Role Management specific states
+	roles: [],
+	rolesLoading: false,
+	rolesError: null,
 };
 
 const Auth = (state = INIT_STATE, action) => {
@@ -21,13 +28,42 @@ const Auth = (state = INIT_STATE, action) => {
 						...state,
 						user: action.payload.data,
 						userLoggedIn: true,
-						loading: false,
+						loading: false, // Refers to login loading
 					};
-				case AuthActionTypes.FETCH_USERS: // Added FETCH_USERS case
+				case AuthActionTypes.FETCH_USERS:
 					return {
 						...state,
-						users: action.payload.data.data, // Changed to action.payload.data.data
-						loading: false,
+						users: action.payload.data.data,
+						usersLoading: false,
+						usersError: null,
+					};
+				case AuthActionTypes.ADD_USER:
+					return {
+						...state,
+						// users: [...state.users, action.payload.data], // Or refetch users
+						usersLoading: false,
+						usersError: null,
+					};
+				case AuthActionTypes.UPDATE_USER:
+					return {
+						...state,
+						// users: state.users.map(user => user.id === action.payload.userId ? action.payload.data : user), // Or refetch users
+						usersLoading: false,
+						usersError: null,
+					};
+				case AuthActionTypes.DELETE_USER:
+					return {
+						...state,
+						// users: state.users.filter(user => user.id !== action.payload.userId), // Or refetch users
+						usersLoading: false,
+						usersError: null,
+					};
+				case AuthActionTypes.FETCH_ROLES:
+					return {
+						...state,
+						roles: action.payload.data.data, // Assuming roles are also nested in data.data
+						rolesLoading: false,
+						rolesError: null,
 					};
 				case AuthActionTypes.SIGNUP_USER:
 					return {
@@ -46,7 +82,7 @@ const Auth = (state = INIT_STATE, action) => {
 					return {
 						...state,
 						resetPasswordSuccess: action.payload.data,
-						loading: false,
+						loading: false, // Refers to signup loading
 						passwordReset: true,
 					};
 				default:
@@ -55,11 +91,25 @@ const Auth = (state = INIT_STATE, action) => {
 
 		case AuthActionTypes.API_RESPONSE_ERROR:
 			switch (action.payload.actionType) {
-				case AuthActionTypes.FETCH_USERS: // Added FETCH_USERS error case
+				case AuthActionTypes.FETCH_USERS:
 					return {
 						...state,
-						loading: false,
-						fetchUsersError: action.payload.error,
+						usersLoading: false,
+						usersError: action.payload.error,
+					};
+				case AuthActionTypes.ADD_USER:
+				case AuthActionTypes.UPDATE_USER:
+				case AuthActionTypes.DELETE_USER:
+					return {
+						...state,
+						usersLoading: false,
+						usersError: action.payload.error,
+					};
+				case AuthActionTypes.FETCH_ROLES:
+					return {
+						...state,
+						rolesLoading: false,
+						rolesError: action.payload.error,
 					};
 				case AuthActionTypes.LOGIN_USER:
 					return {
@@ -79,21 +129,25 @@ const Auth = (state = INIT_STATE, action) => {
 					return {
 						...state,
 						error: action.payload.error,
-						loading: false,
+						loading: false, // Refers to login loading
 						passwordReset: false,
 					};
 				default:
 					return { ...state };
 			}
 
-		case AuthActionTypes.FETCH_USERS: // Added FETCH_USERS loading case
-			return { ...state, loading: true, fetchUsersError: null };
+		case AuthActionTypes.FETCH_USERS:
+			return { ...state, usersLoading: true, usersError: null };
+		case AuthActionTypes.ADD_USER:
+		case AuthActionTypes.UPDATE_USER:
+		case AuthActionTypes.DELETE_USER:
+			return { ...state, usersLoading: true, usersError: null };
+		case AuthActionTypes.FETCH_ROLES:
+			return { ...state, rolesLoading: true, rolesError: null };
 		case AuthActionTypes.LOGIN_USER:
-			return { ...state, loading: true, userLoggedIn: false };
-		case AuthActionTypes.LOGOUT_USER: // Corrected: This is for initiating logout
-			return { ...state, loading: true, userLogout: false };
-		// The API_RESPONSE_ERROR for LOGOUT_USER is handled under the API_RESPONSE_ERROR block correctly.
-		// No specific error action type for logout in the original structure, so it would fall to default or a general error.
+			return { ...state, loading: true, userLoggedIn: false }; // Refers to login loading
+		case AuthActionTypes.LOGOUT_USER:
+			return { ...state, loading: true, userLogout: false }; // Refers to logout loading
 		case AuthActionTypes.RESET:
 			return {
 				...state,

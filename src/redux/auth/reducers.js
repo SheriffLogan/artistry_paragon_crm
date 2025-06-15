@@ -1,4 +1,4 @@
-// apicore
+// src\redux\auth\reducers.js
 import { APICore } from '../../helpers/api/apiCore';
 
 // constants

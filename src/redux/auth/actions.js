@@ -1,4 +1,4 @@
-// constants
+// src\redux\auth\actions.js
 import { AuthActionTypes } from './constants';
 
 // common success
@@ -44,4 +44,29 @@ export const forgotPassword = (username) => ({
 export const resetAuth = () => ({
 	type: AuthActionTypes.RESET,
 	payload: {},
+});
+
+// --- NEW USER MANAGEMENT ACTIONS ---
+
+export const fetchUsers = () => ({
+    type: AuthActionTypes.FETCH_USERS,
+});
+
+export const addUser = (userData) => ({
+    type: AuthActionTypes.ADD_USER,
+    payload: { userData },
+});
+
+export const updateUser = (userId, userData) => ({
+    type: AuthActionTypes.UPDATE_USER,
+    payload: { userId, userData },
+});
+
+export const deleteUser = (userId) => ({
+    type: AuthActionTypes.DELETE_USER,
+    payload: { userId },
+});
+
+export const fetchRoles = () => ({
+    type: AuthActionTypes.FETCH_ROLES,
 });

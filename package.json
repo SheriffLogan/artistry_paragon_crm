@@ -11,6 +11,7 @@
     "format": "prettier --write 'src/**/*.{js,jsx}'"
   },
   "dependencies": {
+    "@ag-grid-community/react": "^30.2.0",
     "@frostui/tailwindcss": "^0.1.5",
     "@fullcalendar/core": "^6.1.8",
     "@fullcalendar/daygrid": "^6.1.8",

@@ -1,3 +1,4 @@
+//src\redux\auth\constants.js
 const AuthActionTypes = {
 	API_RESPONSE_SUCCESS: '@@auth/API_RESPONSE_SUCCESS',
 	API_RESPONSE_ERROR: '@@auth/API_RESPONSE_ERROR',

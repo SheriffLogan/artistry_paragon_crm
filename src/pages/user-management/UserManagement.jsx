@@ -109,6 +109,11 @@ const UserManagementPage = () => {
     },
   ], [handleOpenEditModal, handleDeleteUser]);
 
+  const paginationOptions = React.useMemo(() => ({
+    enabled: true,
+    limit: 10,
+  }), []); // Empty dependency array means it's created once
+
   console.log("UserManagementPage: Current users data:", usersData);
   console.log("UserManagementPage: Current roles data:", rolesData);
   console.log("UserManagementPage: Users loading status:", usersLoading);
@@ -144,7 +149,7 @@ const UserManagementPage = () => {
           <Grid
             data={usersData} // Data comes from Redux state
             columns={columns}
-            pagination={{ enabled: true, limit: 10 }}
+            pagination={paginationOptions}
             search={true}
             sort={true}
             className={{

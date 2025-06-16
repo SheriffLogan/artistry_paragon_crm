@@ -62,10 +62,12 @@ export const ecommerceRoutes = [
 // --- CRM Pages (NEW) ---
 const CustomerPage = React.lazy(() => import('../pages/customers/Customer'));
 const UserManagementPage = React.lazy(() => import('../pages/user-management/UserManagement'));
+const OrdersManagementPage = React.lazy(() => import('../pages/crm/OrdersManagement'));
 
 export const crmRoutes = [
   { path: '/crm/customers', element: <CustomerPage />, route: PrivateRoute, roles: ['admin', 'client'] },
   { path: '/crm/user-management', element: <UserManagementPage />, route: PrivateRoute, roles: ['admin'] },
+  { path: '/crm/orders-list', element: <OrdersManagementPage />, route: PrivateRoute, roles: ['admin', 'crm_user'] },
 ];
 
 // --- Combine Protected Routes ---

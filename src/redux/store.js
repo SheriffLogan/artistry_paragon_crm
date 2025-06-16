@@ -5,6 +5,7 @@ import createSagaMiddleware from 'redux-saga';
 // reducers
 import Layout from './layout/reducers';
 import Auth from './auth/reducers';
+import Orders from './orders/reducers';
 
 // saga
 import rootSaga from './sagas';
@@ -18,6 +19,7 @@ export const store = configureStore({
 	reducer: {
 		Auth: Auth,
 		Layout: Layout,
+		Orders: Orders,
 	},
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middleware),
 });

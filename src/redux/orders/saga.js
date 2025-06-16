@@ -33,7 +33,7 @@ function* fetchOrders() {
     // typically 'data' or the response itself if it's configured to return direct data.
     // Most axios wrappers return { data, status, headers, ... }. So `response.data` is common.
 
-    yield put(fetchOrdersSuccess(response.data)); // Assuming response.data is the array of orders
+    yield put(fetchOrdersSuccess(response.data.data)); // Assuming response.data.data is the array of orders
   } catch (error) {
     // Construct a more informative error object if possible
     const errorData = error.response ? error.response.data : { message: error.message };

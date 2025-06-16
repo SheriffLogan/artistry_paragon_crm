@@ -29,6 +29,22 @@ const MENU_ITEMS = [
       },
     ],
   },
+  {
+    key: 'crm-orders-main',
+    label: 'CRM Orders',
+    isTitle: false,
+    icon: 'ri-shopping-cart-2-line', // Example icon for orders
+    roles: ['admin', 'crm_user'],
+    children: [
+      {
+        key: 'crm-orders-list-page',
+        label: 'All Orders',
+        url: '/crm/orders-list',
+        parentKey: 'crm-orders-main',
+        roles: ['admin', 'crm_user'],
+      },
+    ],
+  },
 
   // {
   //   key: 'analytics',

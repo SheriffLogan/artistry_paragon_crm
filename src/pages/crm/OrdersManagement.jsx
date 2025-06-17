@@ -65,20 +65,17 @@ const OrdersManagementPage = () => {
     {
       name: 'Actions',
       sort: false,
-      width: '100px',
+      width: '150px', // Increased width slightly for debugging text
       formatter: (cell, row) => {
-        // Assuming 'id' is the first cell, containing the order ID
-        const orderId = row.cells.find(c => c.id === 'id')?.data;
-        if (!orderId) return null;
-        // In Grid.js, formatters might not have direct access to raw row data easily for URL generation
-        // when data is passed as array of objects.
-        // The 'row' object in formatter is a special Grid.js Row object.
-        // To get a specific data field from the row for the link:
-        // const orderId = row.cell(0).data; // if ID is the first column
+        const orderIdCell = row.cells.find(c => c.id === 'id');
+        const orderId = orderIdCell ? orderIdCell.data : undefined;
+
+        if (!orderId) return 'ID_ERR'; // Indicate if orderId is not found
+
         return React.createElement(Link, {
-          to: \`/crm/orders/\${orderId}\`, // Path to specific order view
+          to: \`/crm/orders/\${orderId}\`,
           className: 'text-indigo-600 hover:text-indigo-900'
-        }, 'View');
+        }, \`View \${orderId}\`); // Added orderId to text for confirmation
       }
     },
     // Hidden column for user object to access its properties in other formatters
@@ -145,8 +142,10 @@ const OrdersManagementPage = () => {
                   td: 'px-4 py-3 whitespace-nowrap text-sm text-gray-700 border-b border-gray-200',
                   footer: 'p-4 bg-gray-100 border-t border-gray-200',
                   pagination: 'flex items-center justify-between mt-4 text-sm text-gray-600',
-                  paginationButton: 'px-3 py-1 border border-gray-300 rounded hover:bg-gray-200 disabled:opacity-50',
-                  paginationButtonCurrent: 'bg-indigo-500 text-white border-indigo-500',
+                  // Modified lines:
+                  paginationButton: 'px-3 py-1 border border-gray-300 rounded hover:bg-gray-200 disabled:opacity-50 text-gray-700', // Added default text color
+                  paginationButtonCurrent: 'bg-indigo-500 text-white border-indigo-500 opacity-100', // Added opacity-100
+                  // Original search and input styles
                   search: 'max-w-xs mb-4',
                   input : 'mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                 }}
